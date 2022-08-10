@@ -3,6 +3,7 @@
   padding-top: 10px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .post img {
@@ -18,7 +19,9 @@
 .like {
   color: #fff;
   background-color: cadetblue;
+  position: absolute;
   padding: 0 7px;
+  right: 30px;
   border-radius: 4px;
   cursor: pointer;
 }

@@ -13,9 +13,9 @@ const MyPosts = () => {
       
       <div>
         My posts:
-        <Post />
-        <Post />
-        <Post />
+        <Post message='It is the last post' count='10'/>
+        <Post message='It is the middle post' count='15'/>
+        <Post message='It is the first post' count='20'/>
       </div>
     </div>
   )
