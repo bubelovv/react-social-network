@@ -6,16 +6,16 @@ const Navbar = () => {
     <nav className={s.nav}>
       <ul>
         <li>
-          <a className={s.item} href="">Profile</a>
+          <a className={s.item} href="#">Profile</a>
         </li>
         <li>
-          <a className={`${s.item} ${s.active}`} href="">Messages</a>
+          <a className={`${s.item} ${s.active}`} href="#">Messages</a>
         </li>
         <li>
-          <a className={s.item} href="">News</a>
+          <a className={s.item} href="#">News</a>
         </li>
         <li>
-          <a className={s.item} href="">Music</a>
+          <a className={s.item} href="#">Music</a>
         </li>
         <li>
           <a className={s.item} href="">Settings</a>
