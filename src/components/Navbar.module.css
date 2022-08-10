@@ -1,0 +1,26 @@
+.nav {
+  grid-area: nav;
+  background-color: lightblue;
+}
+
+.nav li {
+  list-style: none;
+  text-decoration: none;
+}
+
+.nav ul {
+  padding: 20px;
+  margin: 0;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.item {
+  color: rgb(6, 64, 71);
+}
+
+.item.active {
+  color: aliceblue;
+}
