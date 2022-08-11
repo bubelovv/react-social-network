@@ -5,7 +5,7 @@ import Wallpaper from './Wallpaper/Wallpaper';
 
 const Profile = () => {
   return (
-    <div className={s.content}>
+    <div>
       <Wallpaper />
       <MyPosts />
     </div>

@@ -21,6 +21,10 @@
   color: rgb(6, 64, 71);
 }
 
+.item:hover {
+  color: #ffffff;
+}
+
 .item.active {
   color: aliceblue;
 }
