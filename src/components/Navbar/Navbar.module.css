@@ -22,9 +22,9 @@
 }
 
 .item:hover {
-  color: #ffffff;
+  color: #179bef;
 }
 
-.item.active {
+.active {
   color: aliceblue;
 }
