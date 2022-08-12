@@ -2,28 +2,28 @@ import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
 
+const setClass = navData => navData.isActive ? s.active : '';
+
 const Navbar = () => {
-  return (
-    <nav className={s.nav}>
-      <ul>
-        <li>
-          <NavLink className={navData => navData.isActive ? s.active : s.item} to="/profile">Profile</NavLink>
-        </li>
-        <li>
-          <NavLink className={navData => navData.isActive ? s.active : s.item} to="/messages">Messages</NavLink>
-        </li>
-        <li>
-          <NavLink className={navData => navData.isActive ? s.active : s.item} to="/news">News</NavLink>
-        </li>
-        <li>
-          <NavLink className={navData => navData.isActive ? s.active : s.item} to="/music">Music</NavLink>
-        </li>
-        <li>
-          <NavLink className={navData => navData.isActive ? s.active : s.item} to="/settings">Settings</NavLink>
-        </li>
-      </ul>
-    </nav>
-  )
+    return (
+        <nav className={s.nav}>
+            <div>
+                <NavLink className={setClass} to="/profile">Profile</NavLink>
+            </div>
+            <div>
+                <NavLink className={setClass} to="/messages">Messages</NavLink>
+            </div>
+            <div>
+                <NavLink className={setClass} to="/news">News</NavLink>
+            </div>
+            <div>
+                <NavLink className={setClass} to="/music">Music</NavLink>
+            </div>
+            <div>
+                <NavLink className={setClass} to="/settings">Settings</NavLink>
+            </div>
+        </nav>
+    )
 }
 
 export default Navbar
