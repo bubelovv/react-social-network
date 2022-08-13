@@ -2,33 +2,49 @@ import React from 'react';
 import s from './Messages.module.css';
 import {NavLink} from "react-router-dom";
 
-// const setClass = ({isActive}) => isActive ? s.active : s.dialog;
+const setClass = navData => navData.isActive ? s.active : ' ';
+
+const Dialog = props => {
+    const path = '/messages/' + props.id
+
+    return (
+        <div className={s.dialog}>
+            <NavLink className={setClass} to={path}>{props.name}</NavLink>
+        </div>
+    )
+}
+
+const Message = props => {
+    return <div className={s.message}>{props.message}</div>
+}
 
 const Messages = () => {
+
+    let dialogs = [
+        {id: '1', name: 'Bubelov'},
+        {id: '2', name: 'Darinka'},
+        {id: '3', name: 'Aleksey'},
+        {id: '4', name: 'Manga'},
+        {id: '5', name: 'Ilysha'},
+    ]
+
+    let messages = [
+        {id: '1', message: 'I will work in it-industry'},
+        {id: '2', message: 'I wait you so much, Lubimka'},
+        {id: '3', message: 'I do not know, we will in the ocean or not...'},
+    ]
+
+    const dialogsElements = dialogs.map(d => <Dialog name={d.name} id={d.id}/>);
+
+    const messagesElements = messages.map(m => <Message message={m.message}/>);
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogItems}>
-                <div className={s.dialog + ' ' + s.active}>
-                    <NavLink to='/messages/1'>Bubelov</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/messages/2'>Darinka</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/messages/3'>Aleksey</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/messages/4'>Manga</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/messages/5'>Ilysha</NavLink>
-                </div>
+                { dialogsElements }
             </div>
             <div className={s.messages}>
-                <div className={s.message}>I will work in it-industry</div>
-                <div className={s.message}>I wait you so much, Lubimka</div>
-                <div className={s.message}>What timme will you come to me?</div>
-                <div className={s.message}>I don't know, we will in the ocean or not...</div>
+                { messagesElements }
             </div>
         </div>
     );
