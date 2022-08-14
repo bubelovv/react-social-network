@@ -15,17 +15,18 @@ function App(props) {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar state={props.state.sidebar}/>
                 <div className="app-wrapper-content">
                     <Routes>
-                        <Route path='/profile' element={<Profile posts={props.posts}/>}/>
+                        <Route path='/profile'
+                               element={<Profile state={props.state.profilePage}/>}/>
                         <Route path='/messages/*'
-                               element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>}/>
+                               element={<Dialogs state={props.state.dialogsPage}/>}/>
                         <Route path='/news' element={<News/>}/>
                         <Route path='/music' element={<Music/>}/>
                         <Route path='/settings' element={<Settings/>}/>
                     </Routes>
-                </div>
+ q                </div>
             </div>
         </BrowserRouter>
     )

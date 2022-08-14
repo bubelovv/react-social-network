@@ -5,11 +5,12 @@ import {NavLink} from "react-router-dom";
 const setClass = navData => navData.isActive ? s.active : ' ';
 
 const DialogItem = props => {
-    const path = '/messages/' + props.id;
+    const path = '/messages/' + props.state.id;
 
     return (
         <div className={s.dialog}>
-            <NavLink className={setClass} to={path}>{props.name}</NavLink>
+            <img className={s.avatar} src={props.state.avatar}/>
+            <NavLink className={setClass} to={path}>{props.state.name}</NavLink>
         </div>
     )
 }

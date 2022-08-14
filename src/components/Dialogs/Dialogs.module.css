@@ -1,18 +1,27 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 1fr 10fr;
     padding: 10px;
 }
 
 .dialogItems {
+    min-width: 100px;
 }
 
 .dialog {
+    display: flex;
+    align-items: center;
     margin-bottom: 5px;
     background-color: lavender;
     border-radius: 7px;
-    text-align: center;
-    padding: 0 10px;
+    padding: 3px 3px;
+}
+
+.avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin-right: 3px;
 }
 
 .dialog a {
@@ -25,9 +34,11 @@
 }
 
 .messages {
-    padding-left: 20px;
+    padding-left: 10px;
 }
 
 .message {
-
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }

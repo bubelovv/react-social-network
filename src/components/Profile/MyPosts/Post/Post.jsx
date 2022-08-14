@@ -7,7 +7,7 @@ const Post = (props) => {
 
   return (
     <div className={s.post}>
-      <img src="https://pixelbox.ru/wp-content/uploads/2021/05/ava-vk-animal-91.jpg" alt="cat" />
+      <img src='https://pixelbox.ru/wp-content/uploads/2021/05/ava-vk-animal-91.jpg' alt="cat" />
       <span>{props.message}</span>
       <button className={s.like}> {props.count} like</button>
       {/*<button onClick={increment} className={s.like}> {count} like</button>*/}
