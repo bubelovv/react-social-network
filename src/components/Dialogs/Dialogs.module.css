@@ -1,11 +1,19 @@
+.dialogSection {
+    display: flex;
+}
+
+
 .dialogs {
     display: grid;
-    grid-template-columns: 1fr 10fr;
-    padding: 10px;
+    grid-template-columns: 2fr 10fr;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .dialogItems {
     min-width: 100px;
+    background-color: rgba(248, 255, 255, 0.34);
+    padding: 10px;
 }
 
 .dialog {
@@ -17,6 +25,19 @@
     padding: 3px 3px;
 }
 
+
+.messages {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 10px;
+}
+
 .avatar {
     width: 25px;
     height: 25px;
@@ -25,20 +46,29 @@
 }
 
 .dialog a {
+    width: 60%;
+    text-align: center;
     color: #26abfc;
     text-decoration: none;
 }
 
 .dialog a.active {
     color: #000000;
+    background-color: rgba(255, 133, 81, 0.66);
+    padding: 0 4px;
+    border-radius: 5px;
 }
 
-.messages {
-    padding-left: 10px;
-}
-
-.message {
+.add {
     display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+}
+
+.add button {
+    width: 40px;
+    padding: 5px;
+}
+
+.add textarea {
+    height: 40px;
+    width: 100%;
 }
