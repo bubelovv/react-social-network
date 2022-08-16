@@ -1,4 +1,8 @@
-import {rerenderEntireTree} from "../render";
+let rerenderEntireTree = () => {};
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
+}
 
 let state = {
     sidebar: {
@@ -79,9 +83,9 @@ let state = {
         ],
         newMessageText: '',
     },
-}
+};
 
-export let addMessage = () => {
+export const addMessage = () => {
     if (state.dialogsPage.newMessageText.trim() === '') return;
     let newMassage = {
         id: '4',
@@ -92,12 +96,12 @@ export let addMessage = () => {
     rerenderEntireTree(state);
 };
 
-export let updateNewMessageText = (newMessageText) => {
+export const updateNewMessageText = (newMessageText) => {
     state.dialogsPage.newMessageText = newMessageText;
     rerenderEntireTree(state);
 };
 
-export let addPost = () => {
+export const addPost = () => {
     if (state.profilePage.newPostText.trim() === '') return;
     let newPost = {
         id: 5,
@@ -109,7 +113,7 @@ export let addPost = () => {
     rerenderEntireTree(state);
 };
 
-export let updateNewPostText = (newPostText) => {
+export const updateNewPostText = (newPostText) => {
     state.profilePage.newPostText = newPostText;
     rerenderEntireTree(state);
 };
