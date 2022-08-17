@@ -12,12 +12,13 @@ const Dialogs = props => {
     let newMessageElement = React.useRef(null);
 
     let addMessage = () => {
-        props.addMessage();
+        props.dispatch({type: 'ADD-MESSAGE'});
     };
 
     let onMessageChange = () => {
         let text = newMessageElement.current.value;
-        props.updateNewMessageText(text);
+        let action = {type: 'UPDATE-NEW-POST-MESSAGE', newMessageText: text};
+        props.dispatch(action);
     };
 
     return (
@@ -33,8 +34,8 @@ const Dialogs = props => {
                 <div className={s.add}>
                     <textarea ref={newMessageElement}
                               value={props.dialogsPage.newMessageText}
-                              onChange={onMessageChange}/>
-                    <button onClick={addMessage}>Add</button>
+                              onChange={ onMessageChange }/>
+                    <button onClick={ addMessage }>Add</button>
                 </div>
             </div>
         </div>

@@ -8,26 +8,22 @@ import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import {Routes, Route} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
-import store from "./redux/state";
 
 function App(props) {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar sidebar={props.store.getState().getSidebar()}/>
+            <Navbar sidebar={props.state.getSidebar()}/>
             <div className="app-wrapper-content">
                 <Routes>
                     <Route path='/profile'
                            element={<Profile
-                               store={store}
-                               profilePage={props.store.getState().profilePage}
-                               addPost={props.store.addPost.bind(props.store)}
-                               updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
+                               profilePage={props.state.profilePage}
+                               dispatch={props.dispatch}/>}/>
                     <Route path='/messages/*'
                            element={<Dialogs
-                               dialogsPage={props.store.getState().dialogsPage}
-                               addMessage={props.store.addMessage}
-                               updateNewMessageText={props.store.updateNewMessageText}/>}/>
+                               dialogsPage={props.state.dialogsPage}
+                               dispatch={props.dispatch}/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
@@ -36,4 +32,4 @@ function App(props) {
         </div>)
 }
 
-export default App
+export default App;

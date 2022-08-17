@@ -85,47 +85,43 @@ let store = {
         },
     },
 
+    _callSubscriber() {
+    },
+
     getState() {
         return this._state;
     },
-
-    addPost() {
-        if (this._state.profilePage.newPostText.trim() === '') return;
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        };
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._callSubscriber(this);
-    },
-
-    updateNewPostText(newPostText) {
-        this._state.profilePage.newPostText = newPostText;
-        this.callSubscriber(this);
-    },
-
-    _callSubscriber() {},
-
     subscribe(observer) {
         this._callSubscriber = observer;
     },
 
-    addMessage() {
-        if (this._state.dialogsPage.newMessageText.trim() === '') return;
-        let newMassage = {
-            id: '4',
-            message: this._state.dialogsPage.newMessageText,
-        };
-        this._state.dialogsPage.messages.push(newMassage);
-        this._state.dialogsPage.newMessageText = '';
-        this._callSubscriber(this);
-    },
-
-    updateNewMessageText(newMessageText) {
-        this.dialogsPage.newMessageText = newMessageText;
-        this._callSubscriber(this);
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            if (this._state.profilePage.newPostText.trim() === '') return;
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+            };
+            this._state.profilePage.posts.push(newPost);
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newPostText;
+            this._callSubscriber(this);
+        } else if (action.type === 'ADD-MESSAGE') {
+            if (this._state.dialogsPage.newMessageText.trim() === '') return;
+            let newMassage = {
+                id: '4',
+                message: this._state.dialogsPage.newMessageText,
+            };
+            this._state.dialogsPage.messages.push(newMassage);
+            this._state.dialogsPage.newMessageText = '';
+            this._callSubscriber(this);
+        } else if (action.type === 'UPDATE-NEW-POST-MESSAGE') {
+            this._state.dialogsPage.newMessageText = action.newMessageText;
+            this._callSubscriber(this);
+        }
     },
 }
 
