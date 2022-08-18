@@ -6,7 +6,16 @@ export const updateNewPostTextActionCreator = (text) => {
     return {type: UPDATE_NEW_POST_TEXT, newPostText: text}
 };
 
-const profileReducer = (state, action) => {
+let initialState = {
+        posts: [
+            {id: 1, message: 'It\'s the last post', likesCount: 10},
+            {id: 2, message: 'It\'s  the middle post', likesCount: 15},
+            {id: 3, message: 'It\'s the first post', likesCount: 20},
+        ],
+        newPostText: '',
+    };
+
+const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
             if (state.newPostText.trim() === '') return;

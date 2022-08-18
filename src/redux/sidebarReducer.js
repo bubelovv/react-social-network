@@ -1,13 +1,5 @@
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-POST-MESSAGE';
-
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
-export const updateNewMessageTextActionCreator = (text) => {
-    return {type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text}
-};
-
 let initialState = {
-    dialogs: [
+    friends: [
         {
             id: '1',
             name: 'Bubelov',
@@ -33,32 +25,16 @@ let initialState = {
             name: 'Ilysha',
             avatar: 'https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fHBlcnNvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=300&q=60'
         },
+        {
+            id: '6',
+            name: 'Vanya',
+            avatar: 'https://images.unsplash.com/photo-1615813967515-e1838c1c5116?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTJ8fHBlcnNvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=300&q=60'
+        },
     ],
-    messages: [
-        {id: '1', message: 'I will work in it-industry'},
-        {id: '2', message: 'I wait you so much, Lybimka'},
-        {id: '3', message: 'I do not know, we will go to the ocean or not...'},
-    ],
-    newMessageText: '',
 };
 
-const dialogsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case SEND_MESSAGE:
-            if (state.newMessageText.trim() === '') return;
-            let newMassage = {
-                id: '4',
-                message: state.newMessageText,
-            };
-            state.messages.push(newMassage);
-            state.newMessageText = '';
-            return state;
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageText = action.newMessageText;
-            return state;
-        default:
-            return state;
-    }
+const sidebarReducer = (state = initialState, action) => {
+    return state;
 }
 
-export default dialogsReducer;
+export default sidebarReducer;
