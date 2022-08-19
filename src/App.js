@@ -13,11 +13,11 @@ function App(props) {
     return (
         <div className="app-wrapper">
             <Header/>
-            <Navbar sidebar={props.store.getState().sidebar}/>
+            <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path='/profile' element={<Profile store={props.store}/>}/>
-                    <Route path='/messages/*' element={<DialogsContainer store={props.store}/>}/>
+                    <Route path='/profile' element={<Profile/>}/>
+                    <Route path='/messages/*' element={<DialogsContainer/>}/>
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
