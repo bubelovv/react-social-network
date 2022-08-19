@@ -2,7 +2,6 @@
     display: flex;
 }
 
-
 .dialogs {
     display: grid;
     grid-template-columns: 2fr 10fr;
@@ -46,16 +45,15 @@
 }
 
 .dialog a {
-    width: 60%;
+    width: 67%;
     text-align: center;
-    color: #26abfc;
+    color: #2b2b2b;
     text-decoration: none;
 }
 
 .dialog a.active {
     color: #000000;
-    background-color: rgba(255, 133, 81, 0.66);
-    padding: 0 4px;
+    background-color: rgb(173 216 230);
     border-radius: 5px;
 }
 
