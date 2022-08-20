@@ -3,7 +3,6 @@ import Post from './Post/Post';
 import s from './MyPosts.module.css';
 
 const MyPosts = props => {
-
     let postsElements = props.posts.map(p => <Post message={p.message} count={p.likesCount}/>);
 
     let onAddPost = () => {
@@ -14,7 +13,6 @@ const MyPosts = props => {
         let text = e.target.value;
         props.updateNewPostText(text);
     }
-
     return (
         <div className={s.posts}>
             <div>New post:</div>
