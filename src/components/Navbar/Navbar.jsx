@@ -12,7 +12,10 @@ const Navbar = props => {
                 <NavLink className={setClass} to="/profile">Profile</NavLink>
             </div>
             <div>
-                <NavLink className={setClass} to="/messages">Messages</NavLink>
+                <NavLink className={setClass} to="/dialogs">Dialogs</NavLink>
+            </div>
+            <div>
+                <NavLink className={setClass} to="/users">Users</NavLink>
             </div>
             <div>
                 <NavLink className={setClass} to="/news">News</NavLink>

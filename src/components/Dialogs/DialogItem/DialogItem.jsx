@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 const setClass = navData => navData.isActive ? s.active : ' ';
 
 const DialogItem = props => {
-    const path = '/messages/' + props.dialog.id;
+    const path = '/dialogs/' + props.dialog.id;
 
     return (
         <div className={s.dialog}>
