@@ -5,6 +5,42 @@
   align-items: center;
 }
 
+.like {
+  min-width: 43px;
+  padding: 2px 3px;
+  position: absolute;
+  right: 50px;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  background-color: cadetblue;
+  cursor: pointer;
+}
+
+.dislike {
+  padding: 2px 3px;
+  position: absolute;
+  right: 0px;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  background-color: rgba(255, 54, 54, 0.58);
+  cursor: pointer;
+}
+
+.count {
+  position: absolute;
+  right: 100px;
+  min-width: 20px;
+  padding: 2px 2px;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #85a0d3;
+}
+
 .post img {
   width: 35px;
   height: 35px;
@@ -13,14 +49,4 @@
 
 .post span {
   margin-left: 10px;
-}
-
-.like {
-  color: #fff;
-  background-color: cadetblue;
-  position: absolute;
-  padding: 0 7px;
-  right: 30px;
-  border-radius: 4px;
-  cursor: pointer;
 }

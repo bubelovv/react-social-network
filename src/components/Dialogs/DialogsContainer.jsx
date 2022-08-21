@@ -3,15 +3,6 @@ import {sendMessageActionCreator, updateNewMessageTextActionCreator} from "../..
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 
-//
-// dialogs = {dialogsPage.dialogs}
-// messages = {dialogsPage.messages}
-// sendMessage = {sendMessage}
-// updateNewMessageText = {updateNewMessageText}
-// newMessageText = {dialogsPage.newMessageText}
-
-
-
 const mapStateToProps = (state) => {
     return {
         dialogs: state.dialogsPage.dialogs,

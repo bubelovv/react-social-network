@@ -9,7 +9,7 @@ import News from "./components/News/News";
 import {Routes, Route} from "react-router-dom";
 import Settings from "./components/Settings/Settings";
 
-function App(props) {
+let App = props => {
     return (
         <div className="app-wrapper">
             <Header/>
@@ -23,7 +23,8 @@ function App(props) {
                     <Route path='/settings' element={<Settings/>}/>
                 </Routes>
             </div>
-        </div>)
+        </div>
+    )
 }
 
 export default App;
