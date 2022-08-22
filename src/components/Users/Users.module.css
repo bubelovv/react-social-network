@@ -62,3 +62,15 @@
     align-items: center;
 }
 
+.getUsers {
+    display: block;
+    padding: 5px 15px;
+    margin: 0 auto;
+    background-color: #71bfef;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px 0px rgba(0, 144, 255, 0.5);
+}
+

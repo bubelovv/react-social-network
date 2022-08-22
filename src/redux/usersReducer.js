@@ -14,12 +14,12 @@ const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW_USER: {
             let newState = {...state, users: [...state.users]};
-            newState.users[action.userId - 1].follow = true;
+            newState.users.find(item => item.id === action.userId).followed = true;
             return newState;
         }
         case UNFOLLOW_USER: {
             let newState = {...state, users: [...state.users]};
-            newState.users[action.userId - 1].follow = false;
+            newState.users.find(item => item.id === action.userId).followed = false;
             return newState;
         }
         case SET_USERS: {
