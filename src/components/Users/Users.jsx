@@ -1,27 +1,9 @@
 import React from 'react';
 import styles from './Users.module.css';
-import axios from "axios";
 import avatar from '../../assets/images/avatar.jpg'
 
-class UsersC extends React.Component {
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.setTotalCount(response.data.totalCount);
-            });
-    };
-
-    onPageChanged = (page) => {
-        this.props.setCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.setUsers(response.data.items);
-            });
-    };
-
+class Users extends React.Component {
     render() {
-
         let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
         let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
@@ -29,13 +11,14 @@ class UsersC extends React.Component {
         }
         let pagesLeft = this.props.currentPage - 5 < 0 ? 0 : this.props.currentPage - 5;
         let pagesRight = this.props.currentPage + 5 > pagesCount ? pagesCount : this.props.currentPage + 4;
-        let pagesSlice = pages.slice(pagesLeft, pagesRight)
+        let pagesSlice = pages.slice(pagesLeft, pagesRight);
+
         return (
             <div className={styles.userArea}>
                 <div className={styles.btnNumbersPage}>
                     {pagesSlice.map(page => {
-                        return <span onClick={() => this.onPageChanged(page)}
-                                     className={ this.props.currentPage === page ? styles.selectedPage : styles.pageNumber}>{page}</span>
+                        return <span onClick={() => this.props.onPageChanged(page)}
+                                     className={this.props.currentPage === page ? styles.selectedPage : ''}>{page}</span>
                     })}
                 </div>
 
@@ -67,4 +50,4 @@ class UsersC extends React.Component {
     }
 }
 
-export default UsersC;
+export default Users;
