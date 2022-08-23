@@ -31,14 +31,21 @@
     margin-bottom: 3px;
 }
 
-.btn {
+.followArea button {
     display: block;
     box-sizing: border-box;
     width: 100%;
     border: 0;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.btnFollow {
     background-color: #acd7e5;
+}
+
+.btnUnfollow {
+    background-color: #fdfdfe;
 }
 
 .description {
@@ -71,6 +78,29 @@
     border-radius: 7px;
     border: none;
     cursor: pointer;
-    box-shadow: 2px 2px 5px 0px rgba(0, 144, 255, 0.5);
+    box-shadow: 2px 2px 5px 0 rgba(0, 144, 255, 0.5);
+}
+
+.btnNumbersPage {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 10px;
+}
+
+.btnNumbersPage span {
+    display: inline-flex;
+    width: 40px;
+    padding: 2px 0;
+    margin-right: 5px;
+    border-radius: 4px;
+    justify-content: center;
+    background-color: #bec0ca;
+    cursor: pointer;
+}
+
+.btnNumbersPage span.selectedPage {
+    font-weight: bold;
+    color: black;
+    background-color: #acd7e5;
 }
 
