@@ -3,15 +3,15 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const INCREMENT_LIKES = 'INCREMENT_LIKES';
 const DECREMENT_LIKES = 'DECREMENT_LIKES';
 
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const updateNewPostTextActionCreator = (text) => {
+export const addPost = () => ({type: ADD_POST});
+export const updateNewPostText = (text) => {
     return {type: UPDATE_NEW_POST_TEXT, newPostText: text}
 };
-export const incrementLikesActionCreator = (id) => ({
+export const incrementLikes = (id) => ({
     type: INCREMENT_LIKES,
     id: id,
 });
-export const decrementLikesActionCreator = (id) => ({
+export const decrementLikes = (id) => ({
     type: DECREMENT_LIKES,
     id: id,
 });
@@ -26,13 +26,14 @@ let initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
+    let posts = state.posts;
     switch (action.type) {
         case ADD_POST: {
             if (state.newPostText.trim() === '') return state;
 
             return {
                 ...state,
-                posts: [...state.posts, {id: 5, message: state.newPostText, likesCount: 0}],
+                posts: [...posts, {id: posts[posts.length - 1].id + 1, message: state.newPostText, likesCount: 0}],
                 newPostText: '',
             };
         }
@@ -45,14 +46,14 @@ const profileReducer = (state = initialState, action) => {
         case INCREMENT_LIKES: {
             let newState = {
                 ...state,
-                posts: [...state.posts],
+                posts: [...posts],
             };
             newState.posts[action.id - 1].likesCount++;
             return newState;
         }case DECREMENT_LIKES: {
             let newState = {
                 ...state,
-                posts: [...state.posts],
+                posts: [...posts],
             };
             newState.posts[action.id - 1].likesCount--;
             return newState;

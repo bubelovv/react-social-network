@@ -1,8 +1,8 @@
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-POST-MESSAGE';
 
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
-export const updateNewMessageTextActionCreator = (text) => {
+export const sendMessage = () => ({type: SEND_MESSAGE});
+export const updateNewMessageText = (text) => {
     return {type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text}
 };
 
