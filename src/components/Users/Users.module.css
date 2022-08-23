@@ -13,6 +13,10 @@
     color: black;
 }
 
+.user:last-child {
+    margin-bottom: 0;
+}
+
 .followArea {
     display: flex;
     flex-direction: column;
@@ -102,5 +106,10 @@
     font-weight: bold;
     color: black;
     background-color: #acd7e5;
+}
+
+.preloader {
+    margin-top: 50px;
+    text-align: center;
 }
 
