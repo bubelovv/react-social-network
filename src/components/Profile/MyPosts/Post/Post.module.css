@@ -1,15 +1,18 @@
 .post {
   position: relative;
-  padding-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
   display: flex;
   align-items: center;
+  border: 2px #121212 solid;
+  border-radius: 10px;
 }
 
 .like {
   min-width: 43px;
   padding: 2px 3px;
   position: absolute;
-  right: 50px;
+  right: 60px;
   border-radius: 4px;
   border: none;
   color: #fff;
@@ -20,7 +23,7 @@
 .dislike {
   padding: 2px 3px;
   position: absolute;
-  right: 0px;
+  right: 10px;
   border-radius: 4px;
   border: none;
   color: #fff;
@@ -30,7 +33,7 @@
 
 .count {
   position: absolute;
-  right: 100px;
+  right: 110px;
   min-width: 20px;
   padding: 2px 2px;
   font-size: 14px;

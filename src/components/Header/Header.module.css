@@ -3,9 +3,15 @@
   background-color: lightblue;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
 }
 
 .header img {
   height: 70%;
-  padding-left: 10px;
+}
+
+.login a {
+  color: white;
+  text-decoration: none;
 }

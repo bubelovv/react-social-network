@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Users.module.css';
 import avatar from '../../assets/images/avatar.jpg'
+import {NavLink} from "react-router-dom";
 
 class Users extends React.Component {
     render() {
@@ -13,11 +14,12 @@ class Users extends React.Component {
         let pagesRight = this.props.currentPage + 5 > pagesCount ? pagesCount : this.props.currentPage + 4;
         let pagesSlice = pages.slice(pagesLeft, pagesRight);
 
+        // onClick={() => this.props.setUserProfile(user.userId)}
         return (
             <div className={styles.userArea}>
                 <div className={styles.btnNumbersPage}>
                     {pagesSlice.map(page => {
-                        return <span onClick={() => this.props.onPageChanged(page)}
+                        return <span key={page} onClick={() => this.props.onPageChanged(page)}
                                      className={this.props.currentPage === page ? styles.selectedPage : ''}>{page}</span>
                     })}
                 </div>
@@ -25,8 +27,10 @@ class Users extends React.Component {
                 {this.props.users.map(user => <div className={styles.user} key={user.id}>
                     <div className={styles.followArea}>
                         <div>
-                            <img alt='avatar' className={styles.avatar}
-                                 src={user.photos.small !== null ? user.photos.small : avatar}/>
+                            <NavLink to={`/profile/${user.id}`} >
+                                <img alt='avatar' className={styles.avatar}
+                                     src={user.photos.small !== null ? user.photos.small : avatar}/>
+                            </NavLink>
                         </div>
                         <button className={user.followed ? styles.btnFollow : styles.btnUnfollow}
                                 onClick={() => user.followed ? this.props.unfollow(user.id) : this.props.follow(user.id)}>
