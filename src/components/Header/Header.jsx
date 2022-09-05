@@ -9,12 +9,18 @@ const Header = props => {
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Twitter-logo.svg/2491px-Twitter-logo.svg.png"
                 alt="twitter"
             />
-            <div className={s.login}>
-                {props.isAuth ? props.login :
-                    <NavLink to='/login'>Login</NavLink>
-                }
+            <div>
 
+                <div className={s.login}>
+                    {props.isAuth ? props.login :
+                        <NavLink to='/login'>Login</NavLink>
+                    }
+                </div>
+                <div className={s.login}>
+                    {props.isAuth ? props.email : ''}
+                </div>
             </div>
+
         </header>
     )
 }
