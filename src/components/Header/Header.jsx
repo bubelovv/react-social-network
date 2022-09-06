@@ -10,14 +10,15 @@ const Header = props => {
                 alt="twitter"
             />
             <div>
-
                 <div className={s.login}>
-                    {props.isAuth ? props.login :
+                    {
+                        props.isAuth ?
+                        <div>
+                            <div>{props.login}</div>
+                            <div>{props.email}</div>
+                        </div> :
                         <NavLink to='/login'>Login</NavLink>
                     }
-                </div>
-                <div className={s.login}>
-                    {props.isAuth ? props.email : ''}
                 </div>
             </div>
 

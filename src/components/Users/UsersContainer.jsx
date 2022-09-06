@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import React from 'react';
 import Users from './Users';
 import Preloader from "./Preloader/Preloader";
+import {Navigate} from "react-router-dom";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
@@ -21,6 +22,9 @@ class UsersContainer extends React.Component {
     };
 
     render() {
+
+        if(!this.props.isAuth) return <Navigate to='/login'></Navigate>
+
         return (
             this.props.isFetching ?
                 <Preloader/> :
@@ -44,6 +48,7 @@ const mapStateToProps = (state) => {
         totalCount: state.usersPage.totalCount,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
+        isAuth: state.auth.isAuth,
     }
 };
 

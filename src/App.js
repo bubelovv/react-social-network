@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 import {Routes, Route} from "react-router-dom";
+import Login from "./components/Login/Login";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from './components/Navbar/Navbar'
 import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -25,6 +26,7 @@ let App = () => {
                     <Route path='/news' element={<News/>}/>
                     <Route path='/music' element={<Music/>}/>
                     <Route path='/settings' element={<Settings/>}/>
+                    <Route path='/login' element={<Login/>}/>
                 </Routes>
             </div>
         </div>

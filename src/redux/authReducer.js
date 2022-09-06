@@ -4,11 +4,11 @@ const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 
 export const setAuthUserData = (userId, email, login) => ({type: SET_AUTH_USER_DATA, data:{userId, email, login}});
 
-export const auth = () => {
+export const getAuthUserData = () => {
     return (dispatch) => {
         authApi.auth().then(data => {
             let {id, email, login} = {...data};
-            dispatch(setAuthUserData(id, email, login));
+            if(Object.keys(data).length) dispatch(setAuthUserData(id, email, login));
         });
     };
 };
