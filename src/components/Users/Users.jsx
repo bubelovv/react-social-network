@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './Users.module.css';
 import avatar from '../../assets/images/avatar.jpg'
 import {NavLink} from "react-router-dom";
-import {usersApi} from "../../API/api";
 
 class Users extends React.Component {
     render() {
@@ -32,41 +31,23 @@ class Users extends React.Component {
                                      src={user.photos.small !== null ? user.photos.small : avatar}/>
                             </NavLink>
                         </div>
+
                         <div>
-                            {
-                                user.followed ?
-                                    <button className={styles.btnFollow}
-                                            disabled={this.props.followingInProgress.find(id => id === user.id)}
-                                            onClick={() => {
-                                                this.props.toggleFollowingProgress(true, user.id);
-                                                usersApi.unfollow(user.id)
-                                                    .then(resultCode => {
-                                                        if (resultCode === 0) {
-                                                            this.props.unfollow(user.id)
-                                                        }
-                                                        this.props.toggleFollowingProgress(false, user.id);
-                                                    });
-                                            }}>
-                                        follow
-                                    </button> :
-                                    <button className={styles.btnUnfollow}
-                                            disabled={this.props.followingInProgress.find(id => id === user.id)}
-                                            onClick={() => {
-                                                this.props.toggleFollowingProgress(true, user.id);
-                                                usersApi.follow(user.id)
-                                                    .then(resultCode => {
-                                                        if (resultCode === 0) {
-                                                            this.props.follow(user.id)
-                                                        }
-                                                        this.props.toggleFollowingProgress(false, user.id);
-                                                    });
-                                            }}>
-                                        unfollow
-                                    </button>
+                            {user.followed ?
+                                <button className={styles.btnFollow}
+                                        disabled={this.props.followingInProgress.find(id => id === user.id)}
+                                        onClick={() => this.props.follow(user.id)}>
+                                    follow
+                                </button> :
+                                <button className={styles.btnUnfollow}
+                                        disabled={this.props.followingInProgress.find(id => id === user.id)}
+                                        onClick={() => this.props.unfollow(user.id)}>
+                                    unfollow
+                                </button>
                             }
                         </div>
-
                     </div>
+
                     <div className={styles.description}>
                         <div className={styles.userInfo}>
                             <span>{user.name}</span>

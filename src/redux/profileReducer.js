@@ -1,3 +1,6 @@
+import {profileApi} from "../API/api";
+import {myProfileApi} from "../API/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const INCREMENT_LIKES = 'INCREMENT_LIKES';
@@ -5,18 +8,23 @@ const DECREMENT_LIKES = 'DECREMENT_LIKES';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 export const addPost = () => ({type: ADD_POST});
-export const updateNewPostText = text => {
-    return {type: UPDATE_NEW_POST_TEXT, newPostText: text}
-};
-export const incrementLikes = id => ({
-    type: INCREMENT_LIKES,
-    id: id,
-});
-export const decrementLikes = id => ({
-    type: DECREMENT_LIKES,
-    id: id,
-});
+export const updateNewPostText = text => ({type: UPDATE_NEW_POST_TEXT, newPostText: text});
+export const incrementLikes = id => ({type: INCREMENT_LIKES, id});
+export const decrementLikes = id => ({type: DECREMENT_LIKES, id});
 export const setUserProfile = profile => ({type: SET_USER_PROFILE, profile});
+
+export const getProfile = (userId) => {
+    return (dispatch) => {
+        profileApi.getProfile(userId)
+            .then(data => dispatch(setUserProfile(data)));
+    }
+}
+export const getMyProfile = (userId) => {
+    return (dispatch) => {
+        myProfileApi.getProfile(userId)
+            .then(data => dispatch(setUserProfile(data)));
+    }
+}
 
 let initialState = {
     posts: [
