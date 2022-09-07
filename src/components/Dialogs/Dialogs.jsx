@@ -6,13 +6,11 @@ import {Navigate} from "react-router-dom";
 
 const Dialogs = props => {
     const dialogsElements = props.dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
-
     const messagesElements = props.messages.map(message => <Message key={message.id} message={message.message}/>);
 
     let onSendMessage = () => {
         props.sendMessage();
     }
-
     let onUpdateNewMessageText = (e) => {
         let text = e.target.value;
         props.updateNewMessageText(text);
