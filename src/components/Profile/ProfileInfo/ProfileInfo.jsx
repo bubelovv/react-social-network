@@ -7,6 +7,7 @@ import twitter from '../../../assets/images/twitter.png'
 import inst from '../../../assets/images/inst.png'
 import git from '../../../assets/images/git.png'
 import avatar from '../../../assets/images/avatar.jpg'
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = props => {
     return (
@@ -27,6 +28,7 @@ const ProfileInfo = props => {
                         <div className={s.myInfo}>{props.profile.lookingForAJobDescription}</div>
                     </div>
                 </div>
+                <ProfileStatus status={'Enter your status'}/>
                 <div className={s.aboutMe}>
                     <div className={s.socialIcons}>
                         <a href={props.profile.contacts.facebook} className={s.link}>

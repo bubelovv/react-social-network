@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Profile from "./Profile";
 import {getProfile, setUserProfile} from "../../redux/profileReducer";
-import {Navigate, useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import withAuthRedirect from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
@@ -16,18 +16,9 @@ class ProfileContainer extends React.Component {
     };
 
     render() {
-
-        if(!this.props.isAuth) return <Navigate to='/login'></Navigate>
-
         return <Profile profile={this.props.profile}/>
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-        profile: state.profilePage.profile,
-    }
-};
 
 function withRouter(Component) {
     function ComponentWithRouterProp(props) {
@@ -45,8 +36,14 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 }
 
+const mapStateToProps = (state) => {
+    return {
+        profile: state.profilePage.profile,
+    }
+};
+
+// withAuthRedirect,
 export default compose(
     connect(mapStateToProps, {setUserProfile, getProfile}),
     withRouter,
-    withAuthRedirect,
 )(ProfileContainer)

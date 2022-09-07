@@ -8,7 +8,6 @@ import {
 import {connect} from 'react-redux';
 import Users from './Users';
 import Preloader from "./Preloader/Preloader";
-import {Navigate} from "react-router-dom";
 import withAuthRedirect from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
@@ -23,8 +22,6 @@ class UsersContainer extends React.Component {
     };
 
     render() {
-
-        if(!this.props.isAuth) return <Navigate to='/login'></Navigate>
 
         return (
             this.props.isFetching ?
@@ -52,7 +49,7 @@ const mapStateToProps = (state) => {
     }
 };
 
+// withAuthRedirect,
 export default compose(
     connect(mapStateToProps, {getUsers, setCurrentPage, follow, unfollow}),
-    withAuthRedirect,
 )(UsersContainer)
