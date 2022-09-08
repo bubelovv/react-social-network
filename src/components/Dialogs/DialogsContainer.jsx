@@ -2,7 +2,6 @@
 import {sendMessage, updateNewMessageText} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import withAuthRedirect from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
 const mapStateToProps = (state) => {

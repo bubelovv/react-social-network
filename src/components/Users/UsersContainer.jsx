@@ -8,7 +8,6 @@ import {
 import {connect} from 'react-redux';
 import Users from './Users';
 import Preloader from "./Preloader/Preloader";
-import withAuthRedirect from "../../HOC/withAuthRedirect";
 import {compose} from "redux";
 
 class UsersContainer extends React.Component {

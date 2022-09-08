@@ -32,19 +32,19 @@ const ProfileInfo = props => {
                 <div className={s.aboutMe}>
                     <div className={s.socialIcons}>
                         <a href={props.profile.contacts.facebook} className={s.link}>
-                            <img src={fb}/>
+                            <img src={fb} alt={'fb'}/>
                         </a>
                         <a href={props.profile.contacts.vk} className={s.link}>
-                            <img src={vk}/>
+                            <img src={vk} alt={'vk'}/>
                         </a>
                         <a href={props.profile.contacts.twitter} className={s.link}>
-                            <img src={twitter}/>
+                            <img src={twitter} alt={'twitter'}/>
                         </a>
                         <a href={props.profile.contacts.instagram} className={s.link}>
-                            <img src={inst}/>
+                            <img src={inst} alt={'inst'}/>
                         </a>
                         <a href={props.profile.contacts.github} className={s.link}>
-                            <img src={git}/>
+                            <img src={git} alt={'git'}/>
                         </a>
                     </div>
                 </div>

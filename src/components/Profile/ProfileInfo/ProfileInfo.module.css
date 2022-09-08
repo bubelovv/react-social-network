@@ -8,9 +8,7 @@
 
 .aboutMe {
     display: flex;
-    align-items: start;
-    /*box-sizing: border-box;*/
-    /*width: calc(100% - 20px);*/
+    align-items: flex-start;
     padding: 5px;
     margin: 5px 10px;
     border-radius: 14px;
