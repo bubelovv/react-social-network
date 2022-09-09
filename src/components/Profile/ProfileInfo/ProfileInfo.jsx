@@ -22,14 +22,18 @@ const ProfileInfo = props => {
                     </div>
                     <div className={s.aboutMeInfo}>
                         <div className={s.myInfo}>Name: {props.profile.fullName}</div>
-                        <div className={s.myInfo}>About me: {props.profile.aboutMe || 'i\'am very secretive'}</div>
-                        <div className={s.myInfo}>
+                        <div className={props.profile.aboutMe ? s.myInfo : s.myInfoRed}>
+                            About me: {props.profile.aboutMe || 'i\'am very secretive'}
+                        </div>
+                        <div className={props.profile.lookingForAJob ? s.myInfo : s.myInfoRed}>
                             My job:
                             {props.profile.lookingForAJob ?
                             ' I\'m looking for a job' :
                             ' I\'m not looking for a job'}
                         </div>
-                        <div className={s.myInfo}>Status: {props.profile.lookingForAJobDescription || props.status || 'I don\'t have a status'}</div>
+                        <div className={props.status ? s.myInfo : s.myInfoRed}>
+                            Status: {props.profile.lookingForAJobDescription || props.status || 'I don\'t have a status'}
+                        </div>
                     </div>
                 </div>
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>

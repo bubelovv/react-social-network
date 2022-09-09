@@ -41,6 +41,16 @@
     background-color: #acd7e5;
 }
 
+.myInfoRed {
+
+    display: inline-flex;
+    margin: 3px;
+    padding: 0 5px 3px;
+    line-height: 1;
+    border-radius: 8px;
+    background-color: #ff8b8b;
+}
+
 .myInfo:last-child {
     margin-bottom: 0;
 }

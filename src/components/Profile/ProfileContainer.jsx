@@ -9,6 +9,7 @@ class ProfileContainer extends React.Component {
     componentDidMount() {
         // let userId = this.props.router.params.userId;
         let userId = this.props.router.location.pathname.slice(8); // Переписать на useHooks
+        console.log(userId)
         if (!userId) {
             userId = 25741;
         }
