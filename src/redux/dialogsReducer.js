@@ -1,10 +1,6 @@
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-POST-MESSAGE';
+const ADD_MESSAGE = 'ADD_MESSAGE';
 
-export const sendMessage = () => ({type: SEND_MESSAGE});
-export const updateNewMessageText = (text) => {
-    return {type: UPDATE_NEW_MESSAGE_TEXT, newMessageText: text}
-};
+export const addMessage = (newMessageText) => ({type: ADD_MESSAGE, newMessageText});
 
 let initialState = {
     dialogs: [
@@ -39,24 +35,19 @@ let initialState = {
         {id: '2', message: 'I wait you so much, Lybimka'},
         {id: '3', message: 'I do not know, we will go to the ocean or not...'},
     ],
-    newMessageText: '',
 };
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SEND_MESSAGE: {
-            if (state.newMessageText.trim() === '') return;
+        case ADD_MESSAGE: {
+            if (action.newMessageText.trim() === '') return state;
 
             return {
                 ...state,
-                messages: [...state.messages, {id: '4', message: state.newMessageText}],
-                newMessageText: '',
-            };
-        }
-        case UPDATE_NEW_MESSAGE_TEXT: {
-            return  {
-                ...state,
-                newMessageText: action.newMessageText
+                messages: [
+                    ...state.messages,
+                    { id: state.messages[state.messages.length], message: action.newMessageText }
+                ],
             };
         }
         default:

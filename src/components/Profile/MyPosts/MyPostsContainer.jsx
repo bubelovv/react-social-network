@@ -3,7 +3,6 @@ import {
     addPost,
     decrementLikes,
     incrementLikes,
-    updateNewPostText,
 } from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
@@ -17,7 +16,6 @@ const mapStateToProps = (state) => {
 
 const MyPostsContainer = connect(mapStateToProps, {
     addPost,
-    updateNewPostText,
     incrementLikes,
     decrementLikes,
 })(MyPosts);

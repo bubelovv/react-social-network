@@ -36,7 +36,9 @@ const ProfileInfo = props => {
                         </div>
                     </div>
                 </div>
+
                 <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+
                 <div className={s.aboutMe}>
                     <div className={s.socialIcons}>
                         <a href={props.profile.contacts.facebook} className={s.link}>
