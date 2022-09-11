@@ -12,7 +12,7 @@ const MyPosts = props => {
 
     return (
         <div className={s.posts}>
-            <div>New post:</div>
+            <h3>New post:</h3>
             <NewPostForm newMessageText={props.newMessageText}
                          addPost={props.addPost}/>
             <div>

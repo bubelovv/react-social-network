@@ -57,7 +57,11 @@
 }
 
 .add {
-    display: flex;
+    /* display: flex; */
+}
+
+.error {
+  color: red;
 }
 
 .add button {
