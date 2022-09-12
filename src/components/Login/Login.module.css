@@ -1,0 +1,73 @@
+.formWrap {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.form {
+	background-color: lightblue;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-radius: 5px;
+	padding: 10px 15px;
+}
+
+.formName {
+	text-align: center;
+	color: black;
+	margin-bottom: 10px;
+}
+
+.field {
+	width: 200px;
+	margin-bottom: 5px;
+	padding: 10px;
+	border: 1px solid grey;
+	border-radius: 5px;
+}
+
+.fieldValid {
+	border-color: green;
+}
+
+.fieldInvalid {
+	border-color: red;
+}
+
+.error {
+	color: red;
+	font-size: 12px;
+}
+
+.checkbox {
+	margin-bottom: 30px;
+	position: relative;
+}
+
+.checkbox input {
+	position: absolute;
+	top: 2.5px;
+	left: 0;
+}
+
+.checkbox p {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 15px;
+	line-height: 0.8;
+}
+
+.btn {
+	cursor: pointer;
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	background-color: #22317c;
+	color: white;
+}

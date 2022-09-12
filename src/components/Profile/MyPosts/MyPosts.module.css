@@ -1,40 +1,46 @@
 .posts {
-  padding: 10px;
+	padding: 10px;
 }
 
 .add {
-  /*display: flex;*/
-  /*align-items: center;*/
-  background-color: #fff;
-  /*display: inline-block;*/
-  padding: 15px;
-  border-radius: 15px;
+	/*display: flex;*/
+	/*align-items: center;*/
+	background-color: #fff;
+	/*display: inline-block;*/
+	padding: 15px;
+	border-radius: 15px;
 }
 
 .textarea {
-  width: 100%;
+	width: 100%;
+	min-height: 30px;
+	border-radius: 5px;
+	padding: 5px;
 }
 
-.textareaRed {
-  border-color: #fd8a8a;
+.textareaInvalid {
+	border-color: #fd8a8a;
 }
 
+.textareaValid {
+	border-color: #2badda;
+}
 
 .textarea:focus {
-  border: 1px #2badda solid;
-  border-radius: 3px;
-  outline: none;
+	border: 1px #2badda solid;
+	border-radius: 3px;
+	outline: none;
 }
 
 .errorText {
-  color: red;
+	color: red;
 }
 
 .add button {
-  background-color: rgba(127, 255, 212, 0.514);
-  border: 0;
-  border-radius: 5px;
-  padding: 5px 10px;
-  /*margin-left: 10px;*/
-  cursor: pointer;
+	background-color: rgba(127, 255, 212, 0.514);
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 10px;
+	/*margin-left: 10px;*/
+	cursor: pointer;
 }

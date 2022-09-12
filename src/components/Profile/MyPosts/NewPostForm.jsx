@@ -1,38 +1,30 @@
-import React from 'react'
-import s from './MyPosts.module.css'
-import { useForm } from 'react-hook-form'
+import React from 'react';
+import s from './MyPosts.module.css';
+import { useForm } from 'react-hook-form';
 
 const NewPostForm = (props) => {
 	let {
 		register,
 		handleSubmit,
-		formState: { errors, isValid },
-		watch,
+		formState: { errors, isValid, touchedFields },
 		reset,
-	} = useForm({ mode: 'onBlur' })
-
+	} = useForm({ mode: 'onBlur' });
 	let onSubmit = (data) => {
-		console.log(watch())
-		props.addPost(data.newPostText)
-		reset()
-	}
+		props.addPost(data.newPostText);
+		reset();
+	};
 
-	//  console.log(touchedFields.newPostText);
+	let textareaCls = !touchedFields.newPostText
+		? s.textarea
+		: isValid
+		? s.textarea + ' ' + s.textareaValid
+		: s.textarea + ' ' + s.textareaInvalid;
 
 	return (
 		<form className={s.add} onSubmit={handleSubmit(onSubmit)}>
 			<div>
 				<textarea
-					// className={
-					// 	errors?.newPostText?.message
-					// 		? s.textarea + ' ' + s.textareaRed
-					// 		: s.textarea
-					// }
-					className={
-						!isValid
-							? s.textarea + ' ' + s.textareaRed
-							: s.textarea
-					}
+					className={textareaCls}
 					placeholder="Enter your post..."
 					{...register('newPostText', {
 						required: 'This field is required',
@@ -44,15 +36,13 @@ const NewPostForm = (props) => {
 				/>
 			</div>
 			<div className={s.errorText}>
-				{errors?.newPostText && (
-					<p>{errors?.newPostText?.message || 'Error!'}</p>
-				)}
+				{errors?.newPostText && <p>{errors?.newPostText?.message || 'Error!'}</p>}
 			</div>
 			<div>
 				<button disabled={!isValid}>Add post</button>
 			</div>
 		</form>
-	)
-}
+	);
+};
 
-export default NewPostForm
+export default NewPostForm;
