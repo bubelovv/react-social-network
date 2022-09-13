@@ -1,31 +1,36 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import s from './Login.module.css';
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import s from './Login.module.css'
+import { connect } from 'react-redux'
+import {login} from "../../redux/authReducer";
+import {Navigate} from "react-router-dom";
 
-const LoginForm = (props) => {
+const LoginForm = props => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isValid, touchedFields },
-	} = useForm({ mode: 'onBlur' });
+	} = useForm({ mode: 'onBlur' })
 
-	const inputCls = (inputName) =>
+	const inputCls = inputName =>
 		!touchedFields[inputName]
 			? s.field
 			: !errors[inputName]
 			? s.field + ' ' + s.fieldValid
-			: s.field + ' ' + s.fieldInvalid;
+			: s.field + ' ' + s.fieldInvalid
 
 	return (
 		<div className={s.formWrap}>
 			<form className={s.form} onSubmit={handleSubmit(props.onSubmit)}>
 				<div className={s.formName}>LOGIN FORM</div>
 
-				{errors?.Login && <div className={s.error}>{errors.Login.message || 'Errors'}</div>}
+				{errors?.login && (
+					<div className={s.error}>{errors.login.message || 'Errors'}</div>
+				)}
 				<input
 					placeholder={'login'}
-					className={inputCls('Login')}
-					{...register('Login', {
+					className={inputCls('login')}
+					{...register('login', {
 						required: 'This field id required',
 						minLength: {
 							value: 5,
@@ -38,11 +43,13 @@ const LoginForm = (props) => {
 					})}
 				/>
 
-				{errors?.Password && <div className={s.error}>{errors.Password.message || 'Errors'}</div>}
+				{errors?.password && (
+					<div className={s.error}>{errors.password.message || 'Errors'}</div>
+				)}
 				<input
 					placeholder={'password'}
-					className={inputCls('Password')}
-					{...register('Password', {
+					className={inputCls('password')}
+					{...register('password', {
 						required: 'This field id required',
 						minLength: {
 							value: 5,
@@ -52,7 +59,7 @@ const LoginForm = (props) => {
 				/>
 
 				<div className={s.checkbox}>
-					<input {...register('Checkbox')} type={'checkbox'} />
+					<input {...register('checkbox')} type={'checkbox'} />
 					<p>remember me</p>
 				</div>
 
@@ -63,12 +70,23 @@ const LoginForm = (props) => {
 				</div>
 			</form>
 		</div>
-	);
-};
+	)
+}
 
-const Login = () => {
-	const onSubmit = (data) => console.log(data);
-	return <LoginForm onSubmit={onSubmit} />;
-};
+const Login = props => {
+	const onSubmit = data => {
+		props.login(data.login, data.password, data.checkbox)
+	}
 
-export default Login;
+	if(props.isAuth) return <Navigate to={'/profile'}></Navigate>
+
+	return <LoginForm onSubmit={onSubmit} />
+}
+
+const mapStateToProps = (state) => {
+	return {
+		isAuth: state.auth.isAuth
+	}
+}
+
+export default connect(mapStateToProps, {login})(Login)

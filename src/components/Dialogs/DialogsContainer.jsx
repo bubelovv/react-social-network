@@ -3,6 +3,7 @@ import {addMessage} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {compose} from "redux";
+import withAuthRedirect from "../../HOC/withAuthRedirect";
 
 const mapStateToProps = (state) => {
     return {
@@ -13,5 +14,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {addMessage}),
-    // withAuthRedirect,
+    withAuthRedirect,
 )(Dialogs)

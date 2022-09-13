@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -9,41 +9,49 @@ const instance = axios.create({
 export let usersApi = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then(response => response.data)
+            .then((response) => response.data);
     },
     follow(userId) {
         return instance.post(`follow/${userId}`)
-            .then(response => response.data.resultCode)
+            .then((response) => response.data.resultCode);
     },
     unfollow(userId) {
         return instance.delete(`follow/${userId}`)
-            .then(response => response.data.resultCode)
+            .then((response) => response.data.resultCode);
     },
 };
 
 export let authApi = {
     auth() {
         return instance.get(`auth/me`)
-            .then(response => response.data.data)
+            .then((response) => response.data.data);
+    },
+    loginPost(email, password, rememberMe) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+            .then((response) => response.data);
+    },
+    loginDelete() {
+        return instance.delete(`auth/login`)
+            .then((response) => response.data);
     },
 };
 
 export let profileApi = {
     getProfile(userId) {
         return instance.get(`profile/${userId}`)
-            .then(response => response.data)
+            .then((response) => response.data);
     },
     getStatus(userId) {
-        return instance.get(`profile/status/${userId}`)
+        return instance.get(`profile/status/${userId}`);
     },
     updateStatus(status) {
-        return instance.put(`profile/status`, {status})
+        return instance.put(`profile/status`, {status});
     },
 };
 
-export let myProfileApi = {
-    getProfile() {
-        return instance.get(`profile/2`)
-            .then(response => response.data)
-    },
-};
+// export let myProfileApi = {
+//     getProfile() {
+//         return instance.get(`profile/2`)
+//             .then((response) => response.data);
+//     },
+// };

@@ -13,11 +13,14 @@ const Header = props => {
                 <div className={s.login}>
                     {
                         props.isAuth ?
-                        <div>
-                            <div>{props.login}</div>
-                            <div>{props.email}</div>
-                        </div> :
-                        <NavLink to='/login'>Login</NavLink>
+                            <div className={s.wrap}>
+                                <div className={s.loginWrap}>
+                                    <div className={s.loginName}> {props.login} </div>
+                                    <button className={s.block} onClick={props.logout}>Logout</button>
+                                </div>
+                                <div>{props.email}</div>
+                            </div> :
+                            <NavLink className={s.block} to='/login'>Login</NavLink>
                     }
                 </div>
             </div>
