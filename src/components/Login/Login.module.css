@@ -71,3 +71,7 @@
 	background-color: #22317c;
 	color: white;
 }
+
+.btn:disabled {
+	background-color: #828cd0;
+}

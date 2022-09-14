@@ -18,10 +18,17 @@ export const getAuthUserData = () => {
     }
 }
 
-export const login = (email, password, rememberMe) => {
+export const login = (data, setError) => {
+        const {login, password, checkbox} = data;
+
     return dispatch => {
-        authApi.loginPost(email, password, rememberMe).then(data => {
-            if (data.resultCode === 0) dispatch(getAuthUserData())
+        authApi.loginPost(login, password, checkbox).then(data => {
+            if (data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            } else {
+                setError('login', {type: 'server', message: data.messages[0]});
+                setError('password', {type: 'server', message: data.messages[0]});
+            }
         })
     }
 }
@@ -46,10 +53,7 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_USER_DATA: {
-            return {
-                ...state,
-                ...action.payload,
-            }
+            return { ...state, ...action.payload, }
         }
         default:
             return state
