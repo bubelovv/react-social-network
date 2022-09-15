@@ -9,9 +9,12 @@ import withAuthRedirect from "../../HOC/withAuthRedirect";
 class ProfileContainer extends React.Component {
     componentDidMount() {
         // let userId = this.props.router.params.userId;
-        let userId = this.props.router.location.pathname.slice(9); // Переписать на useHooks
+        let userId = this.props.router.location.pathname.slice(9); // rewrite with useHooks
         if (!userId) {
-            userId = this.props.authorisedUserId;
+            userId = this.props.authorisedUserId; //create redirect with helps JSX-Component and react-hooks
+        }
+        if (!userId) {
+
         }
         this.props.getProfile(userId);
         this.props.getStatus(userId);

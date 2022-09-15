@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './App.css'
-import {Routes, Route} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Login from './components/Login/Login';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from './components/Navbar/Navbar'
@@ -10,8 +10,22 @@ import UsersContainer from "./components/Users/UsersContainer";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
+import {connect} from "react-redux";
+import {initializeApp} from "./redux/appReducer";
+import Preloader from "./components/Users/Preloader/Preloader";
 
-let App = () => {
+// componentDidMount() {}
+
+function App(props) {
+
+    useEffect(() => {
+        props.initializeApp()
+    }, [])
+
+    if(!props.initialized) {
+        return <Preloader/>
+    }
+
     return (
         <div className="app-wrapper">
             <HeaderContainer/>
@@ -29,7 +43,10 @@ let App = () => {
                 </Routes>
             </div>
         </div>
+
     )
 }
 
-export default App;
+const mapStateToProps = (state) => ({initialized: state.app.initialized})
+
+export default connect(mapStateToProps, {initializeApp})(App);

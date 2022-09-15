@@ -1,13 +1,14 @@
 import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
+import logo from "../../assets/images/icons8-internet-64.png"
 
 const Header = props => {
     return (
         <header className={s.header}>
             <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Twitter-logo.svg/2491px-Twitter-logo.svg.png"
-                alt="twitter"
+                src={logo}
+                alt="train"
             />
             <div>
                 <div className={s.login}>
