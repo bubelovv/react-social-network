@@ -7,7 +7,7 @@ import twitter from '../../../assets/images/twitter.png'
 import inst from '../../../assets/images/inst.png'
 import git from '../../../assets/images/git.png'
 import avatar from '../../../assets/images/avatar.jpg'
-import ProfileStatus from './ProfileStatus'
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = props => {
     return (
@@ -23,7 +23,7 @@ const ProfileInfo = props => {
                     <div className={s.aboutMeInfo}>
                         <div className={s.myInfo}>Name: {props.profile.fullName}</div>
                         <div className={props.profile.aboutMe ? s.myInfo : s.myInfoRed}>
-                            About me: {props.profile.aboutMe || 'i\'am very secretive'}
+                            About me: {props.profile.aboutMe || 'i\'m very secretive'}
                         </div>
                         <div className={props.profile.lookingForAJob ? s.myInfo : s.myInfoRed}>
                             My job:
@@ -37,7 +37,7 @@ const ProfileInfo = props => {
                     </div>
                 </div>
 
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
 
                 <div className={s.aboutMe}>
                     <div className={s.socialIcons}>

@@ -9,6 +9,7 @@ const NewPostForm = (props) => {
 		formState: { errors, isValid, touchedFields },
 		reset,
 	} = useForm({ mode: 'onBlur' });
+
 	let onSubmit = (data) => {
 		props.addPost(data.newPostText);
 		reset();

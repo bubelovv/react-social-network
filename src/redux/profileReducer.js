@@ -27,9 +27,8 @@ export const getProfile = (userId) => {
 // }
 export const getStatus = (userId) => {
     return (dispatch) => {
-        profileApi.getStatus(userId).then((response) => {
-            dispatch(setStatus(response.data));
-        });
+        profileApi.getStatus(userId)
+            .then((response) => dispatch(setStatus(response.data)));
     };
 };
 export const updateStatus = (status) => {

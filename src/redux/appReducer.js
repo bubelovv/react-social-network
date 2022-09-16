@@ -7,12 +7,9 @@ export const initializedSuccess = () => ({type: SET_INITIALIZED_SUCCESS})
 export const initializeApp = () => {
     return dispatch => {
         let promise = dispatch(getAuthUserData())
-        // dispatch(somethingElse())
-        // dispatch(somethingElse())
         Promise.all([promise]).then(() => dispatch(initializedSuccess()))
     }
 }
-
 
 let initialState = {
     initialized: false,
