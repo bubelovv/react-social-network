@@ -4,6 +4,7 @@ import s from './Login.module.css'
 import {connect} from 'react-redux'
 import {login} from "../../redux/authReducer";
 import {Navigate} from "react-router-dom";
+import {getIsAuth} from "../../redux/auth-selectors";
 
 const LoginForm = props => {
     const {
@@ -84,6 +85,6 @@ const Login = props => {
     return <LoginForm  onSubmit={onSubmit}/>
 }
 
-const mapStateToProps = (state) => ({isAuth: state.auth.isAuth})
+const mapStateToProps = (state) => ({isAuth: getIsAuth(state)})
 
 export default connect(mapStateToProps, {login})(Login)

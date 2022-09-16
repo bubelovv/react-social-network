@@ -6,12 +6,11 @@ const NewMessageForm = (props) => {
 	let {
 		register,
 		handleSubmit,
-		formState: { errors, isValid, touchedFields },
+		formState: { isValid, touchedFields },
 		reset,
 	} = useForm({ mode: 'onBlur' });
 
 	let onSubmit = (data) => {
-		alert(JSON.stringify(data, errors?.newPostText?.message));
 		props.addMessage(data.newMessageText);
 		reset();
 	};

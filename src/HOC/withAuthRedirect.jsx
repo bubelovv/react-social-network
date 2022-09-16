@@ -1,8 +1,9 @@
 import React from 'react';
 import {Navigate} from "react-router-dom";
 import {connect} from "react-redux";
+import {getIsAuth} from "../redux/auth-selectors";
 
-const mapStateToProps = (state) => ({ isAuth: state.auth.isAuth })
+const mapStateToProps = (state) => ({ isAuth: getIsAuth(state) })
 
 const withAuthRedirect = (Component) => {
 

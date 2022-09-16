@@ -22,7 +22,7 @@ function App(props) {
         props.initializeApp()
     }, [])
 
-    if(!props.initialized) {
+    if (!props.initialized) {
         return <Preloader/>
     }
 
