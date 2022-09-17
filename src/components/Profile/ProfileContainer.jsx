@@ -1,46 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import Profile from './Profile';
 import {getProfile, getStatus, updateStatus} from '../../redux/profileReducer';
-import {useLocation, useNavigate, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {compose} from 'redux';
 import withAuthRedirect from "../../HOC/withAuthRedirect";
 import {getIsAuth} from "../../redux/auth-selectors";
 
-class ProfileContainer extends React.Component {
-    componentDidMount() {
-        // let userId = this.props.router.params.userId;
-        let userId = this.props.router.location.pathname.slice(9); // rewrite with useHooks
+function ProfileContainer(props) {
+    let params = useParams();
+
+    useEffect(() => {
+        let userId = params['*'];
         if (!userId) {
-            userId = this.props.authorisedUserId; //create redirect with helps JSX-Component and react-hooks
+            userId = props.authorisedUserId; //create redirect with helps JSX-Component and react-hooks
         }
-        if (!userId) {
 
-        }
-        this.props.getProfile(userId);
-        this.props.getStatus(userId);
-    }
+        props.getProfile(userId);
+        props.getStatus(userId);
+    }, [])
 
-    render() {
-        return (
-            <Profile
-                profile={this.props.profile}
-                status={this.props.status}
-                updateStatus={this.props.updateStatus}
-            />
-        );
-    }
-}
-
-function withRouter(Component) {
-    function ComponentWithRouterProp(props) {
-        let location = useLocation();
-        let navigate = useNavigate();
-        let params = useParams();
-        return <Component {...props} router={{location, navigate, params}}/>;
-    }
-
-    return ComponentWithRouterProp;
+    return (
+        <Profile
+            profile={props.profile}
+            status={props.status}
+            updateStatus={props.updateStatus}
+        />
+    );
 }
 
 const mapStateToProps = (state) => {
@@ -56,5 +42,4 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps, {getProfile, getStatus, updateStatus}),
     withAuthRedirect,
-    withRouter
 )(ProfileContainer);
