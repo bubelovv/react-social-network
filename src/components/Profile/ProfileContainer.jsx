@@ -11,7 +11,7 @@ function ProfileContainer(props) {
     let params = useParams();
 
     useEffect(() => {
-        let userId = params['*'];
+        let userId = params.userId;
         if (!userId) {
             userId = props.authorisedUserId; //create redirect with helps JSX-Component and react-hooks
         }

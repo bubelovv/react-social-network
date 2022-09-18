@@ -14,8 +14,6 @@ import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/Users/Preloader/Preloader";
 
-// componentDidMount() {}
-
 function App(props) {
 
     useEffect(() => {
@@ -32,8 +30,8 @@ function App(props) {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Routes>
-                    <Route path='/profile/*' element={<ProfileContainer/>}/>
-                    {/*<Route path='/profile' element={<MyProfileContainer />} />*/}
+                    <Route path='/profile/:userId' element={<ProfileContainer/>}/>
+                    <Route path='/profile' element={<ProfileContainer />} />
                     <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                     <Route path='/users' element={<UsersContainer/>}/>
                     <Route path='/news' element={<News/>}/>
