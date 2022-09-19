@@ -23,6 +23,7 @@ const NewPostForm = (props) => {
 
 	return (
 		<form className={s.add} onSubmit={handleSubmit(onSubmit)}>
+			<h4 style={{color: "#000"}}>New post:</h4>
 			<div>
 				<textarea
 					className={textareaCls}
