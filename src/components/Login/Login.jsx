@@ -6,7 +6,7 @@ import {login} from "../../redux/authReducer";
 import {Navigate} from "react-router-dom";
 import {getIsAuth} from "../../redux/auth-selectors";
 
-const LoginForm = props => {
+const LoginForm = ({onSubmit}) => {
     const {
         register,
         handleSubmit,
@@ -17,13 +17,11 @@ const LoginForm = props => {
     const inputCls = inputName =>
         !touchedFields[inputName]
             ? s.field
-            : !errors[inputName]
-                ? s.field + ' ' + s.fieldValid
-                : s.field + ' ' + s.fieldInvalid
+            : !errors[inputName] ? s.field + ' ' + s.fieldValid : s.field + ' ' + s.fieldInvalid
 
     return (
         <div className={s.formWrap}>
-            <form className={s.form} onSubmit={handleSubmit((data) => props.onSubmit(data, setError))}>
+            <form className={s.form} onSubmit={handleSubmit((data) => onSubmit(data, setError))}>
                 <div className={s.formName}>LOGIN FORM</div>
 
                 {errors?.login && (
@@ -75,14 +73,14 @@ const LoginForm = props => {
     )
 }
 
-const Login = props => {
+const Login = ({login, isAuth}) => {
     const onSubmit = (data, setError) => {
-        props.login(data, setError)
+        login(data, setError)
     }
 
-    if (props.isAuth) return <Navigate to={'/profile'}></Navigate>
+    if (isAuth) return <Navigate to={'/profile'}></Navigate>
 
-    return <LoginForm  onSubmit={onSubmit}/>
+    return <LoginForm onSubmit={onSubmit}/>
 }
 
 const mapStateToProps = (state) => ({isAuth: getIsAuth(state)})

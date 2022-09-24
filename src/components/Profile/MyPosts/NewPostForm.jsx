@@ -2,7 +2,7 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import { useForm } from 'react-hook-form';
 
-const NewPostForm = (props) => {
+const NewPostForm = ({addPost}) => {
 	let {
 		register,
 		handleSubmit,
@@ -11,15 +11,13 @@ const NewPostForm = (props) => {
 	} = useForm({ mode: 'onBlur' });
 
 	let onSubmit = (data) => {
-		props.addPost(data.newPostText);
+		addPost(data.newPostText);
 		reset();
 	};
 
 	let textareaCls = !touchedFields.newPostText
 		? s.textarea
-		: isValid
-		? s.textarea + ' ' + s.textareaValid
-		: s.textarea + ' ' + s.textareaInvalid;
+		: isValid ? s.textarea + ' ' + s.textareaValid : s.textarea + ' ' + s.textareaInvalid;
 
 	return (
 		<form className={s.add} onSubmit={handleSubmit(onSubmit)}>

@@ -4,9 +4,9 @@ import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import NewMessageForm from "./NewMessageForm";
 
-const Dialogs = props => {
-    const dialogsElements = props.dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
-    const messagesElements = props.messages.map(message => <Message key={message.id} message={message.message}/>);
+const Dialogs = ({dialogs, messages, addMessage}) => {
+    const dialogsElements = dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
+    const messagesElements = messages.map(message => <Message key={message.id} message={message.message}/>);
 
     return (
         <div className={s.dialogs}>
@@ -15,8 +15,7 @@ const Dialogs = props => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <NewMessageForm newMessageText={props.newMessageText}
-                                addMessage={props.addMessage}/>
+                <NewMessageForm addMessage={addMessage}/>
             </div>
         </div>
     );

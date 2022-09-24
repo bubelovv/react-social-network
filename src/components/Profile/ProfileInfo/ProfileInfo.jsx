@@ -9,51 +9,51 @@ import git from '../../../assets/images/git.png'
 import avatar from '../../../assets/images/avatar.jpg'
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
-const ProfileInfo = props => {
+const ProfileInfo = ({profile, status, updateStatus}) => {
     return (
-        props.profile === null ? <Preloader/> :
+        profile === null ? <Preloader/> :
             <div className={s.profileInfo}>
                 <div className={s.wallpaper}>
                     <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>
                 </div>
                 <div className={s.aboutMe}>
                     <div className={s.profileFoto}>
-                        <img src={props.profile.photos.large === null ? avatar : props.profile.photos.large} alt='bgc'/>
+                        <img src={profile.photos.large === null ? avatar : profile.photos.large} alt='bgc'/>
                     </div>
                     <div className={s.aboutMeInfo}>
-                        <div className={s.myInfo}>Name: {props.profile.fullName}</div>
-                        <div className={props.profile.aboutMe ? s.myInfo : s.myInfoRed}>
-                            About me: {props.profile.aboutMe || 'i\'m very secretive'}
+                        <div className={s.myInfo}>Name: {profile.fullName}</div>
+                        <div className={profile.aboutMe ? s.myInfo : s.myInfoRed}>
+                            About me: {profile.aboutMe || 'i\'m very secretive'}
                         </div>
-                        <div className={props.profile.lookingForAJob ? s.myInfo : s.myInfoRed}>
+                        <div className={profile.lookingForAJob ? s.myInfo : s.myInfoRed}>
                             My job:
-                            {props.profile.lookingForAJob ?
+                            {profile.lookingForAJob ?
                             ' I\'m looking for a job' :
                             ' I\'m not looking for a job'}
                         </div>
-                        <div className={props.status ? s.myInfo : s.myInfoRed}>
-                            Status: {props.profile.lookingForAJobDescription || props.status || 'I don\'t have a status'}
+                        <div className={status ? s.myInfo : s.myInfoRed}>
+                            Status: {profile.lookingForAJobDescription || status || 'I don\'t have a status'}
                         </div>
                     </div>
                 </div>
 
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
 
                 <div className={s.aboutMe}>
                     <div className={s.socialIcons}>
-                        <a href={props.profile.contacts.facebook} className={s.link}>
+                        <a href={profile.contacts.facebook} className={s.link}>
                             <img src={fb} alt={'fb'}/>
                         </a>
-                        <a href={props.profile.contacts.vk} className={s.link}>
+                        <a href={profile.contacts.vk} className={s.link}>
                             <img src={vk} alt={'vk'}/>
                         </a>
-                        <a href={props.profile.contacts.twitter} className={s.link}>
+                        <a href={profile.contacts.twitter} className={s.link}>
                             <img src={twitter} alt={'twitter'}/>
                         </a>
-                        <a href={props.profile.contacts.instagram} className={s.link}>
+                        <a href={profile.contacts.instagram} className={s.link}>
                             <img src={inst} alt={'inst'}/>
                         </a>
-                        <a href={props.profile.contacts.github} className={s.link}>
+                        <a href={profile.contacts.github} className={s.link}>
                             <img src={git} alt={'git'}/>
                         </a>
                     </div>

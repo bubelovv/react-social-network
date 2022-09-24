@@ -14,34 +14,31 @@ import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/Users/Preloader/Preloader";
 
-function App(props) {
+function App({initializeApp, initialized}) {
 
     useEffect(() => {
-        props.initializeApp()
+        initializeApp()
     }, [])
 
-    if (!props.initialized) {
-        return <Preloader/>
-    }
 
-    return (
-        <div className="app-wrapper">
-            <HeaderContainer/>
-            <Navbar/>
-            <div className="app-wrapper-content">
-                <Routes>
-                    <Route path='/profile/:userId' element={<ProfileContainer/>}/>
-                    <Route path='/profile' element={<ProfileContainer />} />
-                    <Route path='/dialogs/*' element={<DialogsContainer/>}/>
-                    <Route path='/users' element={<UsersContainer/>}/>
-                    <Route path='/news' element={<News/>}/>
-                    <Route path='/music' element={<Music/>}/>
-                    <Route path='/settings' element={<Settings/>}/>
-                    <Route path='/login' element={<Login/>}/>
-                </Routes>
+    return (!initialized ?
+            <Preloader/> :
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Routes>
+                        <Route path='/profile/:userId' element={<ProfileContainer/>}/>
+                        <Route path='/profile' element={<ProfileContainer/>}/>
+                        <Route path='/dialogs/*' element={<DialogsContainer/>}/>
+                        <Route path='/users' element={<UsersContainer/>}/>
+                        <Route path='/news' element={<News/>}/>
+                        <Route path='/music' element={<Music/>}/>
+                        <Route path='/settings' element={<Settings/>}/>
+                        <Route path='/login' element={<Login/>}/>
+                    </Routes>
+                </div>
             </div>
-        </div>
-
     )
 }
 

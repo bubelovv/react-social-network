@@ -7,51 +7,44 @@ const instance = axios.create({
 });
 
 export let usersApi = {
-    getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-            .then((response) => response.data);
+    async getUsers(currentPage = 1, pageSize = 10) {
+        let response = await instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return response.data;
     },
-    follow(userId) {
-        return instance.post(`follow/${userId}`)
-            .then((response) => response.data.resultCode);
+    async follow(userId) {
+        let response = await instance.post(`follow/${userId}`)
+        return response.data.resultCode;
     },
-    unfollow(userId) {
-        return instance.delete(`follow/${userId}`)
-            .then((response) => response.data.resultCode);
+    async unfollow(userId) {
+        let response = await instance.delete(`follow/${userId}`)
+        return response.data.resultCode;
     },
 };
 
 export let authApi = {
-    auth() {
-        return instance.get(`auth/me`)
-            .then((response) => response.data.data);
+    async auth() {
+        let response = await instance.get(`auth/me`)
+        return response.data.data;
     },
-    loginPost(email, password, rememberMe) {
-        return instance.post(`auth/login`, {email, password, rememberMe})
-            .then((response) => response.data);
+    async loginPost(email, password, rememberMe) {
+        let response = await instance.post(`auth/login`, {email, password, rememberMe})
+        return response.data;
     },
-    loginDelete() {
-        return instance.delete(`auth/login`)
-            .then((response) => response.data);
+    async loginDelete() {
+        let response = await instance.delete(`auth/login`)
+        return response.data;
     },
 };
 
 export let profileApi = {
-    getProfile(userId) {
-        return instance.get(`profile/${userId}`)
-            .then((response) => response.data);
+    async getProfile(userId) {
+        let response = await instance.get(`profile/${userId}`)
+        return response.data;
     },
-    getStatus(userId) {
-        return instance.get(`profile/status/${userId}`);
+    async getStatus(userId) {
+        return await instance.get(`profile/status/${userId}`);
     },
-    updateStatus(status) {
-        return instance.put(`profile/status`, {status});
+    async updateStatus(status) {
+        return await instance.put(`profile/status`, {status});
     },
 };
-
-// export let myProfileApi = {
-//     getProfile() {
-//         return instance.get(`profile/2`)
-//             .then((response) => response.data);
-//     },
-// };
