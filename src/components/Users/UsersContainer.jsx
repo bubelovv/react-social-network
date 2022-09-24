@@ -9,16 +9,15 @@ import {connect} from 'react-redux';
 import Users from './Users';
 import Preloader from "./Preloader/Preloader";
 import {compose} from "redux";
-// import withAuthRedirect from "../../HOC/withAuthRedirect";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        super.componentDidUpdate(prevProps, prevState, snapshot);
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     super.componentDidUpdate(prevProps, prevState, snapshot);
+    // }
 
     onPageChanged = (currentPage) => {
         this.props.setCurrentPage(currentPage);

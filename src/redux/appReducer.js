@@ -4,11 +4,10 @@ const SET_INITIALIZED_SUCCESS = 'SET_INITIALIZED_SUCCESS'
 
 export const initializedSuccess = () => ({type: SET_INITIALIZED_SUCCESS})
 
-export const initializeApp = () => {
-    return dispatch => {
-        let promise = dispatch(getAuthUserData())
-        Promise.all([promise]).then(() => dispatch(initializedSuccess()))
-    }
+export const initializeApp = () => async dispatch => {
+    let promise = await dispatch(getAuthUserData())
+    await Promise.all([promise])  //Возможно здесь неправильно
+    dispatch(initializedSuccess())
 }
 
 let initialState = {
