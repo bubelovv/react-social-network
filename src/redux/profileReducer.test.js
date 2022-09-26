@@ -11,10 +11,8 @@ test('post should be deleted', () => {
         ]
     }
     let action = deletePost(1)
-
     // 2. change state
     let newState = profileReducer(state, action)
-
     // 3. check result
     expect(newState.posts.length).toBe(2)
 })

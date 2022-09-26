@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from './components/Login/Login';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Navbar from './components/Navbar/Navbar'
@@ -10,18 +10,21 @@ import UsersContainer from "./components/Users/UsersContainer";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/Users/Preloader/Preloader";
+import store from "./redux/reduxStore";
 
-function App({initializeApp, initialized}) {
+export function App(props) {
+const {initializeApp, initialized} = props;
 
     useEffect(() => {
         initializeApp()
     }, [])
 
 
-    return (!initialized ?
+    return (
+        !initialized ?
             <Preloader/> :
             <div className="app-wrapper">
                 <HeaderContainer/>
@@ -44,4 +47,16 @@ function App({initializeApp, initialized}) {
 
 const mapStateToProps = (state) => ({initialized: state.app.initialized})
 
-export default connect(mapStateToProps, {initializeApp})(App);
+const ConnectedApp = connect(mapStateToProps, {initializeApp})(App);
+
+const MainApp = () => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>learn react
+                <ConnectedApp/>
+            </Provider>
+        </BrowserRouter>
+    )
+}
+
+export default MainApp
