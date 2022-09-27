@@ -7,8 +7,9 @@ const Pagination = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-    let pagesLeft = props.currentPage - 5 < 0 ? 0 : props.currentPage - 5;
-    let pagesRight = props.currentPage + 5 > pagesCount ? pagesCount : props.currentPage + 4;
+
+    let pagesLeft = props.currentPage - 4 < 0 ? 0 : props.currentPage - 4;
+    let pagesRight = props.currentPage + 3 > pagesCount ? pagesCount : props.currentPage + 3;
     let pagesSlice = pages.slice(pagesLeft, pagesRight);
 
     return (

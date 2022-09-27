@@ -56,14 +56,13 @@
 }
 
 .socialIcons {
-    height: 40px;
+    height: 30px;
 }
 
 .link {
     display: inline-flex;
     margin-right: 3px;
-    width: 40px;
-    height: 40px;
+    height: 100%;
 }
 
 .link img {
