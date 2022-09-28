@@ -47,4 +47,11 @@ export let profileApi = {
     async updateStatus(status) {
         return await instance.put(`profile/status`, {status});
     },
+    async savePhoto(file) {
+        let formData = new FormData();
+        formData.append('image', file);
+        return await instance.put(`profile/photo`, formData, {
+            headers: {'Content-Type': 'multipart/form-data'}
+        });
+    },
 };

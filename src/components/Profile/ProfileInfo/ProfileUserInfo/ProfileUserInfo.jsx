@@ -2,12 +2,19 @@ import React from "react";
 import s from '../ProfileInfo.module.css';
 import avatar from "../../../../assets/images/avatar.jpg";
 
-const ProfileUserInfo = ({profile, status}) => {
+const ProfileUserInfo = ({profile, status, isOwner, savePhoto}) => {
+
+    const mainPhotoSelected = (e) => {
+        if(e.target.files.length) {
+            savePhoto(e.target.files[0])
+        }
+    }
 
     return (
         <div className={s.aboutMe}>
             <div className={s.profileFoto}>
-                <img src={profile.photos.large === null ? avatar : profile.photos.large} alt='bgc'/>
+                <img src={ profile.photos.large || avatar } alt='bgc'/>
+                {isOwner && <input onChange={mainPhotoSelected} type={"file"}/>}
             </div>
             <div className={s.aboutMeInfo}>
                 <div className={s.myInfo}>Name: {profile.fullName}</div>

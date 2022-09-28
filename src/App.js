@@ -28,7 +28,6 @@ export function App(props) {
         initializeApp()
     }, [])
 
-
     return (
         !initialized ?
             <Preloader/> :
@@ -40,7 +39,7 @@ export function App(props) {
                         <Routes>
                             <Route path='/profile/:userId' element={<ProfileContainer/>}/>
                             <Route path='/profile' element={<ProfileContainer/>}/>
-                            <Route path='/' element={<ProfileContainer/>}/>
+                            {/*<Route path='/' element={<ProfileContainer/>}/>*/}
                             <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                             <Route path='/users' element={<UsersContainer/>}/>
                             <Route path='/news' element={<News/>}/>

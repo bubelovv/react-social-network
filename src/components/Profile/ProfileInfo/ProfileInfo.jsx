@@ -5,7 +5,7 @@ import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 import ProfileSocialLinks from "./ProfileSocialLinks/ProfileSocialLinks";
 import ProfileUserInfo from "./ProfileUserInfo/ProfileUserInfo";
 
-const ProfileInfo = ({profile, status, updateStatus}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     return (
         profile === null ? <Preloader/> :
             <div className={s.profileInfo}>
@@ -13,7 +13,10 @@ const ProfileInfo = ({profile, status, updateStatus}) => {
                     <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>
                 </div>
 
-                <ProfileUserInfo profile={profile} status={status}/>
+                <ProfileUserInfo profile={profile}
+                                 status={status}
+                                 isOwner={isOwner}
+                                 savePhoto={savePhoto}/>
 
                 <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
 
