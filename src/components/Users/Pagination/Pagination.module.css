@@ -6,9 +6,9 @@
 }
 
 .btnNumbersPage span {
+    font-size: 14px;
     display: inline-flex;
-    width: 40px;
-    padding: 2px 0;
+    padding: 0 10px;
     margin-right: 5px;
     border-radius: 4px;
     justify-content: center;
@@ -29,11 +29,44 @@
 .btnArrow {
     font-size: 14px;
     font-style: italic;
-    height: 25px;
-    padding: 0 5px 1px;
-    border-radius: 15px;
     color: white;
-    background-color: #000000;
+    background-color: rgba(61, 61, 61, 0.5);
     cursor: pointer;
+}
+
+.left {
+    border-radius: 0 5px 5px 0;
+    padding: 0 5px 1px 10px;
+    clip-path:
+            polygon(
+                    0% 50%,     /* верхняя левая */
+                    25% 0%,     /* верхняя левая */
+                    100% 0%,    /* верхняя правая */
+                    100% 0%,   /* верхняя правая */
+                    100% 100%,  /* нижняя правая */
+                    100% 100%,  /* нижняя правая */
+                    20% 100%,   /* нижняя левая */
+                    25% 100%      /* нижняя левая */
+            );
+}
+
+.right {
+    border-radius: 5px 0 0 5px;
+    padding: 0 10px 1px 5px;
+    clip-path:
+            polygon(
+                    0% 0%,     /* верхняя левая */
+                    0% 0%,     /* верхняя левая */
+                    75% 0%,    /* верхняя правая */
+                    100% 50%,   /* верхняя правая */
+                    75% 100%,  /* нижняя правая */
+                    100% 100%,  /* нижняя правая */
+                    0% 100%,   /* нижняя левая */
+                    0% 100%      /* нижняя левая */
+            );
+}
+
+.btnArrow:hover {
+    background-color: #000000;
 }
 
