@@ -27,20 +27,27 @@
 .profilePhoto img{
     width: 100px;
     height: 100px;
-    border-radius: 10px;
-    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.profileInfoWrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .customInputFile {
     background-color: lightgray;
     padding: 0 5px 1px;
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
     font-size: 12px;
+    margin-top: 5px;
 }
 
 .customInputFile:hover {
-    background-color: lightblue;
+    background-color: #000000;
+    color: white;
 }
 
 .aboutMeInfo {
@@ -75,7 +82,7 @@
 
 .link {
     display: inline-flex;
-    margin-right: 3px;
+    margin-left: 3px;
     height: 100%;
 }
 
@@ -96,6 +103,7 @@
 }
 
 .statusSpanWrap {
+    display: flex;
     width: 100%;
 }
 
@@ -114,10 +122,24 @@
 
 .statusInputWrap input {
     width: 100%;
+    height: auto;
     margin-left: 5px;
     padding: 0 3px;
     border-radius: 3px;
     background-color: rgba(17, 34, 51, 0.19);
     font-size: 16px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.btnChange {
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 5px;
+    cursor: pointer;
+    flex: 0 0 80px;
+}
+
+.btnChange:hover {
+    background-color: #000;
+    color: white;
 }

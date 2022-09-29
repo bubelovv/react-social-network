@@ -1,39 +1,43 @@
-import React from "react";
+import React, {useState} from "react";
 import s from '../ProfileInfo.module.css';
 import avatar from "../../../../assets/images/avatar.jpg";
+import AboutUserInfo from "./AboutUserInfo/AboutUserInfo";
+import AboutUserForm from "./AboutUserForm/AboutUserForm";
 
-const ProfileUserInfo = ({profile, status, isOwner, savePhoto}) => {
+const ProfileUserInfo = ({profile, isOwner, savePhoto, saveInfo}) => {
 
     const mainPhotoSelected = (e) => {
-        if(e.target.files.length) {
+        if (e.target.files.length) {
             savePhoto(e.target.files[0])
         }
     }
 
+    const [editMode, setEditMode] = useState(false)
+
     return (
         <div className={s.aboutMe}>
+
             <div className={s.profilePhoto}>
-                <img src={ profile.photos.large || avatar } alt='bgc'/>
+                <img src={profile.photos.large || avatar} alt='bgc'/>
 
                 {isOwner && (
-                    <label htmlFor ="file-upload" className={s.customInputFile}>
+                    <label htmlFor="file-upload" className={s.customInputFile}>
                         Change Photo
                         <input hidden id="file-upload" type={"file"} onChange={mainPhotoSelected}/>
                     </label>
                 )}
-
             </div>
-            <div className={s.aboutMeInfo}>
-                <div className={s.myInfo}>Name: {profile.fullName}</div>
-                <div className={profile.aboutMe ? s.myInfo : s.myInfoRed}>
-                    About me: {profile.aboutMe || ' i\'m very secretive'}
-                </div>
-                <div className={profile.lookingForAJob ? s.myInfo : s.myInfoRed}>
-                    Looking for a job: {profile.lookingForAJob ? ' yes' : ' no'}
-                </div>
-                <div className={status ? s.myInfo : s.myInfoRed}>
-                    Job: {profile.lookingForAJobDescription ||  'I\'m not looking for a job'}
-                </div>
+
+            <div className={s.profileInfoWrap}>
+                {editMode
+                    ? <AboutUserForm profile={profile}
+                                     isOwner={isOwner}
+                                     goToEditMode={() => setEditMode(false)}
+                                     saveInfo={saveInfo}/>
+                    : <AboutUserInfo profile={profile}
+                                     isOwner={isOwner}
+                                     goToEditMode={() => setEditMode(true)}/>
+                }
             </div>
         </div>
     )

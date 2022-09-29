@@ -33,9 +33,14 @@ const ProfileStatus = (props) => {
                            value={status}/>
                 </div> :
                 <div className={s.statusSpanWrap}>
-                    <span onDoubleClick={activateEditMade}>
+                    <span>
                         Status: {status || 'Enter your status'}
                     </span>
+                    {props.isOwner && (
+                        <div style={{flex: '0 0 70px'}}>
+                            <button className={s.btnChange} onClick={activateEditMade}>change status</button>
+                        </div>
+                    )}
                 </div>
             }
         </div>

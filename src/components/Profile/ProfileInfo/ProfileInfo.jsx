@@ -2,10 +2,9 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../Users/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
-import ProfileSocialLinks from "./ProfileSocialLinks/ProfileSocialLinks";
 import ProfileUserInfo from "./ProfileUserInfo/ProfileUserInfo";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveInfo}) => {
     return (
         profile === null ? <Preloader/> :
             <div className={s.profileInfo}>
@@ -16,11 +15,10 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
                 <ProfileUserInfo profile={profile}
                                  status={status}
                                  isOwner={isOwner}
-                                 savePhoto={savePhoto}/>
+                                 savePhoto={savePhoto}
+                                 saveInfo={saveInfo}/>
 
-                <ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
-
-                <ProfileSocialLinks contacts={profile.contacts}/>
+                <ProfileStatusWithHooks isOwner={isOwner} status={status} updateStatus={updateStatus}/>
             </div>
     )
 }

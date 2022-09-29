@@ -54,4 +54,7 @@ export let profileApi = {
             headers: {'Content-Type': 'multipart/form-data'}
         });
     },
+    async saveInfo(profile) {
+        return await instance.put(`profile`, profile);
+    },
 };
