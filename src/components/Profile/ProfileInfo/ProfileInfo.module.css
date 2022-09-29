@@ -16,18 +16,31 @@
     background-color: #fff;
 }
 
-.profileFoto {
+.profilePhoto {
     display: flex;
     flex-direction: column;
-    /*height: 120px;*/
+    align-items: center;
     margin-right: 5px;
     flex: 0 0 100px;
 }
 
-.profileFoto img{
+.profilePhoto img{
     width: 100px;
     height: 100px;
     border-radius: 10px;
+    margin-bottom: 5px;
+}
+
+.customInputFile {
+    background-color: lightgray;
+    padding: 0 5px 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.customInputFile:hover {
+    background-color: lightblue;
 }
 
 .aboutMeInfo {

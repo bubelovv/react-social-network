@@ -12,9 +12,16 @@ const ProfileUserInfo = ({profile, status, isOwner, savePhoto}) => {
 
     return (
         <div className={s.aboutMe}>
-            <div className={s.profileFoto}>
+            <div className={s.profilePhoto}>
                 <img src={ profile.photos.large || avatar } alt='bgc'/>
-                {isOwner && <input onChange={mainPhotoSelected} type={"file"}/>}
+
+                {isOwner && (
+                    <label htmlFor ="file-upload" className={s.customInputFile}>
+                        Change Photo
+                        <input hidden id="file-upload" type={"file"} onChange={mainPhotoSelected}/>
+                    </label>
+                )}
+
             </div>
             <div className={s.aboutMeInfo}>
                 <div className={s.myInfo}>Name: {profile.fullName}</div>
