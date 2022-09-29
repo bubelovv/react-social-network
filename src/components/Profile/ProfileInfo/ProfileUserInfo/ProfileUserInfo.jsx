@@ -26,16 +26,13 @@ const ProfileUserInfo = ({profile, status, isOwner, savePhoto}) => {
             <div className={s.aboutMeInfo}>
                 <div className={s.myInfo}>Name: {profile.fullName}</div>
                 <div className={profile.aboutMe ? s.myInfo : s.myInfoRed}>
-                    About me: {profile.aboutMe || 'i\'m very secretive'}
+                    About me: {profile.aboutMe || ' i\'m very secretive'}
                 </div>
                 <div className={profile.lookingForAJob ? s.myInfo : s.myInfoRed}>
-                    My job:
-                    {profile.lookingForAJob ?
-                        ' I\'m looking for a job' :
-                        ' I\'m not looking for a job'}
+                    Looking for a job: {profile.lookingForAJob ? ' yes' : ' no'}
                 </div>
                 <div className={status ? s.myInfo : s.myInfoRed}>
-                    Status: {profile.lookingForAJobDescription || status || 'I don\'t have a status'}
+                    Job: {profile.lookingForAJobDescription ||  'I\'m not looking for a job'}
                 </div>
             </div>
         </div>

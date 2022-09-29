@@ -9,9 +9,9 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
     return (
         profile === null ? <Preloader/> :
             <div className={s.profileInfo}>
-                <div className={s.wallpaper}>
-                    <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>
-                </div>
+                {/*<div className={s.wallpaper}>*/}
+                {/*    <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>*/}
+                {/*</div>*/}
 
                 <ProfileUserInfo profile={profile}
                                  status={status}
