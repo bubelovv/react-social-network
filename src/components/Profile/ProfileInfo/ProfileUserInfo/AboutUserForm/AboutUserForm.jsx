@@ -7,77 +7,81 @@ const AboutUserForm = ({profile, isOwner, goToEditMode, saveInfo}) => {
         register,
         handleSubmit,
         setError,
+        clearErrors,
         formState: {errors, isValid, touchedFields},
         reset,
     } = useForm({
-        mode: 'onBlur',
         defaultValues: profile,
     });
 
     let onSubmit = (formData, setError) => {    // ---------------- REFACTOR ---------------
+
         saveInfo(formData, setError)
             .then(() => {
-                goToEditMode()
+                goToEditMode(false)
             })
     };
 
     return (
-        <form className={s.userForm} onSubmit={handleSubmit((data) => onSubmit(data, setError))}>
-            <div>
-                <div>Full name:</div>
-                <input
-                    {...register('fullName', {
-                        required: 'This field is required',
-                        minLength: 3,
-                    })}
-                />
-            </div>
-            <div> Looking for a job:
-                <input type={'checkbox'} {...register('lookingForAJob')}/>
-            </div>
-            <div>
-                <div>My skills:</div>
-                <textarea
-                    {...register('lookingForAJobDescription', {
-                        required: 'This field is required',
-                        minLength: 3,
-                    })}
-                />
-            </div>
-            <div>
-                <div>About me:</div>
-                <textarea
-                    {...register('aboutMe', {
-                        required: 'This field is required',
-                        minLength: 3,
-                    })}
-                />
-            </div>
-            <div>
+        <form className={s.userForm}
+              onSubmit={handleSubmit((data) => onSubmit(data, setError))}>
+
+            <div className={s.userInfoBlocks}>
+                <div className={s.userInfoBlock}>
+                    <div>Full name:</div>
+                    <input
+                        {...register('fullName', {
+                            required: 'This field is required',
+                            minLength: 3,
+                        })}
+                    />
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div></div>
+                    <span>Looking for a job:</span>
+                    <input className={s.checkBox} type={'checkbox'} {...register('lookingForAJob')}/>
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div>My skills:</div>
+                    <textarea
+                        {...register('lookingForAJobDescription', {
+                            required: 'This field is required',
+                            minLength: 3,
+                        })}
+                    />
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div>About me:</div>
+                    <textarea
+                        {...register('aboutMe', {
+                            required: 'This field is required',
+                            minLength: 3,
+                        })}
+                    />
+                </div>
+                <div>CONTACTS:</div>
                 {Object.keys(profile.contacts).map(contact => {
                     return (
-                        <div key={contact} className={''}>
-                            <div>{contact}:</div>
-                            <input {...register('contacts.' + contact)}/>
+                        <div key={contact} className={s.userInfoBlock}>
+                            <div className={s.contactName}>{contact}:</div>
+                            <input onClick={() => clearErrors(contact)}
+                                   {...register('contacts.' + contact)}/>
+
+                            {errors[contact] && (
+                                <div style={{color: 'red'}}>
+                                    {errors[contact].message || 'Errors'}
+                                </div>
+                            )}
                         </div>
                     )
                 })}
             </div>
 
-            {errors?.fullName && (
-                <div>{errors.fullName.message || 'Errors'}</div>
-            )}
-
             {isOwner && (
-                // <div style={{flex: '0 0 70px'}}>
-                <button className={s.btnChange}>save</button>
-
-                // </div>
+                <div className={s.btnChange}>
+                    <button>save user's information</button>
+                </div>
             )}
-
-            {/*<div className={s.errorText}>*/}
-            {/*    {errors?.newPostText && <p>{errors?.newPostText?.message || 'Error!'}</p>}*/}
-            {/*</div>*/}
         </form>
     );
 };

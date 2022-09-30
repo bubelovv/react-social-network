@@ -32,11 +32,11 @@ const ProfileUserInfo = ({profile, isOwner, savePhoto, saveInfo}) => {
                 {editMode
                     ? <AboutUserForm profile={profile}
                                      isOwner={isOwner}
-                                     goToEditMode={() => setEditMode(false)}
+                                     goToEditMode={setEditMode}
                                      saveInfo={saveInfo}/>
                     : <AboutUserInfo profile={profile}
                                      isOwner={isOwner}
-                                     goToEditMode={() => setEditMode(true)}/>
+                                     goToEditMode={setEditMode}/>
                 }
             </div>
         </div>

@@ -42,11 +42,16 @@ export const savePhoto = (file) => async (dispatch) => {
 
 export const saveInfo = (profile, setError) => async (dispatch, getState) => {
     let response = await profileApi.saveInfo(profile)
-        if (response.data.resultCode === 0) {
+    if (response.data.resultCode === 0) {
         const userId = getState().auth.id
         dispatch(getProfile(userId));
     } else {
-        setError('fullName', {type: 'server', message: response.data["messages"][0]});
+        response.data.messages.map(message => {
+            const name = message.slice(message.indexOf('>') + 1, message.indexOf(')'))
+            const mainName = name[0].toLowerCase() + name.slice(1)
+            setError(mainName, {type: 'server', message});
+        })
+
         return Promise.reject()
     }
 }

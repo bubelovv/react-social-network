@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "../../ProfileInfo.module.css";
-import ProfileSocialLinks from "../ProfileSocialLinks/ProfileSocialLinks";
+import ProfileSocialLinks from "./ProfileSocialLinks/ProfileSocialLinks";
 
 const AboutUserInfo = ({profile, isOwner, goToEditMode}) => {
     return (
@@ -26,7 +26,7 @@ const AboutUserInfo = ({profile, isOwner, goToEditMode}) => {
             {isOwner && (
                 <div style={{flex: '0 0 70px'}}>
                     <button className={s.btnChange}
-                            onClick={goToEditMode}>change user info
+                            onClick={() => goToEditMode(true)}>change user info
                     </button>
 
                 </div>
