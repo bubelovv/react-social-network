@@ -26,13 +26,17 @@ export let authApi = {
         let response = await instance.get(`auth/me`)
         return response.data.data;
     },
-    async loginPost(email, password, rememberMe) {
-        let response = await instance.post(`auth/login`, {email, password, rememberMe})
+    async loginPost(email, password, rememberMe, captcha) {
+        let response = await instance.post(`auth/login`, {email, password, rememberMe, captcha})
         return response.data;
     },
     async loginDelete() {
         let response = await instance.delete(`auth/login`)
         return response.data;
+    },
+    async getCaptcha() {
+        let response = await instance.get(`/security/get-captcha-url`)
+        return response.data.url;
     },
 };
 

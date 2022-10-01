@@ -78,9 +78,14 @@ const AboutUserForm = ({profile, isOwner, goToEditMode, saveInfo}) => {
             </div>
 
             {isOwner && (
-                <div className={s.btnChange}>
-                    <button>save user's information</button>
-                </div>
+                <>
+                    <div className={s.btnChange}>
+                        <button type="submit">save user's information</button>
+                    </div>
+                    <div className={s.btnChange}>
+                        <button onClick={() => goToEditMode(false)}>X close change area X</button>
+                    </div>
+                </>
             )}
         </form>
     );
