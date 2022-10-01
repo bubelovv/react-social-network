@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {login} from "../../redux/authReducer";
 import {Navigate} from "react-router-dom";
 import {getIsAuth} from "../../redux/auth-selectors";
+import cn from "classnames";
 
 const LoginForm = ({onSubmit, urlCaptcha}) => {
     const {
@@ -12,15 +13,14 @@ const LoginForm = ({onSubmit, urlCaptcha}) => {
         handleSubmit,
         setError,
         formState: {errors, isValid, touchedFields},
-    } = useForm({mode: 'onBlur'})
+    } = useForm({mode: 'onChange'})
 
-    // let [captcha, setCaptcha] = useState('')
-
-    const inputCls = inputName =>
-        !touchedFields[inputName]
-            ? s.field
-            : !errors[inputName] ? s.field + ' ' + s.fieldValid : s.field + ' ' + s.fieldInvalid
-
+    const inputCls = inputName => cn(
+        s.field,
+        {[s.fieldValid]: touchedFields[inputName] && !errors[inputName]},
+        {[s.fieldInvalid]: touchedFields[inputName] && errors[inputName]}
+    )
+    console.log(errors)
     return (
         <div className={s.formWrap}>
             <form className={s.form}

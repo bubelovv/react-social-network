@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import { useForm } from 'react-hook-form';
+import cn from "classnames";
 
 const NewPostForm = ({addPost}) => {
 	let {
@@ -15,9 +16,7 @@ const NewPostForm = ({addPost}) => {
 		reset();
 	};
 
-	let textareaCls = !touchedFields.newPostText
-		? s.textarea
-		: isValid ? s.textarea + ' ' + s.textareaValid : s.textarea + ' ' + s.textareaInvalid;
+	const textareaCls = cn(s.textarea, {[s.textareaValid]: touchedFields.newPostText && isValid})
 
 	return (
 		<form className={s.add} onSubmit={handleSubmit(onSubmit)}>

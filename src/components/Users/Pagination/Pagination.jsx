@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './Pagination.module.css';
+import cn from "classnames";
 
 const Pagination = (props) => {
     let pagesCount = Math.ceil(props.totalCount / props.pageSize);
@@ -20,7 +21,7 @@ const Pagination = (props) => {
         <div className={styles.btnNumbersPage}>
 
             {portionPages > 1 &&
-                <button className={styles.btnArrow + ' ' + styles.left} onClick={() => setPortionPages(portionPages - 1)}>prev</button>}
+                <button className={cn(styles.btnArrow, styles.left)} onClick={() => setPortionPages(portionPages - 1)}>prev</button>}
 
 
             {filterPages.map(page => {
@@ -29,7 +30,7 @@ const Pagination = (props) => {
             })}
 
             {props.currentPage < pagesCount &&
-                <button className={styles.btnArrow + ' ' + styles.right} onClick={() => setPortionPages(portionPages + 1)}>next</button>}
+                <button className={cn(styles.btnArrow, styles.right)} onClick={() => setPortionPages(portionPages + 1)}>next</button>}
 
         </div>
     )

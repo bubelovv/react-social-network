@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import {useForm} from 'react-hook-form';
+import cn from "classnames";
 
 const NewMessageForm = ({addMessage}) => {
     let {
@@ -15,9 +16,7 @@ const NewMessageForm = ({addMessage}) => {
         reset();
     };
 
-    let textareaCls = !touchedFields.newMessageText
-        ? s.textarea
-        : isValid ? s.textarea + ' ' + s.textareaValid : s.textarea; // Refactoring
+    const textareaCls = cn(s.textarea, {[s.textareaValid]: touchedFields.newMessageText && isValid})
 
     return (
         <form className={s.add} onSubmit={handleSubmit(onSubmit)}>
