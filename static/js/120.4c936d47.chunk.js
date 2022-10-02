@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy_app=self.webpackChunkmy_app||[]).push([[120],{1120:function(t,e,n){n.r(e);n(2791);var r=n(184);e.default=function(){return(0,r.jsx)("div",{children:"It is very important news It is very important news It is very important news It is very important news It is very important news It is very important news"})}}}]);
+//# sourceMappingURL=120.4c936d47.chunk.js.map
