@@ -1,6 +1,6 @@
 import React, {useEffect, Suspense, lazy} from 'react'
 import './App.css'
-import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import store from "./redux/reduxStore";
@@ -19,6 +19,7 @@ const News = lazy(() => import('./components/News/News'));
 const Music = lazy(() => import('./components/Music/Music'));
 const Settings = lazy(() => import('./components/Settings/Settings'));
 const Login = lazy(() => import('./components/Login/Login'));
+
 // ----------------------------------------
 
 export function App(props) {
@@ -29,17 +30,17 @@ export function App(props) {
     }, [])
 
     return (
-        !initialized ?
-            <Preloader/> :
-            <div className="app-wrapper">
-                <HeaderContainer/>
-                <Navbar/>
+        <div className="app-wrapper">
+            <HeaderContainer/>
+            <Navbar/>
+            {!initialized ?
+                <Preloader/> :
                 <div className="app-wrapper-content">
                     <Suspense fallback={<Preloader/>}>
                         <Routes>
                             <Route path={'/profile/:userId'} element={<ProfileContainer/>}/>
                             <Route path='/profile' element={<ProfileContainer/>}/>
-                            <Route path='/' element={<Navigate to={'/profile/:userId'}/>}/>
+                            <Route path='/' element={<ProfileContainer/>}/>
                             <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                             <Route path='/users' element={<UsersContainer/>}/>
                             <Route path='/news' element={<News/>}/>
@@ -49,7 +50,8 @@ export function App(props) {
                         </Routes>
                     </Suspense>
                 </div>
-            </div>
+            }
+        </div>
     )
 }
 
@@ -59,11 +61,11 @@ const ConnectedApp = connect(mapStateToProps, {initializeApp})(App);
 
 const MainApp = () => {
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Provider store={store}>
                 <ConnectedApp/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 

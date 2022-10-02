@@ -48,7 +48,7 @@ const LoginForm = ({onSubmit, urlCaptcha}) => {
                     className={inputCls('password')}
                     {...register('password', {
                         required: 'This field id required',
-                        minLength: {value: 5, message: 'Min length is 5 symbols'},
+                        minLength: {value: 4, message: 'Min length is 5 symbols'},
                     })}
                 />
 
@@ -69,9 +69,7 @@ const LoginForm = ({onSubmit, urlCaptcha}) => {
                                     className={inputCls('captcha')}
                                     {...register('captcha')}
                                 />
-                                {/*<input value={captcha} onChange={e => setCaptcha(e.target.value)}/>*/}
                             </div>
-                            {/*<button className={s.btn} onClick={() => sendCaptcha(captcha)}>send captcha</button>*/}
                         </div>
                     )
                 }
