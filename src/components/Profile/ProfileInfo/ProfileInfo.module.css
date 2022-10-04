@@ -131,17 +131,3 @@
     font-size: 16px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
-
-.btnChange {
-    font-size: 12px;
-    border-radius: 5px;
-    padding: 5px 5px;
-    cursor: pointer;
-    flex: 0 0 80px;
-    transition: all 0.3s;
-}
-
-.btnChange:hover {
-    background-color: #000;
-    color: white;
-}

@@ -1,6 +1,7 @@
 import React from 'react';
 import s from "../../ProfileInfo.module.css";
 import ProfileSocialLinks from "./ProfileSocialLinks/ProfileSocialLinks";
+import Button from "../../../../../UI/Button/Button";
 
 const AboutUserInfo = ({profile, isOwner, goToEditMode}) => {
     return (
@@ -8,29 +9,19 @@ const AboutUserInfo = ({profile, isOwner, goToEditMode}) => {
             <div className={s.myInfo}>
                 Name: {profile.fullName}
             </div>
-
             <div className={profile.aboutMe ? s.myInfo : s.myInfoRed}>
                 About me: {profile.aboutMe || ' i\'m very secretive'}
             </div>
-
             <div className={profile.lookingForAJob ? s.myInfo : s.myInfoRed}>
                 Looking for a job: {profile.lookingForAJob ? ' yes' : ' no'}
             </div>
-
             <div className={profile.lookingForAJobDescription ? s.myInfo : s.myInfoRed}>
                 My skills: {profile.lookingForAJobDescription || 'I\'m not looking for a job'}
             </div>
 
             <ProfileSocialLinks contacts={profile.contacts}/>
 
-            {isOwner && (
-                <div style={{flex: '0 0 70px'}}>
-                    <button className={s.btnChange}
-                            onClick={() => goToEditMode(true)}>change user info
-                    </button>
-
-                </div>
-            )}
+            {isOwner && <Button activateEditMade={goToEditMode}>change user info</Button>}
         </div>
     );
 };

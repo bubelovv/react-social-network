@@ -1,0 +1,13 @@
+.btnChange {
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 5px;
+    cursor: pointer;
+    flex: 0 0 80px;
+    transition: all 0.3s;
+}
+
+.btnChange:hover {
+    background-color: #000;
+    color: white;
+}

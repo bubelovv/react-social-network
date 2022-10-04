@@ -20,7 +20,7 @@ const LoginForm = ({onSubmit, urlCaptcha}) => {
         {[s.fieldValid]: touchedFields[inputName] && !errors[inputName]},
         {[s.fieldInvalid]: touchedFields[inputName] && errors[inputName]}
     )
-    console.log(errors)
+
     return (
         <div className={s.formWrap}>
             <form className={s.form}

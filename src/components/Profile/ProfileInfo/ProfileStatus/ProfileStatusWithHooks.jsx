@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import s from '../ProfileInfo.module.css';
+import Button from "../../../../UI/Button/Button";
 
 const ProfileStatus = (props) => {
     let [editMode, setEditMode] = useState(false)
@@ -37,9 +38,7 @@ const ProfileStatus = (props) => {
                         Status: {status || 'Enter your status'}
                     </span>
                     {props.isOwner && (
-                        <div style={{flex: '0 0 70px'}}>
-                            <button className={s.btnChange} onClick={activateEditMade}>change status</button>
-                        </div>
+                        <Button activateEditMade={activateEditMade}>change status</Button>
                     )}
                 </div>
             }
