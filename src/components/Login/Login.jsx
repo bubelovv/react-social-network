@@ -2,7 +2,7 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import s from './Login.module.css'
 import {connect} from 'react-redux'
-import {login} from "../../redux/authReducer";
+import {login} from "../../redux/authReducer.ts";
 import {Navigate} from "react-router-dom";
 import {getIsAuth} from "../../redux/auth-selectors";
 import cn from "classnames";
@@ -27,13 +27,13 @@ const LoginForm = ({onSubmit, urlCaptcha}) => {
                   onSubmit={handleSubmit((data) => onSubmit(data, setError))}>
                 <div className={s.formName}>LOGIN FORM</div>
 
-                {errors?.login && (
-                    <div className={s.error}>{errors.login.message || 'Errors'}</div>
+                {errors?.email && (
+                    <div className={s.error}>{errors.email.message || 'Errors'}</div>
                 )}
                 <input
-                    placeholder={'login'}
-                    className={inputCls('login')}
-                    {...register('login', {
+                    placeholder={'email'}
+                    className={inputCls('email')}
+                    {...register('email', {
                         required: 'This field id required',
                         minLength: {value: 5, message: 'Min length is 5 symbols'},
                         pattern: {value: /^\S+@\S+$/i, message: 'Enter the correct Email'},

@@ -3,8 +3,8 @@ import profileReducer from "./profileReducer";
 import dialogsReducer from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 import usersReducer from "./usersReducer";
-import authReducer from "./authReducer";
-import appReducer from "./appReducer";
+import authReducer from "./authReducer.ts";
+import appReducer from "./appReducer.ts";
 import thunkMiddleware from "redux-thunk";
 
 let reducers = combineReducers({

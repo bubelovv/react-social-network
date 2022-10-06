@@ -8,14 +8,12 @@ const AboutUserForm = ({profile, isOwner, goToEditMode, saveInfo}) => {
         handleSubmit,
         setError,
         clearErrors,
-        formState: {errors, isValid, touchedFields},
-        reset,
+        formState: {errors},
     } = useForm({
         defaultValues: profile,
     });
 
     let onSubmit = (formData, setError) => {    // ---------------- REFACTOR ---------------
-
         saveInfo(formData, setError)
             .then(() => {
                 goToEditMode(false)

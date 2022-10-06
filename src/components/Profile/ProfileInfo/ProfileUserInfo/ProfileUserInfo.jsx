@@ -7,6 +7,7 @@ import AboutUserForm from "./AboutUserForm/AboutUserForm";
 const ProfileUserInfo = ({profile, isOwner, savePhoto, saveInfo}) => {
 
     const mainPhotoSelected = (e) => {
+        console.log(e.target.files[0])
         if (e.target.files.length) {
             savePhoto(e.target.files[0])
         }
