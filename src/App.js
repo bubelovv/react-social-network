@@ -2,7 +2,7 @@ import React, {useEffect, Suspense, lazy} from 'react'
 import './App.css'
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {connect, Provider} from "react-redux";
-import {initializeApp} from "./redux/appReducer.ts";
+import {initializeApp} from "./redux/appReducer";
 import store from "./redux/reduxStore";
 
 // --------- my custom components ---------

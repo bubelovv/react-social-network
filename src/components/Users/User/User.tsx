@@ -2,8 +2,16 @@ import React from 'react';
 import styles from '.././Users.module.css';
 import avatar from '../../../assets/images/avatar.jpg'
 import {NavLink} from "react-router-dom";
+import {IUser} from "../../../redux/usersReducer";
 
-function User({user, unfollow, follow, followingInProgress}) {
+interface Props {
+    user: IUser
+    followingInProgress: number[]
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
+
+const User: React.FC<Props> = ({user, unfollow, follow, followingInProgress}) => {
     return (
         <div className={styles.user} key={user.id}>
             <div className={styles.followArea}>
@@ -17,12 +25,12 @@ function User({user, unfollow, follow, followingInProgress}) {
                 <div>
                     {user.followed ?
                         <button className={styles.btnFollow}
-                                disabled={followingInProgress.find(id => id === user.id)}
+                                disabled={!!followingInProgress.find(id => id === user.id)}
                                 onClick={() => follow(user.id)}>
                             follow
                         </button> :
                         <button className={styles.btnUnfollow}
-                                disabled={followingInProgress.find(id => id === user.id)}
+                                disabled={!!followingInProgress.find(id => id === user.id)}
                                 onClick={() => unfollow(user.id)}>
                             unfollow
                         </button>

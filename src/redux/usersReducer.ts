@@ -76,7 +76,7 @@ interface Photos {
     small: string | null
     large: string | null
 }
-interface User {
+export interface IUser {
     id: number
     name: string
     status: string | null
@@ -84,7 +84,7 @@ interface User {
     followed: boolean
 }
 export interface InitialStateUsers {
-    users: User[]
+    users: IUser[]
     pageSize: number
     totalCount: number
     currentPage: number
@@ -101,7 +101,7 @@ let initialState: InitialStateUsers = {
     followingInProgress: [],
 };
 
-let objectsHelper = (object: User[], itemId: string, actionId: number, newObjProps: {followed: boolean}) => {
+let objectsHelper = (object: IUser[], itemId: string, actionId: number, newObjProps: {followed: boolean}) => {
     return object.map((user: any) => {
         if (user[itemId] === actionId) {
             return {...user, ...newObjProps}

@@ -2,7 +2,7 @@ import React from 'react';
 import preloader from '../../../assets/images/preloader.svg';
 import styles from '../Users.module.css';
 
-const Preloader = () => {
+const Preloader: React.FC = () => {
     return (
         <div className={styles.preloader}>
             <img alt='preloader' src={preloader}/>

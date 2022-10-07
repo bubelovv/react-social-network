@@ -4,22 +4,33 @@ import {
     setCurrentPage,
     follow,
     unfollow,
+    IUser,
 } from '../../redux/usersReducer';
 import {connect} from 'react-redux';
 import Users from './Users';
 import Preloader from "./Preloader/Preloader";
 import {compose} from "redux";
+import {RootState} from "../../redux/reduxStore";
 
-const UsersContainer = (props) => {
+interface Props {
+    totalCount: number
+    pageSize: number
+    currentPage:  number
+    isFetching: boolean
+    users: IUser[]
+    followingInProgress: number[]
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
+    setCurrentPage: (currentPage: number) => void
+}
+
+const UsersContainer: React.FC<Props> = (props) => {
     useEffect(() => {
         props.getUsers(props.currentPage, props.pageSize)
     }, []);
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     super.componentDidUpdate(prevProps, prevState, snapshot);
-    // }
-
-    const onPageChanged = (currentPage) => {
+    const onPageChanged = (currentPage: number) => {
         props.setCurrentPage(currentPage);
         props.getUsers(currentPage, props.pageSize)
     };
@@ -38,7 +49,7 @@ const UsersContainer = (props) => {
     )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootState) => {
     return {
         users: state.usersPage.users,
         currentPage: state.usersPage.currentPage,

@@ -2,7 +2,7 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import s from './Login.module.css'
 import {connect} from 'react-redux'
-import {login} from "../../redux/authReducer.ts";
+import {login} from "../../redux/authReducer";
 import {Navigate} from "react-router-dom";
 import {getIsAuth} from "../../redux/auth-selectors";
 import cn from "classnames";
