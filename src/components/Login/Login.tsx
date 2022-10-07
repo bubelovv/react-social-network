@@ -2,20 +2,39 @@ import React from 'react'
 import {useForm} from 'react-hook-form'
 import s from './Login.module.css'
 import {connect} from 'react-redux'
-import {login} from "../../redux/authReducer";
+import {login, LoginData} from "../../redux/authReducer";
 import {Navigate} from "react-router-dom";
 import {getIsAuth} from "../../redux/auth-selectors";
 import cn from "classnames";
+import {RootState} from "../../redux/reduxStore";
 
-const LoginForm = ({onSubmit, urlCaptcha}) => {
+// interface SetError {
+//     setError: (name: FieldPath<FormValues>, error: ErrorOption, options?: { shouldFocus: boolean }) => void
+// }
+
+interface FormValues {
+    email: string
+    password: string
+    checkbox: boolean
+    captcha: string | null
+}
+
+interface PropsLoginForm {
+    onSubmit: (data: FormValues, setError: any) => void
+    urlCaptcha: string | null
+}
+
+type InputCls =  'email' | 'password' | 'checkbox' | 'captcha'
+
+const LoginForm: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
     const {
         register,
         handleSubmit,
         setError,
         formState: {errors, isValid, touchedFields},
-    } = useForm({mode: 'onChange'})
+    } = useForm<FormValues>({mode: 'onChange'})
 
-    const inputCls = inputName => cn(
+    const inputCls = (inputName: InputCls) => cn(
         s.field,
         {[s.fieldValid]: touchedFields[inputName] && !errors[inputName]},
         {[s.fieldInvalid]: touchedFields[inputName] && errors[inputName]}
@@ -85,8 +104,12 @@ const LoginForm = ({onSubmit, urlCaptcha}) => {
     )
 }
 
-const Login = ({login, isAuth, urlCaptcha}) => {
-    const onSubmit = (data, setError) => {
+interface MapStateProps {isAuth: boolean, urlCaptcha: string | null}
+interface MapDispatchProps {login: ( data: LoginData, setError: any) => void}
+type PropsLogin = MapStateProps & MapDispatchProps
+
+const Login: React.FC<PropsLogin> = ({login, isAuth, urlCaptcha}) => {
+    const onSubmit = (data: FormValues, setError: any) => {
         login(data, setError)
     }
 
@@ -95,9 +118,9 @@ const Login = ({login, isAuth, urlCaptcha}) => {
     return <LoginForm urlCaptcha={urlCaptcha} onSubmit={onSubmit}/>
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState): MapStateProps => ({
     isAuth: getIsAuth(state),
     urlCaptcha: state.auth.urlCaptcha
 })
 
-export default connect(mapStateToProps, {login})(Login)
+export default connect<MapStateProps, MapDispatchProps, {}, RootState>(mapStateToProps, {login})(Login)

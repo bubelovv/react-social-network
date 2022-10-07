@@ -49,7 +49,7 @@ export const getAuthUserData = () => async (dispatch: any) => {
     }
 }
 
-interface LoginData {
+export interface LoginData {
     email: string;
     password: string;
     checkbox: boolean;
