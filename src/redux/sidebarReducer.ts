@@ -1,12 +1,12 @@
 let avatar = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyJTIwZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=300&q=60'
 
-interface Friends {
+export interface IFriend {
     id: number
     name: string
     avatar: string
 }
 interface InitialStateSidebar {
-    friends: Friends[]
+    friends: IFriend[]
 }
 
 let initialState: InitialStateSidebar = {

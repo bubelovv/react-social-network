@@ -1,8 +1,13 @@
 import React from 'react';
 import s from './Friends.module.css'
 import Friend from "./Friend/Friend";
+import {IFriend} from "../../../redux/sidebarReducer";
 
-const Friends = ({friends}) => {
+interface Props {
+    friends: IFriend[]
+}
+
+const Friends: React.FC<Props> = ({friends}) => {
     let friendsElements = friends.map(friend => <Friend key={friend.id} friend={friend}/>)
     return (
         <div className={''}>

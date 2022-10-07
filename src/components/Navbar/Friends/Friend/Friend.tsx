@@ -1,7 +1,12 @@
 import React from 'react';
 import s from "./Friend.module.css";
+import {IFriend} from "../../../../redux/sidebarReducer";
 
-const Friend = ({friend}) => {
+interface Props {
+    friend: IFriend
+}
+
+const Friend: React.FC<Props> = ({friend}) => {
     return (
         <div className={s.friend}>
             <img className={s.avatar}

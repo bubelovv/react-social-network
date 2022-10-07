@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './Navbar.module.css';
 import {NavLink} from "react-router-dom";
-import FriendsContainer from "./Friends/FriendsContainer";
+// import FriendsContainer from "./Friends/FriendsContainer";
 
-const setClass = navData => navData.isActive ? s.active : '';
+const setClass = (navData: any) => navData.isActive ? s.active : '';
 
 const Navbar = () => {
     return (
