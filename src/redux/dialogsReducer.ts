@@ -24,11 +24,11 @@ let initialState = {
     ],
 }
 
-interface dialogsType { id: number; name: string; avatar: string }
-interface messagesType { id: number, message: string }
+export interface DialogType { id: number; name: string; avatar: string }
+export interface MessageType { id: number, message: string }
 export interface InitialState {
-    dialogs: dialogsType[];
-    messages: messagesType[];
+    dialogs: DialogType[];
+    messages: MessageType[];
 }
 
 const dialogsReducer = (state = initialState, action: any): InitialState => {

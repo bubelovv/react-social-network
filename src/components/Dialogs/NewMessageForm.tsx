@@ -3,15 +3,23 @@ import s from './Dialogs.module.css';
 import {useForm} from 'react-hook-form';
 import cn from "classnames";
 
-const NewMessageForm = ({addMessage}) => {
+interface Props {
+    addMessage: (newMessageText: string) => void
+}
+
+type FormValues = {
+    newMessageText: string;
+};
+
+const NewMessageForm: React.FC<Props> = ({addMessage}) => {
     let {
         register,
         handleSubmit,
         formState: {isValid, touchedFields},
         reset,
-    } = useForm({mode: 'onChange'});
+    } = useForm<FormValues>({mode: 'onChange'});
 
-    let onSubmit = (data) => {
+    let onSubmit = (data: FormValues) => {
         addMessage(data.newMessageText);
         reset();
     };

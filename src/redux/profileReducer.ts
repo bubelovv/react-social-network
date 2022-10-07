@@ -12,30 +12,12 @@ interface AddPost {
     type: typeof ADD_POST;
     newPostText: string;
 }
-interface IncrementLikes {
-    type: typeof INCREMENT_LIKES;
-    id: number;
-}
-interface DecrementLikes {
-    type: typeof DECREMENT_LIKES;
-    id: number;
-}
-interface SetUserProfile {
-    type: typeof SET_USER_PROFILE;
-    profile: Profile;
-}
-interface SetStatus {
-    type: typeof SET_STATUS;
-    status: string;
-}
-interface DeletePost {
-    type: typeof DELETE_POST;
-    id: number;
-}
-interface SavePhotoSuccess {
-    type: typeof SAVE_PHOTO_SUCCESS;
-    photos: PhotosProfile;
-}
+interface IncrementLikes {type: typeof INCREMENT_LIKES, id: number}
+interface DecrementLikes {type: typeof DECREMENT_LIKES, id: number}
+interface SetUserProfile {type: typeof SET_USER_PROFILE, profile: Profile}
+interface SetStatus {type: typeof SET_STATUS, status: string}
+interface DeletePost {type: typeof DELETE_POST, id: number}
+interface SavePhotoSuccess {type: typeof SAVE_PHOTO_SUCCESS, photos: PhotosProfile}
 
 export const addPost = (newPostText: string): AddPost => ({type: ADD_POST, newPostText});
 export const incrementLikes = (id: number): IncrementLikes => ({type: INCREMENT_LIKES, id});
@@ -48,12 +30,12 @@ export const savePhotoSuccess = (photos: PhotosProfile): SavePhotoSuccess => ({t
 export const getProfile = (userId: number) => async (dispatch: any) => {
     let data = await profileApi.getProfile(userId)
     dispatch(setUserProfile(data))
-};
+}
 
 export const getStatus = (userId: number) => async (dispatch: any) => {
     let response = await profileApi.getStatus(userId)
     dispatch(setStatus(response.data))
-};
+}
 
 export const updateStatus = (status: string) => async (dispatch: any) => {
     let response = await profileApi.updateStatus(status)

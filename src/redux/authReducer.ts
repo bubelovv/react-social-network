@@ -25,7 +25,8 @@ interface ClearCaptcha {
     type: typeof CLEAR_CAPTCHA;
 }
 
-export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserData => ({
+export const setAuthUserData = (id: number | null, email: string | null,
+                                login: string | null, isAuth: boolean): SetAuthUserData => ({
     type: SET_AUTH_USER_DATA,
     payload: {id, email, login, isAuth},
 })

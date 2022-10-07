@@ -12,18 +12,23 @@ import Preloader from "./Preloader/Preloader";
 import {compose} from "redux";
 import {RootState} from "../../redux/reduxStore";
 
-interface Props {
-    totalCount: number
-    pageSize: number
-    currentPage:  number
-    isFetching: boolean
+type MapStateProps = {
     users: IUser[]
+    currentPage:  number
+    pageSize: number
+    totalCount: number
+    isFetching: boolean
     followingInProgress: number[]
+}
+
+type MapDispatchProps = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
     setCurrentPage: (currentPage: number) => void
 }
+
+type Props = MapStateProps & MapDispatchProps
 
 const UsersContainer: React.FC<Props> = (props) => {
     useEffect(() => {
@@ -49,7 +54,7 @@ const UsersContainer: React.FC<Props> = (props) => {
     )
 }
 
-const mapStateToProps = (state: RootState) => {
+const mapStateToProps = (state: RootState): MapStateProps => {
     return {
         users: state.usersPage.users,
         currentPage: state.usersPage.currentPage,
@@ -61,6 +66,6 @@ const mapStateToProps = (state: RootState) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {getUsers, setCurrentPage, follow, unfollow}),
+    connect<MapStateProps, MapDispatchProps, {}, RootState>(mapStateToProps, {getUsers, setCurrentPage, follow, unfollow}),
     // withAuthRedirect,
 )(UsersContainer)

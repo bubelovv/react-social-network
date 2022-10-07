@@ -1,10 +1,15 @@
 import React from 'react';
 import s from '../Dialogs.module.css';
 import {NavLink} from "react-router-dom";
+import {DialogType} from "../../../redux/dialogsReducer";
 
-const setClass = navData => navData.isActive ? s.active : ' ';
+// const setClass = navData => navData.isActive ? s.active : ' ';
 
-const DialogItem = ({dialog}) => {
+interface Props {
+    dialog: DialogType
+}
+
+const DialogItem: React.FC<Props> = ({dialog}) => {
     const path = '/dialogs/' + dialog.id;
 
     return (
@@ -12,7 +17,7 @@ const DialogItem = ({dialog}) => {
             <img className={s.avatar}
                  src={dialog.avatar}
                  alt='avatar'/>
-            <NavLink className={setClass} to={path}>{dialog.name}</NavLink>
+            <NavLink className={s.active} to={path}>{dialog.name}</NavLink>
         </div>
     )
 }

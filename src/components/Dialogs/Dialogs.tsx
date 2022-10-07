@@ -3,10 +3,17 @@ import s from './Dialogs.module.css';
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import NewMessageForm from "./NewMessageForm";
+import {DialogType, MessageType} from "../../redux/dialogsReducer";
 
-const Dialogs = ({dialogs, messages, addMessage}) => {
+interface Props {
+    dialogs: DialogType[]
+    messages: MessageType[]
+    addMessage: (newMessageText: string) => void
+}
+
+const Dialogs: React.FC<Props>  = ({dialogs, messages, addMessage}) => {
     const dialogsElements = dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
-    const messagesElements = messages.map(message => <Message key={message.id} message={message.message}/>);
+    const messagesElements = messages.map(message => <Message key={message.id} message={message}/>);
 
     return (
         <div className={s.dialogs}>

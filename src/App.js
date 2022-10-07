@@ -22,8 +22,7 @@ const Login = lazy(() => import('./components/Login/Login'));
 
 // ----------------------------------------
 
-export function App(props) {
-    const {initializeApp, initialized} = props;
+export const App = ({initializeApp, initialized}) => {
 
     useEffect(() => {
         initializeApp()
