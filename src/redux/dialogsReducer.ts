@@ -1,9 +1,15 @@
+// import {ThunkAction} from "redux-thunk";
+// import {RootState} from "./reduxStore";
+
 const ADD_MESSAGE = 'ADD_MESSAGE';
 
 interface AddMessage {
     type: typeof ADD_MESSAGE;
     newMessageText: string;
 }
+
+type ActionTypes = AddMessage
+// type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
 
 export const addMessage = (newMessageText: string): AddMessage => ({type: ADD_MESSAGE, newMessageText});
 
@@ -31,7 +37,7 @@ export interface InitialState {
     messages: MessageType[];
 }
 
-const dialogsReducer = (state = initialState, action: any): InitialState => {
+const dialogsReducer = (state = initialState, action: ActionTypes): InitialState => {
     switch (action.type) {
         case ADD_MESSAGE: {
             let message = action.newMessageText
@@ -39,12 +45,8 @@ const dialogsReducer = (state = initialState, action: any): InitialState => {
 
             return {                            // I don't know how to work this Type
                 ...state,
-                messages: [
-                    ...state.messages,
-                    {id: state.messages[state.messages.length], message: message}
-                ],
-                userId: 'afesfw',
-            } as InitialState;
+                messages: [...state.messages, {id: state.messages.length, message: message}],
+            }
         }
         default:
             return state;
