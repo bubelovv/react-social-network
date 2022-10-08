@@ -65,12 +65,12 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
                 </div>
                 <div>CONTACTS:</div>
 
-                {Object.keys(profile.contacts).map(contact => {
+                {Object.keys(profile.contacts).map((contact: any) => {
                     return (
                         <div key={contact} className={s.userInfoBlock}>
                             <div className={s.contactName}>{contact as keyof ContactsProfile}:</div>
-                            {/*<input onClick={() => clearErrors(contact)}*/}
-                            {/*       {...register('contacts.' + contact)}/>*/}
+                            <input onClick={() => clearErrors(contact)}  // see all form but need only contacts-form
+                                   {...register<any>('contacts.' + contact)}/>
 
                             {/*{errors[contact] && (*/}
                             {/*    <div style={{color: 'red'}}>*/}
