@@ -12,17 +12,18 @@ interface AddPost {
     type: typeof ADD_POST;
     newPostText: string;
 }
-interface IncrementLikes {type: typeof INCREMENT_LIKES, id: number}
-interface DecrementLikes {type: typeof DECREMENT_LIKES, id: number}
-interface SetUserProfile {type: typeof SET_USER_PROFILE, profile: Profile}
+
+interface IncrementLikes {type: typeof INCREMENT_LIKES, userId: number}
+interface DecrementLikes {type: typeof DECREMENT_LIKES, userId: number}
+interface SetUserProfile {type: typeof SET_USER_PROFILE, profile: IProfile}
 interface SetStatus {type: typeof SET_STATUS, status: string}
 interface DeletePost {type: typeof DELETE_POST, id: number}
 interface SavePhotoSuccess {type: typeof SAVE_PHOTO_SUCCESS, photos: PhotosProfile}
 
 export const addPost = (newPostText: string): AddPost => ({type: ADD_POST, newPostText});
-export const incrementLikes = (id: number): IncrementLikes => ({type: INCREMENT_LIKES, id});
-export const decrementLikes = (id: number): DecrementLikes => ({type: DECREMENT_LIKES, id});
-export const setUserProfile = (profile: Profile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
+export const incrementLikes = (userId: number): IncrementLikes => ({type: INCREMENT_LIKES, userId});
+export const decrementLikes = (userId: number): DecrementLikes => ({type: DECREMENT_LIKES, userId});
+export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status: string): SetStatus => ({type: SET_STATUS, status});
 export const deletePost = (id: number): DeletePost => ({type: DELETE_POST, id});
 export const savePhotoSuccess = (photos: PhotosProfile): SavePhotoSuccess => ({type: SAVE_PHOTO_SUCCESS, photos});
@@ -51,7 +52,16 @@ export const savePhoto = (file: any) => async (dispatch: any) => {      // file 
     }
 }
 
-export const saveInfo = (profile: Profile, setError: any) => async (dispatch: any, getState: any) => {
+export interface FormValues {
+    aboutMe: string
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    userId: number
+    contacts: ContactsProfile
+}
+
+export const saveInfo = (profile: FormValues, setError: any) => async (dispatch: any, getState: any): Promise<any> => {
     let response = await profileApi.saveInfo(profile)
     if (response.data.resultCode === 0) {
         const userId = getState().auth.id
@@ -66,14 +76,14 @@ export const saveInfo = (profile: Profile, setError: any) => async (dispatch: an
     }
 }
 
-interface Post {id: number
+export interface IPost {id: number
     message: string
     likesCount: number}
 interface PhotosProfile {
     large: string | null
     small: string | null
 }
-interface ContactsProfile {
+export interface ContactsProfile {
     facebook: string
     github: string
     instagram: string
@@ -83,7 +93,7 @@ interface ContactsProfile {
     website: string
     youtube: string
 }
-interface Profile {
+export interface IProfile {
     aboutMe: string
     fullName: string
     lookingForAJob: boolean
@@ -93,12 +103,12 @@ interface Profile {
     photos: PhotosProfile
 }
 interface InitialStateProfile {
-    posts: Post[];
-    profile: Profile | null;
+    posts: IPost[];
+    profile: IProfile | null;
     status: string;
 }
 
-let initialState: InitialStateProfile = {
+const initialState: InitialStateProfile = {
     posts: [
         {id: 1, message: "It's the old post", likesCount: 10},
         {id: 2, message: "It's  the middle post", likesCount: 15},
@@ -126,7 +136,7 @@ const profileReducer = (state = initialState, action: any): InitialStateProfile 
                 ...state,
                 posts: [...posts],
             };
-            newState.posts[action.id - 1].likesCount++;
+            newState.posts[action.userId - 1].likesCount++;
             return newState;
         }
         case DECREMENT_LIKES: {
@@ -134,7 +144,7 @@ const profileReducer = (state = initialState, action: any): InitialStateProfile 
                 ...state,
                 posts: [...posts],
             };
-            newState.posts[action.id - 1].likesCount--;
+            newState.posts[action.userId - 1].likesCount--;
             return newState;
         }
         case SET_USER_PROFILE: {

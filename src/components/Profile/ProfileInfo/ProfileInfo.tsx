@@ -3,8 +3,18 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../Users/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 import ProfileUserInfo from "./ProfileUserInfo/ProfileUserInfo";
+import {FormValues, IProfile} from "../../../redux/profileReducer";
 
-const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveInfo}) => {
+interface Props {
+    profile: IProfile | null
+    status: string
+    isOwner: boolean
+    updateStatus: (status: string) => void
+    savePhoto: (file: any) => void
+    saveInfo: (profile: FormValues, setError: any) => void
+}
+
+const ProfileInfo: React.FC<Props> = ({profile, status, updateStatus, isOwner, savePhoto, saveInfo}) => {
     return (
         profile === null ? <Preloader/> :
             <div className={s.profileInfo}>
@@ -13,7 +23,6 @@ const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveInf
                 {/*</div>*/}
 
                 <ProfileUserInfo profile={profile}
-                                 status={status}
                                  isOwner={isOwner}
                                  savePhoto={savePhoto}
                                  saveInfo={saveInfo}/>

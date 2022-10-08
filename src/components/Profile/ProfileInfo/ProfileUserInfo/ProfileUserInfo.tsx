@@ -3,13 +3,22 @@ import s from '../ProfileInfo.module.css';
 import avatar from "../../../../assets/images/avatar.jpg";
 import AboutUserInfo from "./AboutUserInfo/AboutUserInfo";
 import AboutUserForm from "./AboutUserForm/AboutUserForm";
+import {FormValues, IProfile} from "../../../../redux/profileReducer";
 
-const ProfileUserInfo = ({profile, isOwner, savePhoto, saveInfo}) => {
+interface Props {
+    profile: IProfile                                       // | null
+    isOwner: boolean
+    savePhoto: (file: any) => void
+    saveInfo: (profile: FormValues, setError: any) => void
+}
 
-    const mainPhotoSelected = (e) => {
-        console.log(e.target.files[0])
-        if (e.target.files.length) {
-            savePhoto(e.target.files[0])
+const ProfileUserInfo: React.FC<Props> = ({profile, isOwner, savePhoto, saveInfo}) => {
+
+    const mainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        console.log(files)
+        if (files !== null) {
+            savePhoto(files[0])
         }
     }
 
@@ -33,11 +42,11 @@ const ProfileUserInfo = ({profile, isOwner, savePhoto, saveInfo}) => {
                 {editMode
                     ? <AboutUserForm profile={profile}
                                      isOwner={isOwner}
-                                     goToEditMode={setEditMode}
+                                     goToEditMode={() => setEditMode(false)}
                                      saveInfo={saveInfo}/>
                     : <AboutUserInfo profile={profile}
                                      isOwner={isOwner}
-                                     goToEditMode={setEditMode}/>
+                                     goToEditMode={() => setEditMode(true)}/>
                 }
             </div>
         </div>

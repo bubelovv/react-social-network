@@ -2,8 +2,15 @@ import React from 'react';
 import s from "../../ProfileInfo.module.css";
 import ProfileSocialLinks from "./ProfileSocialLinks/ProfileSocialLinks";
 import Button from "../../../../../UI/Button/Button";
+import {IProfile} from "../../../../../redux/profileReducer";
 
-const AboutUserInfo = ({profile, isOwner, goToEditMode}) => {
+interface Props {
+    profile: IProfile                                       // | null
+    isOwner: boolean
+    goToEditMode: () => void
+}
+
+const AboutUserInfo: React.FC<Props> = ({profile, isOwner, goToEditMode}) => {
     return (
         <div className={s.aboutMeInfo}>
             <div className={s.myInfo}>
@@ -21,7 +28,7 @@ const AboutUserInfo = ({profile, isOwner, goToEditMode}) => {
 
             <ProfileSocialLinks contacts={profile.contacts}/>
 
-            {isOwner && <Button activateEditMade={goToEditMode}>change user info</Button>}
+            {isOwner && <Button goToEditMode={goToEditMode}>change user info</Button>}
         </div>
     );
 };

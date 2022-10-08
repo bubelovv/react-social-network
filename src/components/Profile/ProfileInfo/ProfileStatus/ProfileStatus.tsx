@@ -1,32 +1,43 @@
 import React from "react";
 import s from '../ProfileInfo.module.css';
 
-class ProfileStatus extends React.Component {
+type Props = {
+    status: string
+    isOwner: boolean
+    updateStatus: (status: string) => void
+}
+
+type State = {
+    editMode: boolean
+    status: string
+}
+
+class ProfileStatus extends React.Component<Props, State> {
     state = {
         editMode: false,
         status: this.props.status,
     };
 
-    activateEditMade = () => {
+    activateEditMode = () => {
         this.setState({
             editMode: true,
         });
     };
 
-    deactivateEditMade = () => {
+    deactivateEditMode = () => {
         this.setState({
             editMode: false,
         });
         this.props.updateStatus(this.state.status)
     };
 
-    changeStatus = (e) => {
+    changeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: e.currentTarget.value,
         });
     };
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: Props, prevState: State) {
         if(prevProps.status !== this.props.status) {
             this.setState({status: this.props.status});
         }
@@ -40,11 +51,11 @@ class ProfileStatus extends React.Component {
                         <span>Status:</span>
                         <input autoFocus={true}
                                onChange={this.changeStatus}
-                               onBlur={this.deactivateEditMade}
+                               onBlur={this.deactivateEditMode}
                                value={this.state.status}/>
                     </div> :
                     <div className={s.statusSpanWrap}>
-                        <span onDoubleClick={this.activateEditMade}>
+                        <span onDoubleClick={this.activateEditMode}>
                             Status: {this.props.status || 'Enter your status'}
                         </span>
                     </div>

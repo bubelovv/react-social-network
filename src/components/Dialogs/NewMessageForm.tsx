@@ -7,9 +7,9 @@ interface Props {
     addMessage: (newMessageText: string) => void
 }
 
-type FormValues = {
+interface FormValues {
     newMessageText: string;
-};
+}
 
 const NewMessageForm: React.FC<Props> = ({addMessage}) => {
     let {

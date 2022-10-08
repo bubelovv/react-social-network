@@ -6,18 +6,29 @@ import twitter from "../../../../../../assets/images/twitter.png";
 import instagram from "../../../../../../assets/images/inst.png";
 import github from "../../../../../../assets/images/git.png";
 import avatar from "../../../../../../assets/images/avatar.jpg";
+import {ContactsProfile} from "../../../../../../redux/profileReducer";
 
-const ProfileSocialLinks = ({contacts}) => {
-    const socialIcons = {facebook, vk, twitter, instagram, github}
+interface Props {
+    contacts: ContactsProfile
+}
+
+interface SocialIcons {
+    facebook: string
+    vk: string
+    twitter: string
+    instagram: string
+    github: string
+}
+
+const ProfileSocialLinks: React.FC<Props> = ({contacts}) => {
+    const socialIcons: SocialIcons = {facebook, vk, twitter, instagram, github}
 
     const contactsList = Object.keys(contacts).map(contact => {
-        {
-            return contacts[contact] && (
-                <a href={contacts[contact]} key={contact} className={s.link}>
-                    <img src={socialIcons[contact] || avatar} alt={''}/>
-                </a>
-            )
-        }
+        return contacts[contact as keyof ContactsProfile] && (
+            <a href={contacts[contact as keyof ContactsProfile]} key={contact} className={s.link}>
+                <img src={socialIcons[contact as keyof SocialIcons] || avatar} alt={''}/>
+            </a>
+        )
     })
 
     return (

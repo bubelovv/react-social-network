@@ -1,23 +1,29 @@
 import React from 'react';
 import s from "./AboutUserForm.module.css";
 import {useForm} from 'react-hook-form';
+import {ContactsProfile, FormValues, IProfile} from "../../../../../redux/profileReducer";
 
-const AboutUserForm = ({profile, isOwner, goToEditMode, saveInfo}) => {
+interface Props {
+    profile: IProfile                                       // | null
+    isOwner: boolean
+    goToEditMode: () => void
+    saveInfo: (formData: FormValues, setError: any) => any
+}
+
+const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInfo}) => {
     let {
         register,
         handleSubmit,
         setError,
         clearErrors,
         formState: {errors},
-    } = useForm({
+    } = useForm<FormValues>({
         defaultValues: profile,
     });
 
-    let onSubmit = (formData, setError) => {    // ---------------- REFACTOR ---------------
+    let onSubmit = (formData: FormValues, setError: any) => {    // ---------------- REFACTOR ---------------
         saveInfo(formData, setError)
-            .then(() => {
-                goToEditMode(false)
-            })
+            .then(goToEditMode)
     };
 
     return (
@@ -58,18 +64,19 @@ const AboutUserForm = ({profile, isOwner, goToEditMode, saveInfo}) => {
                     />
                 </div>
                 <div>CONTACTS:</div>
+
                 {Object.keys(profile.contacts).map(contact => {
                     return (
                         <div key={contact} className={s.userInfoBlock}>
-                            <div className={s.contactName}>{contact}:</div>
-                            <input onClick={() => clearErrors(contact)}
-                                   {...register('contacts.' + contact)}/>
+                            <div className={s.contactName}>{contact as keyof ContactsProfile}:</div>
+                            {/*<input onClick={() => clearErrors(contact)}*/}
+                            {/*       {...register('contacts.' + contact)}/>*/}
 
-                            {errors[contact] && (
-                                <div style={{color: 'red'}}>
-                                    {errors[contact].message || 'Errors'}
-                                </div>
-                            )}
+                            {/*{errors[contact] && (*/}
+                            {/*    <div style={{color: 'red'}}>*/}
+                            {/*        {errors[contact].message || 'Errors'}*/}
+                            {/*    </div>*/}
+                            {/*)}*/}
                         </div>
                     )
                 })}
@@ -81,7 +88,7 @@ const AboutUserForm = ({profile, isOwner, goToEditMode, saveInfo}) => {
                         <button type="submit">save user's information</button>
                     </div>
                     <div className={s.btnChange}>
-                        <button onClick={() => goToEditMode(false)}>X close change area X</button>
+                        <button onClick={goToEditMode}>X close change area X</button>
                     </div>
                 </>
             )}
