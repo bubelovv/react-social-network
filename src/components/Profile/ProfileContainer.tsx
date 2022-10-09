@@ -15,6 +15,7 @@ import {compose} from 'redux';
 // import withAuthRedirect from "../../HOC/withAuthRedirect";
 import {getIsAuth} from "../../redux/auth-selectors";
 import {RootState} from "../../redux/reduxStore";
+import {UseFormSetError} from "react-hook-form";
 
 interface MapStateProps {
     profile: IProfile | null
@@ -23,12 +24,12 @@ interface MapStateProps {
     isAuth: boolean
 }
 
-type MapDispatchProps = {
+interface MapDispatchProps {
     getProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
-    savePhoto: (file: any) => void
-    saveInfo: (profile: FormValues, setError: any) => void
+    savePhoto: (file: File) => void
+    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => void
 }
 
 type Props = MapStateProps & MapDispatchProps
@@ -67,7 +68,6 @@ const mapStateToProps = (state: RootState): MapStateProps => {
         isAuth: getIsAuth(state),
     };
 };
-
 
 export default compose(
     connect<

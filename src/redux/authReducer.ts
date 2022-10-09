@@ -1,6 +1,8 @@
 import {authApi, ResultCode, ResultCodeForCaptcha} from '../API/api'
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./reduxStore";
+import {UseFormSetError} from "react-hook-form";
+import {LoginFormValues} from "../components/Login/Login";
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 const SET_CAPTCHA = 'SET_CAPTCHA'
@@ -54,7 +56,7 @@ export interface LoginData {
     captcha: string | null;
 }
 
-export const login = (data: LoginData, setError: any): ThunkType => {
+export const login = (data: LoginData, setError: UseFormSetError<LoginFormValues>): ThunkType => {
     const {email, password, checkbox, captcha} = data;
 
     return async (dispatch) => {
@@ -65,7 +67,7 @@ export const login = (data: LoginData, setError: any): ThunkType => {
         } else if(data.resultCode === ResultCodeForCaptcha.captcha) {
             await dispatch(getCaptcha())
         } else {
-            setError('login', {type: 'server', message: data.messages[0]});
+            setError('email', {type: 'server', message: data.messages[0]});
             setError('password', {type: 'server', message: data.messages[0]});
         }
     }

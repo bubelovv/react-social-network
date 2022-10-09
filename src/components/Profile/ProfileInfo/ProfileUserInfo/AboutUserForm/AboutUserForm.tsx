@@ -1,13 +1,13 @@
 import React from 'react';
 import s from "./AboutUserForm.module.css";
-import {useForm} from 'react-hook-form';
+import {useForm, UseFormSetError} from 'react-hook-form';
 import {ContactsProfile, FormValues, IProfile} from "../../../../../redux/profileReducer";
 
 interface Props {
     profile: IProfile                                       // | null
     isOwner: boolean
     goToEditMode: () => void
-    saveInfo: (formData: FormValues, setError: any) => any
+    saveInfo: (formData: FormValues, setError: UseFormSetError<FormValues>) => void
 }
 
 const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInfo}) => {
@@ -21,9 +21,9 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
         defaultValues: profile,
     });
 
-    let onSubmit = (formData: FormValues, setError: any) => {    // ---------------- REFACTOR ---------------
-        saveInfo(formData, setError)
-            .then(goToEditMode)
+    let onSubmit = async (formData: FormValues, setError: UseFormSetError<FormValues>) => {    // ---------------- REFACTOR ---------------
+        await saveInfo(formData, setError)
+        goToEditMode()
     };
 
     return (

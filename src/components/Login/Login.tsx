@@ -1,5 +1,5 @@
 import React from 'react'
-import {useForm} from 'react-hook-form'
+import {useForm, UseFormSetError} from 'react-hook-form'
 import s from './Login.module.css'
 import {connect} from 'react-redux'
 import {login, LoginData} from "../../redux/authReducer";
@@ -8,11 +8,7 @@ import {getIsAuth} from "../../redux/auth-selectors";
 import cn from "classnames";
 import {RootState} from "../../redux/reduxStore";
 
-// interface SetError {
-//     setError: (name: FieldPath<FormValues>, error: ErrorOption, options?: { shouldFocus: boolean }) => void
-// }
-
-interface FormValues {
+export interface LoginFormValues {
     email: string
     password: string
     checkbox: boolean
@@ -20,7 +16,7 @@ interface FormValues {
 }
 
 interface PropsLoginForm {
-    onSubmit: (data: FormValues, setError: any) => void
+    onSubmit: (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => void
     urlCaptcha: string | null
 }
 
@@ -32,7 +28,7 @@ const LoginForm: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
         handleSubmit,
         setError,
         formState: {errors, isValid, touchedFields},
-    } = useForm<FormValues>({mode: 'onChange'})
+    } = useForm<LoginFormValues>({mode: 'onChange'})
 
     const inputCls = (inputName: InputCls) => cn(
         s.field,
@@ -105,11 +101,11 @@ const LoginForm: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
 }
 
 interface MapStateProps {isAuth: boolean, urlCaptcha: string | null}
-interface MapDispatchProps {login: ( data: LoginData, setError: any) => void}
+interface MapDispatchProps {login: ( data: LoginData, setError: UseFormSetError<LoginFormValues>) => void}
 type PropsLogin = MapStateProps & MapDispatchProps
 
 const Login: React.FC<PropsLogin> = ({login, isAuth, urlCaptcha}) => {
-    const onSubmit = (data: FormValues, setError: any) => {
+    const onSubmit = (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => {
         login(data, setError)
     }
 
@@ -123,4 +119,9 @@ const mapStateToProps = (state: RootState): MapStateProps => ({
     urlCaptcha: state.auth.urlCaptcha
 })
 
-export default connect<MapStateProps, MapDispatchProps, {}, RootState>(mapStateToProps, {login})(Login)
+export default connect<
+    MapStateProps,
+    MapDispatchProps,
+    undefined,
+    RootState
+    >(mapStateToProps, {login})(Login)

@@ -1,6 +1,7 @@
 import {profileApi, ResultCode} from '../API/api';
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./reduxStore";
+import {FieldPath, UseFormSetError} from "react-hook-form";
 
 const ADD_POST = 'ADD-POST';
 const INCREMENT_LIKES = 'INCREMENT_LIKES';
@@ -47,7 +48,7 @@ interface SavePhotoSuccess {
 
 type ActionTypes = AddPost | IncrementLikes | DecrementLikes |
     SetUserProfile | SetStatus | DeletePost | SavePhotoSuccess
-type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
+export type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
 
 export const addPost = (newPostText: string): AddPost => ({type: ADD_POST, newPostText});
 export const incrementLikes = (userId: number): IncrementLikes => ({type: INCREMENT_LIKES, userId});
@@ -76,7 +77,7 @@ export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     }
 }
 
-export const savePhoto = (file: any): ThunkType => async (dispatch) => {      // should file be an object?
+export const savePhoto = (file: File): ThunkType => async (dispatch) => {
     let {resultCode, data} = await profileApi.savePhoto(file)
     if (resultCode === ResultCode.Success) {
         await dispatch(savePhotoSuccess(data.photos));
@@ -92,8 +93,8 @@ export interface FormValues {
     userId: number
 }
 
-export const saveInfo = (profile: FormValues, setError: any): ThunkType => {
-    return async (dispatch, getState: () => RootState): Promise<any> => {
+export const saveInfo = (profile: FormValues, setError: UseFormSetError<FormValues>): ThunkType => {
+    return async (dispatch, getState: () => RootState) => {
         let data = await profileApi.saveInfo(profile)
         if (data.resultCode === ResultCode.Success) {
             const userId = getState().auth.id
@@ -102,7 +103,7 @@ export const saveInfo = (profile: FormValues, setError: any): ThunkType => {
             data.messages.forEach((message: string) => {
                 const name = message.slice(message.indexOf('>') + 1, message.indexOf(')'))
                 const mainName = name[0].toLowerCase() + name.slice(1)
-                setError(mainName, {type: 'server', message});
+                setError(mainName as FieldPath<FormValues>, {type: 'server', message});
             })
             return Promise.reject()
         }

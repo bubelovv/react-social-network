@@ -3,14 +3,15 @@ import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 import {FormValues, IProfile} from "../../redux/profileReducer";
+import {UseFormSetError} from "react-hook-form";
 
 interface Props {
     profile: IProfile | null
     status: string
     isOwner: boolean
     updateStatus: (status: string) => void
-    savePhoto: (file: any) => void
-    saveInfo: (profile: FormValues, setError: any) => void
+    savePhoto: (file: File) => void
+    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => void
 }
 
 const Profile: React.FC<Props> = ({profile, status, updateStatus, isOwner, savePhoto, saveInfo}) => {

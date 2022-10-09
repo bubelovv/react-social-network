@@ -9,6 +9,10 @@ interface InitialStateSidebar {
     friends: IFriend[]
 }
 
+interface ActionTypes {
+
+}
+
 let initialState: InitialStateSidebar = {
     friends: [
         {id: 1, name: 'Bubelov',avatar: avatar},
@@ -20,7 +24,7 @@ let initialState: InitialStateSidebar = {
     ],
 };
 
-const sidebarReducer = (state = initialState, action: any) => {
+const sidebarReducer = (state = initialState, action: ActionTypes) => {
     return state;
 }
 
