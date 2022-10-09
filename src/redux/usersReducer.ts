@@ -1,4 +1,4 @@
-import {usersApi} from "../API/api";
+import {ResultCode, usersApi} from "../API/api";
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./reduxStore";
 import {Dispatch} from "redux";
@@ -67,17 +67,16 @@ export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
         dispatch(toggleIsFetching(true));
         let data = await usersApi.getUsers(currentPage, pageSize)
         dispatch(toggleIsFetching(false));
-        console.log(data.items)
         dispatch(setUsers(data.items));
         dispatch(setTotalCount(data.totalCount));
     }
 }
 
 const _followUnfollowFlow = async (dispatch: Dispatch<ActionTypes>, userId: number, followUnfollow: string,
-                                   followUnfollowAC: (userId: number) => (UnfollowSuccessful | FollowSuccessful)) => {
+                                   followUnfollowAC: (userId: number) => UnfollowSuccessful | FollowSuccessful) => {
     dispatch(toggleFollowingProgress(true, userId));
     let resultCode = await usersApi[followUnfollow](userId)
-    if (resultCode === 0) {
+    if (resultCode === ResultCode.Success) {
         dispatch(followUnfollowAC(userId));
     }
     dispatch(toggleFollowingProgress(false, userId));

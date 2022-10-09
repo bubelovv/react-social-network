@@ -1,4 +1,4 @@
-import {profileApi} from '../API/api';
+import {profileApi, ResultCode} from '../API/api';
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./reduxStore";
 
@@ -65,41 +65,41 @@ export const getProfile = (userId: number | null): ThunkType => async (dispatch)
 }
 
 export const getStatus = (userId: number): ThunkType => async (dispatch) => {
-    let response = await profileApi.getStatus(userId)
-    dispatch(setStatus(response.data))
+    let data = await profileApi.getStatus(userId)
+    dispatch(setStatus(data))
 }
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
-    let response = await profileApi.updateStatus(status)
-    if (response.data.resultCode === 0) {
+    let resultCode = await profileApi.updateStatus(status)
+    if (resultCode === ResultCode.Success) {
         dispatch(setStatus(status));
     }
 }
 
-export const savePhoto = (file: any): ThunkType => async (dispatch) => {      // file should be an object?
-    let response = await profileApi.savePhoto(file)
-    if (response.data.resultCode === 0) {
-        await dispatch(savePhotoSuccess(response.data.data.photos));
+export const savePhoto = (file: any): ThunkType => async (dispatch) => {      // should file be an object?
+    let {resultCode, data} = await profileApi.savePhoto(file)
+    if (resultCode === ResultCode.Success) {
+        await dispatch(savePhotoSuccess(data.photos));
     }
 }
 
 export interface FormValues {
     aboutMe: string
+    contacts: ContactsProfile
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     userId: number
-    contacts: ContactsProfile
 }
 
 export const saveInfo = (profile: FormValues, setError: any): ThunkType => {
     return async (dispatch, getState: () => RootState): Promise<any> => {
-        let response = await profileApi.saveInfo(profile)
-        if (response.data.resultCode === 0) {
+        let data = await profileApi.saveInfo(profile)
+        if (data.resultCode === ResultCode.Success) {
             const userId = getState().auth.id
             await dispatch(getProfile(userId));
         } else {
-            response.data.messages.forEach((message: string) => {
+            data.messages.forEach((message: string) => {
                 const name = message.slice(message.indexOf('>') + 1, message.indexOf(')'))
                 const mainName = name[0].toLowerCase() + name.slice(1)
                 setError(mainName, {type: 'server', message});
@@ -114,7 +114,7 @@ export interface IPost {
     message: string
     likesCount: number
 }
-interface PhotosProfile {
+export interface PhotosProfile {
     large: string | null
     small: string | null
 }

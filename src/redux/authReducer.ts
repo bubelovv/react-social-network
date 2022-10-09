@@ -1,4 +1,4 @@
-import {authApi} from '../API/api'
+import {authApi, ResultCode, ResultCodeForCaptcha} from '../API/api'
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./reduxStore";
 
@@ -40,16 +40,9 @@ export const setCaptcha = (urlCaptcha: string): SetCaptcha => ({type: SET_CAPTCH
 
 export const clearCaptcha = (): ClearCaptcha => ({type: CLEAR_CAPTCHA})
 
-// interface ApiData {
-//     id: number | null;
-//     email: string | null;
-//     login: string | null;
-// }
-
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
-    let data = await authApi.auth()
+    let data = await authApi.me()
     if (Object.keys(data).length) {
-        // let {id, email, login} = {...data}
         dispatch(setAuthUserData(data.id, data.email, data.login, true))
     }
 }
@@ -66,10 +59,10 @@ export const login = (data: LoginData, setError: any): ThunkType => {
 
     return async (dispatch) => {
         let data = await authApi.loginPost(email, password, checkbox, captcha)
-        if (data.resultCode === 0) {
+        if (data.resultCode === ResultCode.Success) {
             await dispatch(getAuthUserData())
             await dispatch(clearCaptcha())
-        } else if(data.resultCode === 10) {
+        } else if(data.resultCode === ResultCodeForCaptcha.captcha) {
             await dispatch(getCaptcha())
         } else {
             setError('login', {type: 'server', message: data.messages[0]});
@@ -79,7 +72,7 @@ export const login = (data: LoginData, setError: any): ThunkType => {
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-    let data = await authApi.loginDelete()
+    let data = await authApi.logout()
     if (data.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false))
     }

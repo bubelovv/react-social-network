@@ -15,8 +15,7 @@ interface Props {
 const ProfileUserInfo: React.FC<Props> = ({profile, isOwner, savePhoto, saveInfo}) => {
 
     const mainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files;
-        console.log(files)
+        const files = e.target.files
         if (files !== null) {
             savePhoto(files[0])
         }
