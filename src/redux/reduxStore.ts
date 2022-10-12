@@ -25,6 +25,6 @@ const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunkMiddleware)
 ));
 
-// let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+export type InferValueTypes<T> = T extends {[key: string]: infer U} ? U : never
 
 export default store;

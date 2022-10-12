@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {
     getUsers,
-    setCurrentPage,
+    // actions,
     follow,
     unfollow,
     IUser,
@@ -25,7 +25,7 @@ type MapDispatchProps = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
-    setCurrentPage: (currentPage: number) => void
+    // setCurrentPage: (currentPage: number) => void
 }
 
 type Props = MapStateProps & MapDispatchProps
@@ -36,7 +36,7 @@ const UsersContainer: React.FC<Props> = (props) => {
     }, []);
 
     const onPageChanged = (currentPage: number) => {
-        props.setCurrentPage(currentPage);
+        // props.setCurrentPage(currentPage);
         props.getUsers(currentPage, props.pageSize)
     };
 
@@ -71,6 +71,7 @@ export default compose(
         MapDispatchProps,
         {},
         RootState
-        >(mapStateToProps, {getUsers, setCurrentPage, follow, unfollow}),
+        >(mapStateToProps, {getUsers, follow, unfollow}),
+        // >(mapStateToProps, {getUsers, setCurrentPage: actions.setCurrentPage, follow, unfollow}),
     // withAuthRedirect,
 )(UsersContainer)
