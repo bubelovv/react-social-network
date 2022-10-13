@@ -1,7 +1,8 @@
-import {profileApi, ResultCode} from '../API/api';
+import {ResultCode} from '../API/api';
 import {ThunkAction} from "redux-thunk";
 import {RootState} from "./reduxStore";
 import {FieldPath, UseFormSetError} from "react-hook-form";
+import {profileApi} from "../API/profileApi";
 
 const ADD_POST = 'ADD-POST';
 const INCREMENT_LIKES = 'INCREMENT_LIKES';
@@ -43,7 +44,7 @@ interface DeletePost {
 
 interface SavePhotoSuccess {
     type: typeof SAVE_PHOTO_SUCCESS,
-    photos: PhotosProfile
+    photos: IPhotosProfile
 }
 
 type ActionTypes = AddPost | IncrementLikes | DecrementLikes |
@@ -56,7 +57,7 @@ export const decrementLikes = (userId: number): DecrementLikes => ({type: DECREM
 export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
 export const setStatus = (status: string): SetStatus => ({type: SET_STATUS, status});
 export const deletePost = (id: number): DeletePost => ({type: DELETE_POST, id});
-export const savePhotoSuccess = (photos: PhotosProfile): SavePhotoSuccess => ({type: SAVE_PHOTO_SUCCESS, photos});
+export const savePhotoSuccess = (photos: IPhotosProfile): SavePhotoSuccess => ({type: SAVE_PHOTO_SUCCESS, photos});
 
 export const getProfile = (userId: number | null): ThunkType => async (dispatch) => {
     if (userId !== null) {
@@ -86,7 +87,7 @@ export const savePhoto = (file: File): ThunkType => async (dispatch) => {
 
 export interface FormValues {
     aboutMe: string
-    contacts: ContactsProfile
+    contacts: IContactsProfile
     fullName: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
@@ -115,11 +116,11 @@ export interface IPost {
     message: string
     likesCount: number
 }
-export interface PhotosProfile {
+export interface IPhotosProfile {
     large: string | null
     small: string | null
 }
-export interface ContactsProfile {
+export interface IContactsProfile {
     facebook: string
     github: string
     instagram: string
@@ -135,8 +136,8 @@ export interface IProfile {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     userId: number
-    contacts: ContactsProfile
-    photos: PhotosProfile
+    contacts: IContactsProfile
+    photos: IPhotosProfile
 }
 interface InitialStateProfile {
     posts: IPost[];

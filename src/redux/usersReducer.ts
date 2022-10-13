@@ -1,7 +1,8 @@
-import {ResultCode, usersApi} from "../API/api";
+import {ResultCode} from "../API/api";
 import {ThunkAction} from "redux-thunk";
 import {InferValueTypes, RootState} from "./reduxStore";
 import {Dispatch} from "redux";
+import {usersApi} from "../API/usersApi";
 
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'UNFOLLOW_USER';

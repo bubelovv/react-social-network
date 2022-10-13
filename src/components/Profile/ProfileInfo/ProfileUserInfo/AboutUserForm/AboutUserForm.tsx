@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./AboutUserForm.module.css";
 import {useForm, UseFormSetError} from 'react-hook-form';
-import {ContactsProfile, FormValues, IProfile} from "../../../../../redux/profileReducer";
+import {IContactsProfile, FormValues, IProfile} from "../../../../../redux/profileReducer";
 
 interface Props {
     profile: IProfile                                       // | null
@@ -68,7 +68,7 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
                 {Object.keys(profile.contacts).map((contact: any) => {
                     return (
                         <div key={contact} className={s.userInfoBlock}>
-                            <div className={s.contactName}>{contact as keyof ContactsProfile}:</div>
+                            <div className={s.contactName}>{contact as keyof IContactsProfile}:</div>
                             <input onClick={() => clearErrors(contact)}  // see all form but need only contacts-form
                                    {...register<any>('contacts.' + contact)}/>
 
