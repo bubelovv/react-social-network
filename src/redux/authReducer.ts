@@ -1,6 +1,5 @@
 import {ResultCode} from '../API/api'
-import {ThunkAction} from "redux-thunk";
-import {InferValueTypes, RootState} from "./reduxStore";
+import {BaseThunkType, InferValueTypes} from "./reduxStore";
 import {UseFormSetError} from "react-hook-form";
 import {LoginFormValues} from "../components/Login/Login";
 import {authApi, ResultCodeForCaptcha} from "../API/authApi";
@@ -13,14 +12,13 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
 export const actions = {
     setAuthUserData: (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
-        type: SET_AUTH_USER_DATA,
-        payload: {id, email, login, isAuth},
+        type: SET_AUTH_USER_DATA, payload: {id, email, login, isAuth},
     }) as const,
     setCaptcha: (urlCaptcha: string) => ({type: SET_CAPTCHA, urlCaptcha}) as const,
     clearCaptcha: () => ({type: CLEAR_CAPTCHA}) as const,
 }
 
-type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
+type ThunkType = BaseThunkType<ActionTypes>
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
     let data = await authApi.me()

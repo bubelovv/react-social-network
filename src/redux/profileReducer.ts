@@ -1,6 +1,5 @@
 import {ResultCode} from '../API/api';
-import {ThunkAction} from "redux-thunk";
-import {InferValueTypes, RootState} from "./reduxStore";
+import {BaseThunkType, InferValueTypes, RootState} from "./reduxStore";
 import {FieldPath, UseFormSetError} from "react-hook-form";
 import {profileApi} from "../API/profileApi";
 
@@ -24,7 +23,7 @@ export const actions = {
     savePhotoSuccess: (photos: IPhotosProfile) => ({type: SAVE_PHOTO_SUCCESS, photos}) as const,
 }
 
-type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
+type ThunkType = BaseThunkType<ActionTypes>
 
 export const getProfile = (userId: number | null): ThunkType => async (dispatch) => {
     if (userId !== null) {

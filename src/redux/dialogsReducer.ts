@@ -4,7 +4,7 @@ const ADD_MESSAGE = 'ADD_MESSAGE';
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 
-// type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
+// type ThunkType = BaseThunkType<ActionTypes>
 
 export const actions = {
     addMessage: (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText}),

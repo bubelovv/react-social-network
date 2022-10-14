@@ -1,6 +1,5 @@
 import {getAuthUserData} from "./authReducer";
-import {ThunkAction} from "redux-thunk";
-import {InferValueTypes, RootState} from "./reduxStore";
+import {BaseThunkType, InferValueTypes} from "./reduxStore";
 
 const SET_INITIALIZED_SUCCESS = 'SET_INITIALIZED_SUCCESS'
 
@@ -10,7 +9,7 @@ export const actions = {
     initializedSuccess: () => ({type: SET_INITIALIZED_SUCCESS}) as const
 }
 
-type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
+type ThunkType = BaseThunkType<ActionTypes>
 
 export const initializeApp = (): ThunkType => async (dispatch) => {
     let promise = await dispatch(getAuthUserData())
