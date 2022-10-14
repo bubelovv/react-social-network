@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-    addPost,
-    decrementLikes,
-    incrementLikes, IPost,
+    actions, IPost,
 } from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
@@ -25,9 +23,9 @@ const mapStateToProps = (state: RootState): MapStateProps => {
 };
 
 const MyPostsContainer = connect<MapStateProps, MapDispatchProps, {}, RootState>(mapStateToProps, {
-    addPost,
-    incrementLikes,
-    decrementLikes,
+    addPost: actions.addPost,
+    incrementLikes: actions.incrementLikes,
+    decrementLikes: actions.decrementLikes,
 })(MyPosts);
 
 export default MyPostsContainer;

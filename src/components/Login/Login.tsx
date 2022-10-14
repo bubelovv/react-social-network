@@ -20,8 +20,6 @@ interface PropsLoginForm {
     urlCaptcha: string | null
 }
 
-type InputCls =  'email' | 'password' | 'checkbox' | 'captcha'
-
 const LoginForm: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
     const {
         register,
@@ -30,7 +28,7 @@ const LoginForm: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
         formState: {errors, isValid, touchedFields},
     } = useForm<LoginFormValues>({mode: 'onChange'})
 
-    const inputCls = (inputName: InputCls) => cn(
+    const inputCls = (inputName: keyof LoginFormValues) => cn(
         s.field,
         {[s.fieldValid]: touchedFields[inputName] && !errors[inputName]},
         {[s.fieldInvalid]: touchedFields[inputName] && errors[inputName]}

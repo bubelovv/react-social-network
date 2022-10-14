@@ -3,6 +3,8 @@ import {ThunkAction} from "redux-thunk";
 import {InferValueTypes, RootState} from "./reduxStore";
 import {Dispatch} from "redux";
 import {usersApi} from "../API/usersApi";
+import {objectsHelper} from "../utils/object-helper";
+import {IPhotosProfile} from "./profileReducer";
 
 const FOLLOW_USER = 'FOLLOW_USER';
 const UNFOLLOW_USER = 'UNFOLLOW_USER';
@@ -13,8 +15,6 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
-
-type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
 
 export const actions = {
     followSuccessful: (userId: number) => ({type: FOLLOW_USER, userId} as const),
@@ -27,6 +27,8 @@ export const actions = {
         return {type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId}  as const;
     },
 }
+
+type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
 
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
     return async (dispatch) => {
@@ -57,15 +59,11 @@ export const unfollow = (userId: number): ThunkType => async (dispatch) => {
     await _followUnfollowFlow(dispatch, userId, "follow", actions.followSuccessful)
 }
 
-interface Photos {
-    small: string | null
-    large: string | null
-}
 export interface IUser {
     id: number
     name: string
     status: string | null
-    photos: Photos
+    photos: IPhotosProfile
     followed: boolean
 }
 export interface InitialStateUsers {
@@ -76,22 +74,13 @@ export interface InitialStateUsers {
     isFetching: boolean
     followingInProgress: number[] // array of users id
 }
-let initialState: InitialStateUsers = {
+const initialState: InitialStateUsers = {
     users: [],
     pageSize: 5,
     totalCount: 0,
     currentPage: 1,
     isFetching: false,
     followingInProgress: [],
-}
-
-let objectsHelper = (object: IUser[], itemId: string, actionId: number, newObjProps: { followed: boolean }) => {
-    return object.map((user: IUser) => {
-        if (user[itemId as keyof IUser] === actionId) {
-            return {...user, ...newObjProps}
-        }
-        return user
-    })
 }
 
 const usersReducer = (state = initialState, action: ActionTypes): InitialStateUsers => {

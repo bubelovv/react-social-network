@@ -1,6 +1,6 @@
 import {ResultCode} from '../API/api';
 import {ThunkAction} from "redux-thunk";
-import {RootState} from "./reduxStore";
+import {InferValueTypes, RootState} from "./reduxStore";
 import {FieldPath, UseFormSetError} from "react-hook-form";
 import {profileApi} from "../API/profileApi";
 
@@ -12,76 +12,43 @@ const SET_STATUS = 'SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
-interface AddPost {
-    type: typeof ADD_POST,
-    newPostText: string
+type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
+
+export const actions = {
+    addPost: (newPostText: string) => ({type: ADD_POST, newPostText}) as const,
+    incrementLikes: (userId: number) => ({type: INCREMENT_LIKES, userId}) as const,
+    decrementLikes: (userId: number) => ({type: DECREMENT_LIKES, userId}) as const,
+    setUserProfile: (profile: IProfile) => ({type: SET_USER_PROFILE, profile}) as const,
+    setStatus: (status: string) => ({type: SET_STATUS, status}) as const,
+    deletePost: (id: number) => ({type: DELETE_POST, id}) as const,
+    savePhotoSuccess: (photos: IPhotosProfile) => ({type: SAVE_PHOTO_SUCCESS, photos}) as const,
 }
 
-interface IncrementLikes {
-    type: typeof INCREMENT_LIKES,
-    userId: number
-}
-
-interface DecrementLikes {
-    type: typeof DECREMENT_LIKES,
-    userId: number
-}
-
-interface SetUserProfile {
-    type: typeof SET_USER_PROFILE,
-    profile: IProfile
-}
-
-interface SetStatus {
-    type: typeof SET_STATUS,
-    status: string
-}
-
-interface DeletePost {
-    type: typeof DELETE_POST,
-    id: number
-}
-
-interface SavePhotoSuccess {
-    type: typeof SAVE_PHOTO_SUCCESS,
-    photos: IPhotosProfile
-}
-
-type ActionTypes = AddPost | IncrementLikes | DecrementLikes |
-    SetUserProfile | SetStatus | DeletePost | SavePhotoSuccess
-export type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
-
-export const addPost = (newPostText: string): AddPost => ({type: ADD_POST, newPostText});
-export const incrementLikes = (userId: number): IncrementLikes => ({type: INCREMENT_LIKES, userId});
-export const decrementLikes = (userId: number): DecrementLikes => ({type: DECREMENT_LIKES, userId});
-export const setUserProfile = (profile: IProfile): SetUserProfile => ({type: SET_USER_PROFILE, profile});
-export const setStatus = (status: string): SetStatus => ({type: SET_STATUS, status});
-export const deletePost = (id: number): DeletePost => ({type: DELETE_POST, id});
-export const savePhotoSuccess = (photos: IPhotosProfile): SavePhotoSuccess => ({type: SAVE_PHOTO_SUCCESS, photos});
+type ThunkType = ThunkAction<Promise<void>, RootState, undefined, ActionTypes>
 
 export const getProfile = (userId: number | null): ThunkType => async (dispatch) => {
     if (userId !== null) {
         let data = await profileApi.getProfile(userId)
-        dispatch(setUserProfile(data))
+        dispatch(actions.setUserProfile(data))
     }
 }
 
 export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     let data = await profileApi.getStatus(userId)
-    dispatch(setStatus(data))
+    dispatch(actions.setStatus(data))
 }
 
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     let resultCode = await profileApi.updateStatus(status)
     if (resultCode === ResultCode.Success) {
-        dispatch(setStatus(status));
+        dispatch(actions.setStatus(status));
     }
 }
 
 export const savePhoto = (file: File): ThunkType => async (dispatch) => {
     let {resultCode, data} = await profileApi.savePhoto(file)
     if (resultCode === ResultCode.Success) {
-        await dispatch(savePhotoSuccess(data.photos));
+        dispatch(actions.savePhotoSuccess(data.photos));
     }
 }
 
@@ -116,10 +83,12 @@ export interface IPost {
     message: string
     likesCount: number
 }
+
 export interface IPhotosProfile {
     large: string | null
     small: string | null
 }
+
 export interface IContactsProfile {
     facebook: string
     github: string
@@ -130,6 +99,7 @@ export interface IContactsProfile {
     website: string
     youtube: string
 }
+
 export interface IProfile {
     aboutMe: string
     fullName: string
@@ -139,6 +109,7 @@ export interface IProfile {
     contacts: IContactsProfile
     photos: IPhotosProfile
 }
+
 interface InitialStateProfile {
     posts: IPost[];
     profile: IProfile | null;

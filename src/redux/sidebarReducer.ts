@@ -9,9 +9,7 @@ interface InitialStateSidebar {
     friends: IFriend[]
 }
 
-interface ActionTypes {
-
-}
+interface ActionTypes {}
 
 let initialState: InitialStateSidebar = {
     friends: [

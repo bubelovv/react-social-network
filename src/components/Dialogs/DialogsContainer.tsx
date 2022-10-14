@@ -1,9 +1,8 @@
 import React from 'react';
-import {addMessage, DialogType, MessageType} from '../../redux/dialogsReducer';
+import {actions, DialogType, MessageType} from '../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-// import withAuthRedirect from '../../HOC/withAuthRedirect';
 import {RootState} from "../../redux/reduxStore";
 
 interface MapStateProps {
@@ -23,6 +22,8 @@ const mapStateToProps = (state: RootState): MapStateProps => {
 };
 
 export default compose(
-    connect<MapStateProps, MapDispatchProps, {}, RootState>(mapStateToProps, {addMessage}),
+    connect<MapStateProps, MapDispatchProps, {}, RootState>(mapStateToProps, {
+        addMessage: actions.addMessage
+    }),
     // withAuthRedirect,
 )(Dialogs)
