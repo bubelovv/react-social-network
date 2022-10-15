@@ -26,7 +26,7 @@ interface IMapStateProps {
 }
 
 interface IMapDispatchProps {
-    initializeApp: () => Promise<void>,
+    initializeApp: () => void,
 }
 
 type PropsType = IMapStateProps & IMapDispatchProps;

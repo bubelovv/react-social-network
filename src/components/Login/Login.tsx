@@ -1,12 +1,7 @@
 import React from 'react'
 import {useForm, UseFormSetError} from 'react-hook-form'
 import s from './Login.module.css'
-import {connect} from 'react-redux'
-import {login, LoginData} from "../../redux/authReducer";
-import {Navigate} from "react-router-dom";
-import {getIsAuth} from "../../redux/auth-selectors";
 import cn from "classnames";
-import {RootState} from "../../redux/reduxStore";
 
 export interface LoginFormValues {
     email: string
@@ -20,7 +15,7 @@ interface PropsLoginForm {
     urlCaptcha: string | null
 }
 
-const LoginForm: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
+const Login: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
     const {
         register,
         handleSubmit,
@@ -98,28 +93,4 @@ const LoginForm: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
     )
 }
 
-interface MapStateProps {isAuth: boolean, urlCaptcha: string | null}
-interface MapDispatchProps {login: ( data: LoginData, setError: UseFormSetError<LoginFormValues>) => void}
-type PropsLogin = MapStateProps & MapDispatchProps
-
-const Login: React.FC<PropsLogin> = ({login, isAuth, urlCaptcha}) => {
-    const onSubmit = (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => {
-        login(data, setError)
-    }
-
-    if (isAuth) return <Navigate to={'/profile'}></Navigate>
-
-    return <LoginForm urlCaptcha={urlCaptcha} onSubmit={onSubmit}/>
-}
-
-const mapStateToProps = (state: RootState): MapStateProps => ({
-    isAuth: getIsAuth(state),
-    urlCaptcha: state.auth.urlCaptcha
-})
-
-export default connect<
-    MapStateProps,
-    MapDispatchProps,
-    undefined,
-    RootState
-    >(mapStateToProps, {login})(Login)
+export default Login
