@@ -36,9 +36,9 @@ type Props = MapStateProps & MapDispatchProps
 
 const ProfileContainer: React.FC<Props> = (props) => {
     let params = useParams();
-    let userId  = Number(params.userId);
+    let userId = Number(params.userId);
     if (!userId) {
-        if(typeof props.authorisedUserId === 'number') {
+        if (typeof props.authorisedUserId === 'number') {
             userId = props.authorisedUserId;            //create redirect with helps JSX-Component and react-hooks
         }
     }
@@ -60,21 +60,17 @@ const ProfileContainer: React.FC<Props> = (props) => {
     );
 }
 
-const mapStateToProps = (state: RootState): MapStateProps => {
-    return {
-        profile: state.profilePage.profile,
-        status: state.profilePage.status,
-        authorisedUserId: state.auth.id,
-        isAuth: getIsAuth(state),
-    };
-};
+const mapStateToProps = (state: RootState): MapStateProps => ({
+    profile: state.profilePage.profile,
+    status: state.profilePage.status,
+    authorisedUserId: state.auth.id,
+    isAuth: getIsAuth(state),
+});
 
-export default compose(
-    connect<
-        MapStateProps,
+export default compose<React.FC>(
+    connect<MapStateProps,
         MapDispatchProps,
         undefined,
-        RootState
-        >(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto, saveInfo}),
+        RootState>(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto, saveInfo}),
     // withAuthRedirect,
 )(ProfileContainer);

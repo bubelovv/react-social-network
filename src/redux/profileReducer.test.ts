@@ -1,4 +1,4 @@
-import profileReducer, {deletePost} from "./profileReducer";
+import profileReducer, {actions} from "./profileReducer";
 
 // test deleted post
 test('post should be deleted', () => {
@@ -8,9 +8,11 @@ test('post should be deleted', () => {
             {id: 1, message: "It's the old post", likesCount: 10},
             {id: 2, message: "It's  the middle post", likesCount: 15},
             {id: 3, message: "It's the last post", likesCount: 20},
-        ]
+        ],
+        profile: null,
+        status: '',
     }
-    let action = deletePost(1)
+    let action = actions.deletePost(1)
     // 2. change state
     let newState = profileReducer(state, action)
     // 3. check result

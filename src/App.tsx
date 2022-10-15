@@ -3,7 +3,7 @@ import './App.css'
 import {HashRouter, Route, Routes} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
-import store from "./redux/reduxStore";
+import store, {RootState} from "./redux/reduxStore";
 
 // --------- my custom components ---------
 import Preloader from "./components/Users/Preloader/Preloader";
@@ -18,11 +18,20 @@ const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
 const News = lazy(() => import('./components/News/News'));
 const Music = lazy(() => import('./components/Music/Music'));
 const Settings = lazy(() => import('./components/Settings/Settings'));
-const Login = lazy(() => import('./components/Login/Login'));
-
+const Login = lazy(() => import('./components/Login/LoginContainer'));
 // ----------------------------------------
 
-export const App = ({initializeApp, initialized}) => {
+interface IMapStateProps {
+    initialized: boolean,
+}
+
+interface IMapDispatchProps {
+    initializeApp: () => Promise<void>,
+}
+
+type PropsType = IMapStateProps & IMapDispatchProps;
+
+export const App: React.FC<PropsType> = ({initializeApp, initialized}) => {
 
     useEffect(() => {
         initializeApp()
@@ -54,7 +63,7 @@ export const App = ({initializeApp, initialized}) => {
     )
 }
 
-const mapStateToProps = (state) => ({initialized: state.app.initialized})
+const mapStateToProps = (state: RootState) => ({initialized: state.app.initialized})
 
 const ConnectedApp = connect(mapStateToProps, {initializeApp})(App);
 

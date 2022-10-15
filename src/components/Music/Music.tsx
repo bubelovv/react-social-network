@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Music = () => {
+const Music: React.FC = () => {
     return (
         <div>
           Music
@@ -14,4 +14,4 @@ const Music = () => {
     );
 };
 
-export default Music;
+export default Music as React.FC;

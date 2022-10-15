@@ -72,6 +72,5 @@ export default compose(
         {},
         RootState
         >(mapStateToProps, {getUsers, follow, unfollow}),
-        // >(mapStateToProps, {getUsers, setCurrentPage: actions.setCurrentPage, follow, unfollow}),
     // withAuthRedirect,
 )(UsersContainer)

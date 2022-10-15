@@ -9,6 +9,7 @@ const SET_CAPTCHA = 'SET_CAPTCHA'
 const CLEAR_CAPTCHA = 'CLEAR_CAPTCHA'
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
+type ThunkType = BaseThunkType<ActionTypes>
 
 export const actions = {
     setAuthUserData: (id: number | null, email: string | null, login: string | null, isAuth: boolean) => ({
@@ -17,8 +18,6 @@ export const actions = {
     setCaptcha: (urlCaptcha: string) => ({type: SET_CAPTCHA, urlCaptcha}) as const,
     clearCaptcha: () => ({type: CLEAR_CAPTCHA}) as const,
 }
-
-type ThunkType = BaseThunkType<ActionTypes>
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
     let data = await authApi.me()

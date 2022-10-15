@@ -1,6 +1,6 @@
 import React from 'react';
 
-const News = () => {
+const News: React.FC = () => {
     return (
         <div>
           It is very important news
@@ -13,4 +13,4 @@ const News = () => {
     );
 };
 
-export default News;
+export default News as React.FC;
