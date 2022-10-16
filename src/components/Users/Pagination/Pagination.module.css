@@ -32,6 +32,7 @@
     color: white;
     background-color: rgba(61, 61, 61, 0.5);
     cursor: pointer;
+    transition: all 0.2s;
 }
 
 .left {

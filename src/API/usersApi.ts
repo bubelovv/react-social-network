@@ -8,8 +8,9 @@ interface IGetUsersResponse {
 }
 
 export let usersApi: { [key: string]: any } = {
-    async getUsers(currentPage = 1, pageSize = 10, term = '') {
-        let response = await instance.get<IGetUsersResponse>(`users?page=${currentPage}&count=${pageSize}&term=${term}`)
+    async getUsers(currentPage = 1, pageSize = 10, term = '', friend = '') {
+        friend = !friend ? friend : (friend === 'true' ? 'true' : 'false')
+        let response = await instance.get<IGetUsersResponse>(`users?page=${currentPage}&count=${pageSize}&term=${term}&friend=${friend}`)
         return response.data;
     },
     async follow(userId: number) {

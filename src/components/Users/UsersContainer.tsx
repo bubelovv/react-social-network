@@ -19,29 +19,29 @@ type MapStateProps = {
     totalCount: number
     isFetching: boolean
     followingInProgress: number[]
-    filter: { term: string }
+    filter: { term: string, friend: string }
 }
 
 type MapDispatchProps = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    getUsers: (currentPage: number, pageSize: number, term: string) => void
+    getUsers: (currentPage: number, pageSize: number, term: string, friend: string) => void
 }
 
 type Props = MapStateProps & MapDispatchProps
 
 const UsersContainer: React.FC<Props> = (props) => {
     useEffect(() => {
-        props.getUsers(props.currentPage, props.pageSize, props.filter.term);
+        props.getUsers(props.currentPage, props.pageSize, props.filter.term, props.filter.friend);
     }, []);
 
     const onPageChanged = (currentPage: number) => {
         const {pageSize, filter} = props;
-        props.getUsers(currentPage, pageSize, filter.term);
+        props.getUsers(currentPage, pageSize, filter.term, filter.friend);
     };
 
-    const onFilterChange = (term: string) => {
-        props.getUsers(1, props.pageSize, term);
+    const onFilterChange = (term: string, friend: string) => {
+        props.getUsers(1, props.pageSize, term, friend);
     };
 
     return (
@@ -54,7 +54,7 @@ const UsersContainer: React.FC<Props> = (props) => {
                    followingInProgress={props.followingInProgress}
                    onPageChanged={onPageChanged}
                    onFilterChange={onFilterChange}
-                   term={props.filter.term}
+                   filter={props.filter}
                    follow={props.follow}
                    unfollow={props.unfollow}/>
     );

@@ -11,6 +11,7 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const SET_FILTER_TERM = 'SET_FILTER_TERM';
+const SET_FILTER_FRIEND = 'SET_FILTER_FRIEND';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 
@@ -23,6 +24,7 @@ export const actions = {
     setCurrentPage: (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const),
     setTotalCount: (totalCount: number) => ({type: SET_TOTAL_COUNT, totalCount} as const),
     setFilterTerm: (term: string) => ({type: SET_FILTER_TERM, term} as const),
+    setFilterFriend: (friend: string) => ({type: SET_FILTER_FRIEND, friend} as const),
     toggleIsFetching: (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const),
     toggleFollowingProgress: (isFetching: boolean, userId: number) => {
         return {type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId} as const;
@@ -31,12 +33,13 @@ export const actions = {
 
 type ThunkType = BaseThunkType<ActionTypes>
 
-export const getUsers = (currentPage: number, pageSize: number, term: string): ThunkType => {
+export const getUsers = (currentPage: number, pageSize: number, term: string, friend: string): ThunkType => {
     return async (dispatch) => {
         dispatch(actions.setCurrentPage(currentPage));
         dispatch(actions.toggleIsFetching(true));
         dispatch(actions.setFilterTerm(term));
-        let data = await usersApi.getUsers(currentPage, pageSize, term);
+        dispatch(actions.setFilterFriend(friend));
+        let data = await usersApi.getUsers(currentPage, pageSize, term, friend);
         dispatch(actions.toggleIsFetching(false));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setTotalCount(data.totalCount));
@@ -78,6 +81,7 @@ export interface InitialStateUsers {
     followingInProgress: number[] // array of users id
     filter: {
         term: string,
+        friend: string,
     },
 }
 
@@ -90,6 +94,7 @@ export const initialState: InitialStateUsers = {
     followingInProgress: [],
     filter: {
         term: '',
+        friend: '',
     },
 };
 
@@ -118,6 +123,9 @@ const usersReducer = (state = initialState, action: ActionTypes): InitialStateUs
         }
         case SET_FILTER_TERM: {
             return {...state, filter: {...state.filter, term: action.term}};
+        }
+        case SET_FILTER_FRIEND: {
+            return {...state, filter: {...state.filter, friend: action.friend}};
         }
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching};

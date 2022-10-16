@@ -2,34 +2,40 @@ import React from 'react';
 import {useForm} from 'react-hook-form';
 
 interface IProps {
-    onFilterChange: (term: string) => void
-    term: string
+    onFilterChange: (term: string, friend: string) => void;
+    filter: { term: string, friend: string };
 }
 
-const UsersFilterForm: React.FC<IProps> = ({onFilterChange, term}) => {
+const UsersFilterForm: React.FC<IProps> = ({onFilterChange, filter}) => {
 
     interface FormValues {
-        term: string
+        term: string;
+        friend: string;
     }
 
     const {
         register,
         handleSubmit,
-        reset,
-    } = useForm<FormValues>()
+    } = useForm<FormValues>();
 
     const onSubmit = (data: FormValues) => {
-        reset({})
-        onFilterChange(data.term);
-    }
+        onFilterChange(data.term, data.friend);
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <input
-                defaultValue={term}
+                defaultValue={filter.term}
                 placeholder={'search users'}
                 {...register('term')}
             />
+            <select
+                defaultValue={filter.friend}
+                {...register('friend')}>
+                <option value="">All users</option>
+                <option value="true">Followed users</option>
+                <option value="false">Not followed users</option>
+            </select>
             <button>find</button>
         </form>
     );
