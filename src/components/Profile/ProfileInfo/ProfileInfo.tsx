@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../Users/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
 import ProfileUserInfo from "./ProfileUserInfo/ProfileUserInfo";
-import {FormValues, IProfile} from "../../../redux/profileReducer";
+import {FormValues, IProfile, ThunkType} from "../../../redux/profileReducer";
 import {UseFormSetError} from "react-hook-form";
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
     isOwner: boolean
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
-    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => void
+    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => ThunkType
 }
 
 const ProfileInfo: React.FC<Props> = ({profile, status, updateStatus, isOwner, savePhoto, saveInfo}) => {

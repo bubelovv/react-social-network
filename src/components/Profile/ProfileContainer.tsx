@@ -7,7 +7,7 @@ import {
     getStatus,
     IProfile,
     saveInfo,
-    savePhoto,
+    savePhoto, ThunkType,
     updateStatus
 } from '../../redux/profileReducer';
 import {useParams} from 'react-router-dom';
@@ -29,7 +29,7 @@ interface MapDispatchProps {
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
     savePhoto: (file: File) => void
-    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => void
+    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => ThunkType
 }
 
 type Props = MapStateProps & MapDispatchProps

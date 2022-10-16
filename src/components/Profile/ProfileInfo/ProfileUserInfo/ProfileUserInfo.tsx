@@ -3,14 +3,14 @@ import s from '../ProfileInfo.module.css';
 import avatar from "../../../../assets/images/avatar.jpg";
 import AboutUserInfo from "./AboutUserInfo/AboutUserInfo";
 import AboutUserForm from "./AboutUserForm/AboutUserForm";
-import {FormValues, IProfile} from "../../../../redux/profileReducer";
+import {FormValues, IProfile, ThunkType} from "../../../../redux/profileReducer";
 import {UseFormSetError} from "react-hook-form";
 
 interface Props {
     profile: IProfile
     isOwner: boolean
     savePhoto: (file: File) => void
-    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => void
+    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => ThunkType
 }
 
 const ProfileUserInfo: React.FC<Props> = ({profile, isOwner, savePhoto, saveInfo}) => {

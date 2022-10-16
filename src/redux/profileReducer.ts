@@ -1,6 +1,6 @@
 import {ResultCode} from '../API/api';
 import {BaseThunkType, InferValueTypes, RootState} from "./reduxStore";
-import {FieldPath, UseFormSetError} from "react-hook-form";
+import {UseFormSetError} from "react-hook-form";
 import {profileApi} from "../API/profileApi";
 
 const ADD_POST = 'ADD-POST';
@@ -23,7 +23,7 @@ export const actions = {
     savePhotoSuccess: (photos: IPhotosProfile) => ({type: SAVE_PHOTO_SUCCESS, photos}) as const,
 }
 
-type ThunkType = BaseThunkType<ActionTypes>
+export type ThunkType = BaseThunkType<ActionTypes>
 
 export const getProfile = (userId: number | null): ThunkType => async (dispatch) => {
     if (userId !== null) {
@@ -63,6 +63,7 @@ export interface FormValues {
 export const saveInfo = (profile: FormValues, setError: UseFormSetError<FormValues>): ThunkType => {
     return async (dispatch, getState: () => RootState) => {
         let data = await profileApi.saveInfo(profile)
+
         if (data.resultCode === ResultCode.Success) {
             const userId = getState().auth.id
             await dispatch(getProfile(userId));
@@ -70,7 +71,8 @@ export const saveInfo = (profile: FormValues, setError: UseFormSetError<FormValu
             data.messages.forEach((message: string) => {
                 const name = message.slice(message.indexOf('>') + 1, message.indexOf(')'))
                 const mainName = name[0].toLowerCase() + name.slice(1)
-                setError(mainName as FieldPath<FormValues>, {type: 'server', message});
+
+                setError('contacts.' + mainName as keyof FormValues, {type: 'server', message});
             })
             return Promise.reject()
         }

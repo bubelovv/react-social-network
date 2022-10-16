@@ -1,13 +1,13 @@
 import React from 'react';
 import s from "./AboutUserForm.module.css";
 import {useForm, UseFormSetError} from 'react-hook-form';
-import {IContactsProfile, FormValues, IProfile} from "../../../../../redux/profileReducer";
+import {FormValues, IProfile, ThunkType} from "../../../../../redux/profileReducer";
 
 interface Props {
-    profile: IProfile                                       // | null
-    isOwner: boolean
-    goToEditMode: () => void
-    saveInfo: (formData: FormValues, setError: UseFormSetError<FormValues>) => void
+    profile: IProfile,
+    isOwner: boolean,
+    goToEditMode: () => void,
+    saveInfo: (formData: FormValues, setError: UseFormSetError<FormValues>) => ThunkType,
 }
 
 const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInfo}) => {
@@ -21,7 +21,7 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
         defaultValues: profile,
     });
 
-    let onSubmit = async (formData: FormValues, setError: UseFormSetError<FormValues>) => {    // ---------------- REFACTOR ---------------
+    let onSubmit = async (formData: FormValues, setError: UseFormSetError<FormValues>) => {
         await saveInfo(formData, setError)
         goToEditMode()
     };
@@ -65,21 +65,111 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
                 </div>
                 <div>CONTACTS:</div>
 
-                {Object.keys(profile.contacts).map((contact: any) => {
-                    return (
-                        <div key={contact} className={s.userInfoBlock}>
-                            <div className={s.contactName}>{contact as keyof IContactsProfile}:</div>
-                            <input onClick={() => clearErrors(contact)}  // see all form but need only contacts-form
-                                   {...register<any>('contacts.' + contact)}/>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'facebook'}:</div>
+                    <input onClick={() => clearErrors('contacts.facebook')}
+                           {...register('contacts.facebook')}/>
 
-                            {/*{errors[contact] && (*/}
-                            {/*    <div style={{color: 'red'}}>*/}
-                            {/*        {errors[contact].message || 'Errors'}*/}
-                            {/*    </div>*/}
-                            {/*)}*/}
+                    {errors.contacts?.facebook && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.facebook.message || 'Errors'}
                         </div>
-                    )
-                })}
+                    )}
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'github'}:</div>
+                    <input onClick={() => clearErrors('contacts.github')}
+                           {...register('contacts.github')}/>
+
+                    {errors.contacts?.github && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.github.message || 'Errors'}
+                        </div>
+                    )}
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'instagram'}:</div>
+                    <input onClick={() => clearErrors('contacts.instagram')}
+                           {...register('contacts.instagram')}/>
+
+                    {errors.contacts?.instagram && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.instagram.message || 'Errors'}
+                        </div>
+                    )}
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'mainLink'}:</div>
+                    <input onClick={() => clearErrors('contacts.mainLink')}
+                           {...register('contacts.mainLink')}/>
+
+                    {errors.contacts?.mainLink && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.mainLink.message || 'Errors'}
+                        </div>
+                    )}
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'twitter'}:</div>
+                    <input onClick={() => clearErrors('contacts.twitter')}
+                           {...register('contacts.twitter')}/>
+
+                    {errors.contacts?.twitter && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.twitter.message || 'Errors'}
+                        </div>
+                    )}
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'vk'}:</div>
+                    <input onClick={() => clearErrors('contacts.vk')}
+                           {...register('contacts.vk')}/>
+
+                    {errors.contacts?.vk && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.vk.message || 'Errors'}
+                        </div>
+                    )}
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'website'}:</div>
+                    <input onClick={() => clearErrors('contacts.website')}
+                           {...register('contacts.website')}/>
+
+                    {errors.contacts?.website && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.website.message || 'Errors'}
+                        </div>
+                    )}
+                </div>
+                <div className={s.userInfoBlock}>
+                    <div className={s.contactName}>{'youtube'}:</div>
+                    <input onClick={() => clearErrors('contacts.youtube')}
+                           {...register('contacts.youtube')}/>
+
+                    {errors.contacts?.youtube && (
+                        <div style={{color: 'red'}}>
+                            {errors.contacts?.youtube.message || 'Errors'}
+                        </div>
+                    )}
+                </div>
+
+                {/*todo: create something solution for it*/}
+                {/*{Object.keys(profile.contacts).map((contact) => {*/}
+                {/*    return (*/}
+                {/*        <div key={contact} className={s.userInfoBlock}>*/}
+                {/*            <div className={s.contactName}>{contact as keyof FormValues}:</div>*/}
+                {/*            <input onClick={() => clearErrors('contacts.' + contact as keyof FormValues)}*/}
+                {/*                   {...register('contacts.' + contact as keyof FormValues)}/>*/}
+
+                {/*            {errors?.contacts && errors?.contacts[contact] && (*/}
+                {/*                <div style={{color: 'red'}}>*/}
+                {/*                    {errors?.contacts[contact] && errors.contacts[contact]?.message }*/}
+                {/*                </div>*/}
+                {/*            )}*/}
+                {/*        </div>*/}
+                {/*    )*/}
+                {/*})}*/}
             </div>
 
             {isOwner && (
@@ -88,7 +178,7 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
                         <button type="submit">save user's information</button>
                     </div>
                     <div className={s.btnChange}>
-                        <button onClick={goToEditMode}>X close change area X</button>
+                        <button onClick={goToEditMode}>go out edit mode</button>
                     </div>
                 </>
             )}
