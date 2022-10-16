@@ -111,7 +111,7 @@ export interface IProfile {
     photos: IPhotosProfile
 }
 
-interface InitialStateProfile {
+export interface InitialStateProfile {
     posts: IPost[];
     profile: IProfile | null;
     status: string;

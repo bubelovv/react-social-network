@@ -73,7 +73,7 @@ export interface InitialStateUsers {
     isFetching: boolean
     followingInProgress: number[] // array of users id
 }
-const initialState: InitialStateUsers = {
+export const initialState: InitialStateUsers = {
     users: [],
     pageSize: 5,
     totalCount: 0,
