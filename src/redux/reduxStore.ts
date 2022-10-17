@@ -5,7 +5,8 @@ import sidebarReducer from "./sidebarReducer";
 import usersReducer from "./usersReducer";
 import authReducer from "./authReducer";
 import appReducer from "./appReducer";
-import thunkMiddleware, {ThunkAction} from "redux-thunk";
+import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -17,6 +18,13 @@ const rootReducer = combineReducers({
 });
 
 export type RootState = ReturnType<typeof rootReducer>
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+type AppAction = ReturnType<typeof store.dispatch>;
+export type AppDispatch = ThunkDispatch<RootState, any, AppAction>;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+// export type AppDispatch = typeof store.dispatch;
+// export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
