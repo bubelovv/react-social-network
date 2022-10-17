@@ -7,7 +7,7 @@ import store, {RootState} from "./redux/reduxStore";
 
 // --------- my custom components ---------
 import Preloader from "./components/Users/Preloader/Preloader";
-import HeaderContainer from './components/Header/HeaderContainer';
+import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 // ----------------------------------------
 
@@ -39,7 +39,7 @@ export const App: React.FC<PropsType> = ({initializeApp, initialized}) => {
 
     return (
         <div className="app-wrapper">
-            <HeaderContainer/>
+            <Header/>
             <Navbar/>
             {!initialized ?
                 <Preloader/> :
