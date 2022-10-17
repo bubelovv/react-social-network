@@ -13,7 +13,7 @@ import Navbar from './components/Navbar/Navbar';
 
 // ----------- lazy-components ------------
 const ProfileContainer = lazy(() => import('./components/Profile/ProfileContainer'));
-const DialogsContainer = lazy(() => import('./components/Dialogs/DialogsContainer'));
+const Dialogs = lazy(() => import('./components/Dialogs/Dialogs'));
 const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
 const News = lazy(() => import('./components/News/News'));
 const Music = lazy(() => import('./components/Music/Music'));
@@ -49,7 +49,7 @@ export const App: React.FC<PropsType> = ({initializeApp, initialized}) => {
                             <Route path={'/profile/:userId'} element={<ProfileContainer/>}/>
                             <Route path='/profile' element={<ProfileContainer/>}/>
                             <Route path='/' element={<ProfileContainer/>}/>
-                            <Route path='/dialogs/*' element={<DialogsContainer/>}/>
+                            <Route path='/dialogs/*' element={<Dialogs/>}/>
                             <Route path='/users' element={<UsersContainer/>}/>
                             <Route path='/news' element={<News/>}/>
                             <Route path='/music' element={<Music/>}/>

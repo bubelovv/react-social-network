@@ -1,19 +1,22 @@
 import React from 'react';
 import s from './Dialogs.module.css';
-import Message from "./Message/Message";
-import DialogItem from "./DialogItem/DialogItem";
-import NewMessageForm from "./NewMessageForm";
-import {DialogType, MessageType} from "../../redux/dialogsReducer";
+import Message from './Message/Message';
+import DialogItem from './DialogItem/DialogItem';
+import NewMessageForm from './NewMessageForm';
+import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
+import {actions} from '../../redux/dialogsReducer';
 
-interface Props {
-    dialogs: DialogType[]
-    messages: MessageType[]
-    addMessage: (newMessageText: string) => void
-}
+const Dialogs: React.FC = () => {
+    const dialogs = useAppSelector(state => state.dialogsPage.dialogs);
+    const messages = useAppSelector(state => state.dialogsPage.messages);
+    const dispatch = useAppDispatch();
 
-const Dialogs: React.FC<Props>  = ({dialogs, messages, addMessage}) => {
+    const addMessage = (newMessageText: string) => {
+        dispatch(actions.addMessage(newMessageText))
+    }
+
     const dialogsElements = dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
-    const messagesElements = messages.map(message => <Message key={message.id} message={message}/>);
+    const messagesElements = messages.map(message => <Message key={message.id} message={message.message}/>);
 
     return (
         <div className={s.dialogs}>

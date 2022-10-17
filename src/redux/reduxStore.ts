@@ -17,6 +17,12 @@ const rootReducer = combineReducers({
     app: appReducer,
 });
 
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
 export type RootState = ReturnType<typeof rootReducer>
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -25,13 +31,6 @@ export type AppDispatch = ThunkDispatch<RootState, any, AppAction>;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 // export type AppDispatch = typeof store.dispatch;
 // export const useAppDispatch = () => useDispatch<AppDispatch>();
-
-// @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunkMiddleware)
-));
 
 export type InferValueTypes<T> = T extends {[key: string]: infer U} ? U : never
 

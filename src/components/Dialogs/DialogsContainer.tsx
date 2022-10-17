@@ -1,29 +1,12 @@
 import React from 'react';
-import {actions, DialogType, MessageType} from '../../redux/dialogsReducer';
-import Dialogs from './Dialogs';
-import {connect} from 'react-redux';
-import {compose} from 'redux';
-import {RootState} from "../../redux/reduxStore";
+import Users from '../Users/Users';
 
-interface MapStateProps {
-    dialogs: DialogType[]
-    messages: MessageType[]
-}
+// I'll need in this component in the future, when I will send a request on server.
 
-interface MapDispatchProps {
-    addMessage: (newMessageText: string) => void
-}
-
-const mapStateToProps = (state: RootState): MapStateProps => {
-    return {
-        dialogs: state.dialogsPage.dialogs,
-        messages: state.dialogsPage.messages,
-    }
+const DialogsContainer = () => {
+    return (
+        <Users/>
+    );
 };
 
-export default compose(
-    connect<MapStateProps, MapDispatchProps, {}, RootState>(mapStateToProps, {
-        addMessage: actions.addMessage
-    }),
-    // withAuthRedirect,
-)(Dialogs)
+export default DialogsContainer;
