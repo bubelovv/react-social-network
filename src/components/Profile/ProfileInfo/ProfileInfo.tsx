@@ -1,21 +1,18 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import Preloader from "../../Users/Preloader/Preloader";
-import ProfileStatusWithHooks from "./ProfileStatus/ProfileStatusWithHooks";
-import ProfileUserInfo from "./ProfileUserInfo/ProfileUserInfo";
-import {FormValues, IProfile, ThunkType} from "../../../redux/profileReducer";
-import {UseFormSetError} from "react-hook-form";
+import Preloader from '../../Users/Preloader/Preloader';
+import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
+import ProfileUserInfo from './ProfileUserInfo/ProfileUserInfo';
+import {useAppSelector} from '../../../redux/reduxStore';
 
 interface Props {
-    profile: IProfile | null
-    status: string
-    isOwner: boolean
-    updateStatus: (status: string) => void
-    savePhoto: (file: File) => void
-    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => ThunkType
+    isOwner: boolean;
 }
 
-const ProfileInfo: React.FC<Props> = ({profile, status, updateStatus, isOwner, savePhoto, saveInfo}) => {
+const ProfileInfo: React.FC<Props> = ({isOwner}) => {
+    const profile = useAppSelector(state => state.profilePage.profile);
+    const status = useAppSelector(state => state.profilePage.status);
+
     return (
         profile === null ? <Preloader/> :
             <div className={s.profileInfo}>
@@ -23,16 +20,11 @@ const ProfileInfo: React.FC<Props> = ({profile, status, updateStatus, isOwner, s
                 {/*    <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>*/}
                 {/*</div>*/}
 
-                <ProfileUserInfo profile={profile}
-                                 isOwner={isOwner}
-                                 savePhoto={savePhoto}
-                                 saveInfo={saveInfo}/>
+                <ProfileUserInfo isOwner={isOwner} profile={profile}/>
 
-                <ProfileStatusWithHooks isOwner={isOwner}
-                                        status={status}
-                                        updateStatus={updateStatus}/>
+                <ProfileStatusWithHooks isOwner={isOwner} status={status}/>
             </div>
-    )
-}
+    );
+};
 
-export default ProfileInfo
+export default ProfileInfo;

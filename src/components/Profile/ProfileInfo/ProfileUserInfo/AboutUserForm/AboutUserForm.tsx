@@ -1,16 +1,17 @@
 import React from 'react';
-import s from "./AboutUserForm.module.css";
+import s from './AboutUserForm.module.css';
 import {useForm, UseFormSetError} from 'react-hook-form';
-import {FormValues, IProfile, ThunkType} from "../../../../../redux/profileReducer";
+import {FormValues, IProfile, saveInfo} from '../../../../../redux/profileReducer';
+import {useAppDispatch} from '../../../../../redux/reduxStore';
 
 interface Props {
     profile: IProfile,
-    isOwner: boolean,
     goToEditMode: () => void,
-    saveInfo: (formData: FormValues, setError: UseFormSetError<FormValues>) => ThunkType,
 }
 
-const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInfo}) => {
+const AboutUserForm: React.FC<Props> = ({profile, goToEditMode}) => {
+    const dispatch = useAppDispatch();
+
     let {
         register,
         handleSubmit,
@@ -22,8 +23,8 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
     });
 
     let onSubmit = async (formData: FormValues, setError: UseFormSetError<FormValues>) => {
-        await saveInfo(formData, setError)
-        goToEditMode()
+        await dispatch(saveInfo(formData, setError));
+        goToEditMode();
     };
 
     return (
@@ -172,16 +173,13 @@ const AboutUserForm: React.FC<Props> = ({profile, isOwner, goToEditMode, saveInf
                 {/*})}*/}
             </div>
 
-            {isOwner && (
-                <>
-                    <div className={s.btnChange}>
-                        <button type="submit">save user's information</button>
-                    </div>
-                    <div className={s.btnChange}>
-                        <button onClick={goToEditMode}>go out edit mode</button>
-                    </div>
-                </>
-            )}
+            <div className={s.btnChange}>
+                <button type="submit">save user's information</button>
+            </div>
+            <div className={s.btnChange}>
+                <button onClick={goToEditMode}>go out edit mode</button>
+            </div>
+
         </form>
     );
 };

@@ -1,13 +1,13 @@
 import React from 'react';
-import s from "../../ProfileInfo.module.css";
-import ProfileSocialLinks from "./ProfileSocialLinks/ProfileSocialLinks";
-import Button from "../../../../../UI/Button/Button";
-import {IProfile} from "../../../../../redux/profileReducer";
+import s from '../../ProfileInfo.module.css';
+import ProfileSocialLinks from './ProfileSocialLinks/ProfileSocialLinks';
+import Button from '../../../../../UI/Button/Button';
+import {IProfile} from '../../../../../redux/profileReducer';
 
 interface Props {
-    profile: IProfile                                       // | null
-    isOwner: boolean
-    goToEditMode: () => void
+    profile: IProfile;
+    isOwner: boolean;
+    goToEditMode: () => void;
 }
 
 const AboutUserInfo: React.FC<Props> = ({profile, isOwner, goToEditMode}) => {

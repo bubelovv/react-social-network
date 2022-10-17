@@ -1,76 +1,29 @@
 import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
 import Profile from './Profile';
-import {
-    FormValues,
-    getProfile,
-    getStatus,
-    IProfile,
-    saveInfo,
-    savePhoto, ThunkType,
-    updateStatus
-} from '../../redux/profileReducer';
+import {getProfile, getStatus} from '../../redux/profileReducer';
 import {useParams} from 'react-router-dom';
-import {compose} from 'redux';
-// import withAuthRedirect from "../../HOC/withAuthRedirect";
-import {getIsAuth} from "../../redux/auth-selectors";
-import {RootState} from "../../redux/reduxStore";
-import {UseFormSetError} from "react-hook-form";
+import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
 
-interface MapStateProps {
-    profile: IProfile | null
-    status: string
-    authorisedUserId: number | null
-    isAuth: boolean
-}
 
-interface MapDispatchProps {
-    getProfile: (userId: number) => void
-    getStatus: (userId: number) => void
-    updateStatus: (status: string) => void
-    savePhoto: (file: File) => void
-    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => ThunkType
-}
+const ProfileContainer: React.FC = () => {
+    const authorisedUserId = useAppSelector(state => state.auth.id);
+    const dispatch = useAppDispatch();
 
-type Props = MapStateProps & MapDispatchProps
-
-const ProfileContainer: React.FC<Props> = (props) => {
+    //todo: refactor <Navigate/>
     let params = useParams();
     let userId = Number(params.userId);
     if (!userId) {
-        if (typeof props.authorisedUserId === 'number') {
-            userId = props.authorisedUserId;            //create redirect with helps JSX-Component and react-hooks
+        if (typeof authorisedUserId === 'number') {
+            userId = authorisedUserId;
         }
     }
 
     useEffect(() => {
-        props.getProfile(userId);
-        props.getStatus(userId);
-    }, [params])
+        dispatch<void>(getProfile(userId));
+        dispatch<void>(getStatus(userId));
+    }, [params]);
 
-    return (
-        <Profile
-            isOwner={userId === props.authorisedUserId}
-            profile={props.profile}
-            status={props.status}
-            updateStatus={props.updateStatus}
-            savePhoto={props.savePhoto}
-            saveInfo={props.saveInfo}
-        />
-    );
-}
+    return <Profile isOwner={userId === authorisedUserId}/>;
+};
 
-const mapStateToProps = (state: RootState): MapStateProps => ({
-    profile: state.profilePage.profile,
-    status: state.profilePage.status,
-    authorisedUserId: state.auth.id,
-    isAuth: getIsAuth(state),
-});
-
-export default compose<React.FC>(
-    connect<MapStateProps,
-        MapDispatchProps,
-        undefined,
-        RootState>(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto, saveInfo}),
-    // withAuthRedirect,
-)(ProfileContainer);
+export default ProfileContainer;

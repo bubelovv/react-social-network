@@ -2,31 +2,19 @@ import React from 'react';
 // import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
-import {FormValues, IProfile, ThunkType} from "../../redux/profileReducer";
-import {UseFormSetError} from "react-hook-form";
 
 interface Props {
-    profile: IProfile | null
-    status: string
-    isOwner: boolean
-    updateStatus: (status: string) => void
-    savePhoto: (file: File) => void
-    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => ThunkType
+    isOwner: boolean;
 }
 
-const Profile: React.FC<Props> = ({profile, status, updateStatus, isOwner, savePhoto, saveInfo}) => {
+const Profile: React.FC<Props> = ({isOwner}) => {
 
     return (
         <div>
-            <ProfileInfo profile={profile}
-                         status={status}
-                         updateStatus={updateStatus}
-                         isOwner={isOwner}
-                         savePhoto={savePhoto}
-                         saveInfo={saveInfo}/>
+            <ProfileInfo isOwner={isOwner}/>
             <MyPostsContainer/>
         </div>
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;

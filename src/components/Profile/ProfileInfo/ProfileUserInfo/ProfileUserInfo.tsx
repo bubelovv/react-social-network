@@ -1,39 +1,38 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import s from '../ProfileInfo.module.css';
-import avatar from "../../../../assets/images/avatar.jpg";
-import AboutUserInfo from "./AboutUserInfo/AboutUserInfo";
-import AboutUserForm from "./AboutUserForm/AboutUserForm";
-import {FormValues, IProfile, ThunkType} from "../../../../redux/profileReducer";
-import {UseFormSetError} from "react-hook-form";
+import avatar from '../../../../assets/images/avatar.jpg';
+import AboutUserInfo from './AboutUserInfo/AboutUserInfo';
+import AboutUserForm from './AboutUserForm/AboutUserForm';
+import {IProfile, savePhoto} from '../../../../redux/profileReducer';
+import {useAppDispatch} from '../../../../redux/reduxStore';
 
 interface Props {
-    profile: IProfile
-    isOwner: boolean
-    savePhoto: (file: File) => void
-    saveInfo: (profile: FormValues, setError: UseFormSetError<FormValues>) => ThunkType
+    profile: IProfile;
+    isOwner: boolean;
 }
 
-const ProfileUserInfo: React.FC<Props> = ({profile, isOwner, savePhoto, saveInfo}) => {
+const ProfileUserInfo: React.FC<Props> = ({profile, isOwner}) => {
+    const dispatch = useAppDispatch();
 
     const mainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const files = e.target.files
+        const files = e.target.files;
         if (files !== null) {
-            savePhoto(files[0])
+            dispatch<void>(savePhoto(files[0]));
         }
-    }
+    };
 
-    const [editMode, setEditMode] = useState(false)
+    const [editMode, setEditMode] = useState(false);
 
     return (
         <div className={s.aboutMe}>
 
             <div className={s.profilePhoto}>
-                <img src={profile.photos.large || avatar} alt='bgc'/>
+                <img src={profile.photos.large || avatar} alt="bgc"/>
 
                 {isOwner && (
                     <label htmlFor="file-upload" className={s.customInputFile}>
                         Change Photo
-                        <input hidden id="file-upload" type={"file"} onChange={mainPhotoSelected}/>
+                        <input hidden id="file-upload" type={'file'} onChange={mainPhotoSelected}/>
                     </label>
                 )}
             </div>
@@ -41,16 +40,14 @@ const ProfileUserInfo: React.FC<Props> = ({profile, isOwner, savePhoto, saveInfo
             <div className={s.profileInfoWrap}>
                 {editMode
                     ? <AboutUserForm profile={profile}
-                                     isOwner={isOwner}
-                                     goToEditMode={() => setEditMode(false)}
-                                     saveInfo={saveInfo}/>
+                                     goToEditMode={() => setEditMode(false)}/>
                     : <AboutUserInfo profile={profile}
                                      isOwner={isOwner}
                                      goToEditMode={() => setEditMode(true)}/>
                 }
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default ProfileUserInfo;
