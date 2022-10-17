@@ -1,5 +1,6 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import styles from './UsersFilterForm.module.css';
 
 interface IProps {
     onFilterChange: (term: string, friend: string) => void;
@@ -23,20 +24,21 @@ const UsersFilterForm: React.FC<IProps> = ({onFilterChange, filter}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <input
+        <form  className={styles.filterForm}
+            onSubmit={handleSubmit(onSubmit)}>
+            <input className={styles.filterInput}
                 defaultValue={filter.term}
                 placeholder={'search users'}
                 {...register('term')}
             />
-            <select
+            <select className={styles.filterSelect}
                 defaultValue={filter.friend}
                 {...register('friend')}>
                 <option value="">All users</option>
                 <option value="true">Followed users</option>
                 <option value="false">Not followed users</option>
             </select>
-            <button>find</button>
+            <button className={styles.filterButton}>find</button>
         </form>
     );
 };
