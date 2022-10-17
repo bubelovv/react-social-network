@@ -18,7 +18,7 @@ const UsersContainer = lazy(() => import('./components/Users/UsersContainer'));
 const News = lazy(() => import('./components/News/News'));
 const Music = lazy(() => import('./components/Music/Music'));
 const Settings = lazy(() => import('./components/Settings/Settings'));
-const Login = lazy(() => import('./components/Login/LoginContainer'));
+const Login = lazy(() => import('./components/Login/Login'));
 // ----------------------------------------
 
 interface IMapStateProps {

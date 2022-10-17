@@ -1,33 +1,41 @@
-import React from 'react'
-import {useForm, UseFormSetError} from 'react-hook-form'
-import s from './Login.module.css'
-import cn from "classnames";
+import React from 'react';
+import {useForm, UseFormSetError} from 'react-hook-form';
+import s from './Login.module.css';
+import cn from 'classnames';
+import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
+import {Navigate} from 'react-router-dom';
+import {login} from '../../redux/authReducer';
 
 export interface LoginFormValues {
-    email: string
-    password: string
-    checkbox: boolean
-    captcha: string | null
+    email: string;
+    password: string;
+    checkbox: boolean;
+    captcha: string | null;
 }
 
-interface PropsLoginForm {
-    onSubmit: (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => void
-    urlCaptcha: string | null
-}
+const Login: React.FC = () => {
+    const urlCaptcha = useAppSelector(state => state.auth.urlCaptcha);
+    const isAuth = useAppSelector(state => state.auth.isAuth);
+    const dispatch = useAppDispatch();
 
-const Login: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
     const {
         register,
         handleSubmit,
         setError,
         formState: {errors, isValid, touchedFields},
-    } = useForm<LoginFormValues>({mode: 'onChange'})
+    } = useForm<LoginFormValues>({mode: 'onChange'});
+
+    if (isAuth) return <Navigate to={'/profile'}></Navigate>;
 
     const inputCls = (inputName: keyof LoginFormValues) => cn(
         s.field,
         {[s.fieldValid]: touchedFields[inputName] && !errors[inputName]},
         {[s.fieldInvalid]: touchedFields[inputName] && errors[inputName]}
-    )
+    );
+
+    const onSubmit = (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => {
+        dispatch<void>(login(data, setError));
+    };
 
     return (
         <div className={s.formWrap}>
@@ -42,7 +50,7 @@ const Login: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
                     placeholder={'email'}
                     className={inputCls('email')}
                     {...register('email', {
-                        required: 'This field id required',
+                        required: 'This field is required',
                         minLength: {value: 5, message: 'Min length is 5 symbols'},
                         pattern: {value: /^\S+@\S+$/i, message: 'Enter the correct Email'},
                     })}
@@ -55,7 +63,7 @@ const Login: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
                     placeholder={'password'}
                     className={inputCls('password')}
                     {...register('password', {
-                        required: 'This field id required',
+                        required: 'This field is required',
                         minLength: {value: 4, message: 'Min length is 5 symbols'},
                     })}
                 />
@@ -65,22 +73,20 @@ const Login: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
                     <input {...register('checkbox')} type={'checkbox'}/>
                 </div>
 
-                {
-                    urlCaptcha !== null && (
+                {urlCaptcha !== null && (
+                    <div>
                         <div>
-                            <div>
-                                <img src={urlCaptcha} alt={'captcha'}/>
-                            </div>
-                            <div>
-                                <input
-                                    placeholder={'captcha'}
-                                    className={inputCls('captcha')}
-                                    {...register('captcha')}
-                                />
-                            </div>
+                            <img src={urlCaptcha} alt={'captcha'}/>
                         </div>
-                    )
-                }
+                        <div>
+                            <input
+                                placeholder={'captcha'}
+                                className={inputCls('captcha')}
+                                {...register('captcha')}
+                            />
+                        </div>
+                    </div>
+                )}
 
                 <div>
                     <button disabled={!isValid} className={s.btn}>
@@ -90,7 +96,7 @@ const Login: React.FC<PropsLoginForm> = ({onSubmit, urlCaptcha}) => {
 
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;
