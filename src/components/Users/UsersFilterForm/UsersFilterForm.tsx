@@ -24,19 +24,19 @@ const UsersFilterForm: React.FC<IProps> = ({onFilterChange, filter}) => {
     };
 
     return (
-        <form  className={styles.filterForm}
-            onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.filterForm}
+              onSubmit={handleSubmit(onSubmit)}>
             <input className={styles.filterInput}
-                defaultValue={filter.term}
-                placeholder={'search users'}
-                {...register('term')}
+                   defaultValue={filter.term}
+                   placeholder={'search users'}
+                   {...register('term')}
             />
             <select className={styles.filterSelect}
-                defaultValue={filter.friend}
-                {...register('friend')}>
-                <option value="">All users</option>
-                <option value="true">Followed users</option>
-                <option value="false">Not followed users</option>
+                    defaultValue={filter.friend}
+                    {...register('friend')}>
+                <option value=''>All users</option>
+                <option value='true'>Followed users</option>
+                <option value='false'>Not followed users</option>
             </select>
             <button className={styles.filterButton}>find</button>
         </form>
