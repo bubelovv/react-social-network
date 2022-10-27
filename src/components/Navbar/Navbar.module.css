@@ -1,14 +1,30 @@
 .nav {
-  grid-area: nav;
-  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  width: 150px;
   padding: 10px;
+  border: 1px solid teal;
+  border-radius: 5px;
+  background-color: #ffffff;
 }
 
-nav a {
-  display: block;
-  text-decoration: none;
+.nav a {
   margin-bottom: 5px;
-  color: aliceblue;
+  padding: 1px 5px 3px;
+  border-radius: 4px;
+  color: teal;
+  font-size: 16px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: all linear 0.1s;
+}
+
+.nav a:last-child {
+  margin-bottom: 0;
+}
+
+.nav a:hover {
+  background-color: rgba(0, 128, 128, 0.2);
 }
 
 .active {

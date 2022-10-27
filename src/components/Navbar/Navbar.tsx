@@ -8,24 +8,12 @@ const setClass = (navData: any) => navData.isActive ? s.active : '';
 const Navbar = () => {
     return (
         <nav className={s.nav}>
-            <div>
                 <NavLink className={setClass} to="/profile">Profile</NavLink>
-            </div>
-            <div>
                 <NavLink className={setClass} to="/dialogs">Dialogs</NavLink>
-            </div>
-            <div>
                 <NavLink className={setClass} to="/users">Users</NavLink>
-            </div>
-            <div>
                 <NavLink className={setClass} to="/news">News</NavLink>
-            </div>
-            <div>
                 <NavLink className={setClass} to="/music">Music</NavLink>
-            </div>
-            <div>
                 <NavLink className={setClass} to="/settings">Settings</NavLink>
-            </div>
             {/*<FriendsContainer/>*/}
         </nav>
     )
