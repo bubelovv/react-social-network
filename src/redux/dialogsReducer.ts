@@ -1,4 +1,4 @@
-import {InferValueTypes} from "./reduxStore";
+import {InferValueTypes} from './reduxStore';
 
 const ADD_MESSAGE = 'ADD_MESSAGE';
 
@@ -7,12 +7,12 @@ type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 // type ThunkType = BaseThunkType<ActionTypes>
 
 export const actions = {
-    addMessage: (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText}),
-}
+    addMessage: (name: string, newMessageText: string) => ({type: ADD_MESSAGE, name, newMessageText}),
+};
 
-let avatar: string = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyJTIwZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=300&q=60'
+const avatar: string = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyJTIwZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=300&q=60';
 
-let initialState = {
+const initialState = {
     dialogs: [
         {id: 1, name: 'Bubelov', avatar: avatar},
         {id: 2, name: 'Darinka', avatar: avatar},
@@ -21,21 +21,22 @@ let initialState = {
         {id: 5, name: 'Ilysha', avatar: avatar},
     ],
     messages: [
-        {id: 1, message: 'I will work in it-industry'},
-        {id: 2, message: 'I wait you so much, Lybimka'},
-        {id: 3, message: 'I do not know, we will go to the ocean or not...'},
+        {id: 1, name: 'Aleksey', message: 'I will work in it-industry'},
+        {id: 2, name: 'Aleksey', message: 'I wait you so much, Lybimka'},
+        {id: 3, name: 'Aleksey', message: 'I do not know, we will go to the ocean or not...'},
     ],
-}
+};
 
 export interface DialogType {
-    id: number;
-    name: string;
-    avatar: string
+    id: number,
+    name: string,
+    avatar: string,
 }
 
 export interface MessageType {
     id: number,
-    message: string
+    name: string,
+    message: string,
 }
 
 export interface InitialState {
@@ -46,17 +47,17 @@ export interface InitialState {
 const dialogsReducer = (state = initialState, action: ActionTypes): InitialState => {
     switch (action.type) {
         case ADD_MESSAGE: {
-            let message = action.newMessageText
+            let message = action.newMessageText;
             if (message.trim() === '') return state;
 
-            return {
+            return <InitialState>{
                 ...state,
-                messages: [...state.messages, {id: state.messages.length, message: message}],
-            }
+                messages: [...state.messages, {id: state.messages.length, name: action.name, message: message}],
+            };
         }
         default:
             return state;
     }
-}
+};
 
 export default dialogsReducer;

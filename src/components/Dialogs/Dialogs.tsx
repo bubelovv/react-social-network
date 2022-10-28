@@ -9,18 +9,19 @@ import {actions} from '../../redux/dialogsReducer';
 const Dialogs: React.FC = () => {
     const dialogs = useAppSelector(state => state.dialogsPage.dialogs);
     const messages = useAppSelector(state => state.dialogsPage.messages);
+    const name = useAppSelector(state => state.auth.login) as string;
     const dispatch = useAppDispatch();
 
     const addMessage = (newMessageText: string) => {
-        dispatch(actions.addMessage(newMessageText))
+        dispatch(actions.addMessage(name, newMessageText))
     }
 
     const dialogsElements = dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
-    const messagesElements = messages.map(message => <Message key={message.id} message={message.message}/>);
+    const messagesElements = messages.map(message => <Message key={message.id} name={message.name} message={message.message}/>);
 
     return (
-        <div className={s.dialogs}>
-            <div className={s.dialogItems}>
+        <div className={s.dialogsContainer}>
+            <div className={s.dialogs}>
                 {dialogsElements}
             </div>
             <div className={s.messages}>

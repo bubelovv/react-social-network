@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import {useForm} from 'react-hook-form';
-import cn from "classnames";
+import cn from 'classnames';
 
 interface IProps {
-    addMessage: (newMessageText: string) => void
+    addMessage: (newMessageText: string) => void;
 }
 
 interface IFormValues {
@@ -24,10 +24,10 @@ const NewMessageForm: React.FC<IProps> = ({addMessage}) => {
         reset();
     };
 
-    const textareaCls = cn(s.textarea, {[s.textareaValid]: touchedFields.newMessageText && isValid})
+    const textareaCls = cn(s.textarea, {[s.textareaValid]: touchedFields.newMessageText && isValid});
 
     return (
-        <form className={s.add} onSubmit={handleSubmit(onSubmit)}>
+        <form className={s.newMsgForm} onSubmit={handleSubmit(onSubmit)}>
 			<textarea
                 className={textareaCls}
                 placeholder="Enter your message..."
@@ -36,7 +36,7 @@ const NewMessageForm: React.FC<IProps> = ({addMessage}) => {
                     minLength: 1,
                 })}
             />
-            <button disabled={!isValid}>Add</button>
+            <button disabled={!isValid}>{'>>>'}</button>
         </form>
     );
 };
