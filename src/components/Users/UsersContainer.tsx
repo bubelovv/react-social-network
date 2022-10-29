@@ -8,7 +8,8 @@ const UsersContainer: React.FC = () => {
 
     return <>
         {isFetching ?
-            <Preloader/> : null}
+            <Preloader/>
+             : null}
         <Users/>
     </>;
 };

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styles from './Users.module.css';
-import Pagination from './Pagination/Pagination';
+import Pagination from '../../UI/Pagination/Pagination';
 import User from './User/User';
 import UsersFilterForm from './UsersFilterForm/UsersFilterForm';
 import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
