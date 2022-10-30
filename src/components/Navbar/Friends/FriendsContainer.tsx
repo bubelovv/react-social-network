@@ -1,8 +1,8 @@
 import React from 'react';
 import Friends from "./Friends";
 import {connect} from "react-redux";
-import {RootState} from "../../../redux/reduxStore";
-import {IFriend} from "../../../redux/sidebarReducer";
+import {RootState} from "../../../store/store";
+import {IFriend} from "../../../store/sidebarReducer";
 
 interface MapStateProps {
     friends: IFriend[]

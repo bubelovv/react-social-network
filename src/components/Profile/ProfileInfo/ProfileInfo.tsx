@@ -3,7 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from '../../Users/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 import ProfileUserInfo from './ProfileUserInfo/ProfileUserInfo';
-import {useAppSelector} from '../../../redux/reduxStore';
+import {useAppSelector} from '../../../store/store';
 
 interface Props {
     isOwner: boolean;

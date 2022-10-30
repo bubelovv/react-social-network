@@ -2,7 +2,7 @@ import React from 'react';
 import s from '../../ProfileInfo.module.css';
 import ProfileSocialLinks from './ProfileSocialLinks/ProfileSocialLinks';
 import Button from '../../../../../UI/Button/Button';
-import {IProfile} from '../../../../../redux/profileReducer';
+import {IProfile} from '../../../../../store/profileReducer';
 
 interface Props {
     profile: IProfile;

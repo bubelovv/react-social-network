@@ -2,8 +2,8 @@ import React from 'react';
 import s from './Header.module.css';
 import {NavLink} from 'react-router-dom';
 import logo from '../../assets/images/icons8-internet-64.png';
-import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
-import {logout} from '../../redux/authReducer';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {logout} from '../../store/authReducer';
 
 const Header: React.FC = () => {
     const login = useAppSelector(state => state.auth.login);

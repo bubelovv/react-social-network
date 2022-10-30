@@ -2,9 +2,9 @@ import React from 'react';
 import {useForm, UseFormSetError} from 'react-hook-form';
 import s from './Login.module.css';
 import cn from 'classnames';
-import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 import {Navigate} from 'react-router-dom';
-import {login} from '../../redux/authReducer';
+import {login} from '../../store/authReducer';
 
 export interface LoginFormValues {
     email: string;

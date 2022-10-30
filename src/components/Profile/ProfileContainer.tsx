@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import Profile from './Profile';
-import {getProfile, getStatus} from '../../redux/profileReducer';
+import {getProfile, getStatus} from '../../store/profileReducer';
 import {useParams} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
+import {useAppDispatch, useAppSelector} from '../../store/store';
 
 
 const ProfileContainer: React.FC = () => {

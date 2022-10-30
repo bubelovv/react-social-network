@@ -1,5 +1,5 @@
 import {ResultCode} from '../API/api';
-import {BaseThunkType, InferValueTypes, RootState} from "./reduxStore";
+import {BaseThunkType, InferValueTypes, RootState} from "./store";
 import {UseFormSetError} from "react-hook-form";
 import {profileApi} from "../API/profileApi";
 

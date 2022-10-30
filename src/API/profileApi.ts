@@ -1,4 +1,4 @@
-import {FormValues, IProfile, IPhotosProfile} from "../redux/profileReducer";
+import {FormValues, IProfile, IPhotosProfile} from "../store/profileReducer";
 import {IDefaultResponse, instance} from "./api";
 
 interface IResponseDataPhotos {

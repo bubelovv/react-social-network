@@ -1,8 +1,8 @@
 import React, {lazy, Suspense, useEffect} from 'react';
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
-import {initializeApp} from './redux/appReducer';
-import {useAppDispatch, useAppSelector} from './redux/reduxStore';
+import {initializeApp} from './store/appReducer';
+import {useAppDispatch, useAppSelector} from './store/store';
 
 // --------- my custom components ---------
 import Preloader from './components/Users/Preloader/Preloader';

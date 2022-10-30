@@ -1,4 +1,4 @@
-import {IUser} from "../redux/usersReducer";
+import {IUser} from "../store/usersReducer";
 import {instance, IResponseWithFieldsErrors} from "./api";
 
 interface IGetUsersResponse {

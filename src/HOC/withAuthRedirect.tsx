@@ -1,8 +1,8 @@
 import React from 'react';
 import {Navigate} from "react-router-dom";
 import {connect} from "react-redux";
-import {getIsAuth} from "../redux/auth-selectors";
-import {RootState} from "../redux/reduxStore";
+import {getIsAuth} from "../store/auth-selectors";
+import {RootState} from "../store/store";
 
 const mapStateToProps = (state: RootState) => ({
     isAuth: getIsAuth(state)

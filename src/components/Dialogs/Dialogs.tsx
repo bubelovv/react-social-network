@@ -3,8 +3,8 @@ import s from './Dialogs.module.css';
 import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
 import NewMessageForm from './NewMessageForm';
-import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
-import {actions} from '../../redux/dialogsReducer';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {actions} from '../../store/dialogsReducer';
 
 const Dialogs: React.FC = () => {
     const dialogs = useAppSelector(state => state.dialogsPage.dialogs);

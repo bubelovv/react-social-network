@@ -26,14 +26,12 @@ const store = createStore(rootReducer, composeEnhancers(
 export type RootState = ReturnType<typeof rootReducer>
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 type AppAction = ReturnType<typeof store.dispatch>;
 export type AppDispatch = ThunkDispatch<RootState, any, AppAction>;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
-// export type AppDispatch = typeof store.dispatch;
-// export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export type InferValueTypes<T> = T extends {[key: string]: infer U} ? U : never
-
 export type BaseThunkType<AC extends Action> = ThunkAction<Promise<void>, RootState, undefined, AC>
 
 export default store;

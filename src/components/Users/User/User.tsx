@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '.././Users.module.css';
 import avatar from '../../../assets/images/avatar.jpg'
 import {NavLink} from "react-router-dom";
-import {IUser} from "../../../redux/usersReducer";
+import {IUser} from "../../../store/usersReducer";
 
 interface Props {
     user: IUser

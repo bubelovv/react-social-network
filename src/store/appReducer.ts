@@ -1,5 +1,5 @@
 import {getAuthUserData} from "./authReducer";
-import {BaseThunkType, InferValueTypes} from "./reduxStore";
+import {BaseThunkType, InferValueTypes} from "./store";
 
 const SET_INITIALIZED_SUCCESS = 'SET_INITIALIZED_SUCCESS'
 

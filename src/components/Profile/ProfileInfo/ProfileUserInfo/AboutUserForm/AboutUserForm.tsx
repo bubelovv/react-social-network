@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './AboutUserForm.module.css';
 import {useForm, UseFormSetError} from 'react-hook-form';
-import {FormValues, IProfile, saveInfo} from '../../../../../redux/profileReducer';
-import {useAppDispatch} from '../../../../../redux/reduxStore';
+import {FormValues, IProfile, saveInfo} from '../../../../../store/profileReducer';
+import {useAppDispatch} from '../../../../../store/store';
 
 interface Props {
     profile: IProfile,

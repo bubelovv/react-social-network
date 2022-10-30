@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {RootState} from "./reduxStore";
+import {RootState} from "./store";
 
 const getIsAuthSelector = (state: RootState) => {
     return state.auth.isAuth

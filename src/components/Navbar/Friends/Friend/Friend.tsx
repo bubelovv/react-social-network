@@ -1,6 +1,6 @@
 import React from 'react';
 import s from "./Friend.module.css";
-import {IFriend} from "../../../../redux/sidebarReducer";
+import {IFriend} from "../../../../store/sidebarReducer";
 
 interface Props {
     friend: IFriend

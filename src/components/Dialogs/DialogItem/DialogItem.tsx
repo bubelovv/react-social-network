@@ -1,7 +1,7 @@
 import React from 'react';
 import s from '../Dialogs.module.css';
 import {NavLink} from "react-router-dom";
-import {DialogType} from "../../../redux/dialogsReducer";
+import {DialogType} from "../../../store/dialogsReducer";
 
 // const setClass = navData => navData.isActive ? s.active : ' ';
 

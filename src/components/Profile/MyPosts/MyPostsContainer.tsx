@@ -1,10 +1,10 @@
 import React from 'react';
 import {
     actions, IPost,
-} from "../../../redux/profileReducer";
+} from "../../../store/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {RootState} from "../../../redux/reduxStore";
+import {RootState} from "../../../store/store";
 
 interface MapStateProps {
     posts: IPost[]

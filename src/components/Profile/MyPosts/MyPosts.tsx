@@ -2,7 +2,7 @@ import React from 'react';
 import Post from './Post/Post';
 import s from './MyPosts.module.css';
 import NewPostForm from "./NewPostForm";
-import {IPost} from "../../../redux/profileReducer";
+import {IPost} from "../../../store/profileReducer";
 
 interface Props {
     posts: IPost[]

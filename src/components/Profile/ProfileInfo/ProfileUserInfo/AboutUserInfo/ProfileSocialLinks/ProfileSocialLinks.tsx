@@ -6,7 +6,7 @@ import twitter from "../../../../../../assets/images/twitter.png";
 import instagram from "../../../../../../assets/images/inst.png";
 import github from "../../../../../../assets/images/git.png";
 import avatar from "../../../../../../assets/images/avatar.jpg";
-import {IContactsProfile} from "../../../../../../redux/profileReducer";
+import {IContactsProfile} from "../../../../../../store/profileReducer";
 
 interface Props {
     contacts: IContactsProfile

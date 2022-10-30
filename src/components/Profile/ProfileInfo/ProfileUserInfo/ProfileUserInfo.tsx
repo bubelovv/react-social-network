@@ -3,8 +3,8 @@ import s from '../ProfileInfo.module.css';
 import avatar from '../../../../assets/images/avatar.jpg';
 import AboutUserInfo from './AboutUserInfo/AboutUserInfo';
 import AboutUserForm from './AboutUserForm/AboutUserForm';
-import {IProfile, savePhoto} from '../../../../redux/profileReducer';
-import {useAppDispatch} from '../../../../redux/reduxStore';
+import {IProfile, savePhoto} from '../../../../store/profileReducer';
+import {useAppDispatch} from '../../../../store/store';
 
 interface Props {
     profile: IProfile;

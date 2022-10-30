@@ -1,5 +1,5 @@
 import {ResultCode} from '../API/api';
-import {BaseThunkType, InferValueTypes} from './reduxStore';
+import {BaseThunkType, InferValueTypes} from './store';
 import {Dispatch} from 'redux';
 import {usersApi} from '../API/usersApi';
 import {objectsHelper} from '../utils/object-helper';

@@ -3,8 +3,8 @@ import styles from './Users.module.css';
 import Pagination from '../../UI/Pagination/Pagination';
 import User from './User/User';
 import UsersFilterForm from './UsersFilterForm/UsersFilterForm';
-import {useAppDispatch, useAppSelector} from '../../redux/reduxStore';
-import {follow, getUsers, unfollow} from '../../redux/usersReducer';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {follow, getUsers, unfollow} from '../../store/usersReducer';
 import {useSearchParams} from 'react-router-dom';
 
 const Users: React.FC = () => {
@@ -35,12 +35,11 @@ const Users: React.FC = () => {
         const termParam = String(searchParams.get('term'));
         const friendParam = String(searchParams.get('friend'));
         const pageParam = Number(searchParams.get('page'));
-        console.log(termParam, friendParam, pageParam);
+
         const actualTerm = termParam !== 'null' ? termParam : filter.term;
         const actualFriend = friendParam !== 'null' ? friendParam : filter.friend;
         const actualPage = pageParam !== 0 ? pageParam : currentPage;
 
-        // friend = !friend ? friend : `${friend === 'true'}`
         dispatch<void>(getUsers(actualPage, pageSize, actualTerm, actualFriend));
     }, []);
 

@@ -1,4 +1,4 @@
-import {InferValueTypes} from './reduxStore';
+import {InferValueTypes} from './store';
 
 const ADD_MESSAGE = 'ADD_MESSAGE';
 
@@ -10,7 +10,7 @@ export const actions = {
     addMessage: (name: string, newMessageText: string) => ({type: ADD_MESSAGE, name, newMessageText}),
 };
 
-const avatar: string = 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyJTIwZmFjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=300&q=60';
+const avatar: string = 'https://images.unsplash.com/photo-1666831283699-27263e1e04cd';
 
 const initialState = {
     dialogs: [
@@ -50,7 +50,7 @@ const dialogsReducer = (state = initialState, action: ActionTypes): InitialState
             let message = action.newMessageText;
             if (message.trim() === '') return state;
 
-            return <InitialState>{
+            return {
                 ...state,
                 messages: [...state.messages, {id: state.messages.length, name: action.name, message: message}],
             };

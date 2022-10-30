@@ -1,5 +1,5 @@
 import {ResultCode} from '../API/api'
-import {BaseThunkType, InferValueTypes} from "./reduxStore";
+import {BaseThunkType, InferValueTypes} from "./store";
 import {UseFormSetError} from "react-hook-form";
 import {LoginFormValues} from "../components/Login/Login";
 import {authApi, ResultCodeForCaptcha} from "../API/authApi";
