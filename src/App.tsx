@@ -1,7 +1,7 @@
 import React, {lazy, Suspense, useEffect} from 'react';
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
-import {initializeApp} from './store/appReducer';
+import {initializeApp} from './store/app/appSlice';
 import {useAppDispatch, useAppSelector} from './store/store';
 
 // --------- my custom components ---------

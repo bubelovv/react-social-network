@@ -1,12 +1,12 @@
-import {ResultCode} from '../API/api'
-import {BaseThunkType, InferValueTypes} from "./store";
-import {UseFormSetError} from "react-hook-form";
-import {LoginFormValues} from "../components/Login/Login";
-import {authApi, ResultCodeForCaptcha} from "../API/authApi";
+import {ResultCode} from '../API/api';
+import {BaseThunkType, InferValueTypes} from './store';
+import {UseFormSetError} from 'react-hook-form';
+import {LoginFormValues} from '../components/Login/Login';
+import {authApi, ResultCodeForCaptcha} from '../API/authApi';
 
-const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
-const SET_CAPTCHA = 'SET_CAPTCHA'
-const CLEAR_CAPTCHA = 'CLEAR_CAPTCHA'
+const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
+const SET_CAPTCHA = 'SET_CAPTCHA';
+const CLEAR_CAPTCHA = 'CLEAR_CAPTCHA';
 
 type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 type ThunkType = BaseThunkType<ActionTypes>
@@ -17,14 +17,14 @@ export const actions = {
     }) as const,
     setCaptcha: (urlCaptcha: string) => ({type: SET_CAPTCHA, urlCaptcha}) as const,
     clearCaptcha: () => ({type: CLEAR_CAPTCHA}) as const,
-}
+};
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
-    const data = await authApi.me()
+    const data = await authApi.me();
     if (Object.keys(data).length) {
-        dispatch(actions.setAuthUserData(data.id, data.email, data.login, true))
+        dispatch(actions.setAuthUserData(data.id, data.email, data.login, true));
     }
-}
+};
 
 export interface LoginData {
     email: string;
@@ -37,30 +37,30 @@ export const login = (data: LoginData, setError: UseFormSetError<LoginFormValues
     const {email, password, checkbox, captcha} = data;
 
     return async (dispatch) => {
-        const data = await authApi.loginPost(email, password, checkbox, captcha)
+        const data = await authApi.loginPost(email, password, checkbox, captcha);
         if (data.resultCode === ResultCode.Success) {
-            await dispatch(getAuthUserData())
-            dispatch(actions.clearCaptcha())
+            await dispatch(getAuthUserData());
+            dispatch(actions.clearCaptcha());
         } else if (data.resultCode === ResultCodeForCaptcha.captcha) {
-            await dispatch(getCaptcha())
+            await dispatch(getCaptcha());
         } else {
             setError('email', {type: 'server', message: data.messages[0]});
             setError('password', {type: 'server', message: data.messages[0]});
         }
-    }
-}
+    };
+};
 
 export const logout = (): ThunkType => async (dispatch) => {
-    const data = await authApi.logout()
+    const data = await authApi.logout();
     if (data.resultCode === 0) {
-        dispatch(actions.setAuthUserData(null, null, null, false))
+        dispatch(actions.setAuthUserData(null, null, null, false));
     }
-}
+};
 
 export const getCaptcha = (): ThunkType => async (dispatch) => {
-    const urlCaptcha = await authApi.getCaptcha()
-    dispatch(actions.setCaptcha(urlCaptcha))
-}
+    const urlCaptcha = await authApi.getCaptcha();
+    dispatch(actions.setCaptcha(urlCaptcha));
+};
 
 export interface InitialState {
     id: number | null,
@@ -76,22 +76,22 @@ let initialState: InitialState = {
     login: null,
     isAuth: false,
     urlCaptcha: null,
-}
+};
 
 const authReducer = (state = initialState, action: ActionTypes): InitialState => {
     switch (action.type) {
         case SET_AUTH_USER_DATA: {
-            return {...state, ...action.payload,}
+            return {...state, ...action.payload,};
         }
         case SET_CAPTCHA: {
-            return {...state, urlCaptcha: action.urlCaptcha}
+            return {...state, urlCaptcha: action.urlCaptcha};
         }
         case CLEAR_CAPTCHA: {
-            return {...state, urlCaptcha: null}
+            return {...state, urlCaptcha: null};
         }
         default:
-            return state
+            return state;
     }
-}
+};
 
-export default authReducer
+export default authReducer;
