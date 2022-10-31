@@ -4,7 +4,7 @@ import {dialogsSlice} from './dialogs/dialogsSlice';
 import sidebarReducer from './sidebarReducer';
 import usersReducer from './usersReducer';
 import authReducer from './authReducer';
-import {appSlice} from './app/appSlice';
+// import {appSlice} from './app/appSlice';
 import {ThunkAction} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    app: appSlice.reducer,
+    // app: appSlice.reducer,
 });
 
 export const store = configureStore({

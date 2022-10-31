@@ -1,10 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {DialogsState, IMessage} from './types';
+import avatar from '../../assets/images/avatar.jpg';
 // import {InferValueTypes} from './store';
 // type ActionTypes = ReturnType<InferValueTypes<typeof actions>>
 // type ThunkType = BaseThunkType<ActionTypes>
 
-const avatar: string = 'https://images.unsplash.com/photo-1666831283699-27263e1e04cd';
+// const avatar: string = 'https://images.unsplash.com/photo-1666831283699-27263e1e04cd';
 
 const initialState: DialogsState = {
     dialogs: [

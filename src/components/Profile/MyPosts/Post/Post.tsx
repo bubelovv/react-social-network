@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Post.module.css';
+import avatar from '../../../../assets/images/avatar.jpg';
 
 interface Props {
     postId: number
@@ -20,7 +21,7 @@ const Post: React.FC<Props> = (props) => {
 
     return (
         <div className={s.post}>
-            <img src='https://pixelbox.ru/wp-content/uploads/2021/05/ava-vk-animal-91.jpg' alt="cat"/>
+            <img src={avatar} alt="cat"/>
             <span>{props.message}</span>
             <span className={s.count}>{props.likesCount}</span>
             <button onClick={onDecrementLikes} className={s.dislike}> dislike</button>
