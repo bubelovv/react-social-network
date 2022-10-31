@@ -20,7 +20,7 @@ export const actions = {
 }
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
-    let data = await authApi.me()
+    const data = await authApi.me()
     if (Object.keys(data).length) {
         dispatch(actions.setAuthUserData(data.id, data.email, data.login, true))
     }
@@ -37,7 +37,7 @@ export const login = (data: LoginData, setError: UseFormSetError<LoginFormValues
     const {email, password, checkbox, captcha} = data;
 
     return async (dispatch) => {
-        let data = await authApi.loginPost(email, password, checkbox, captcha)
+        const data = await authApi.loginPost(email, password, checkbox, captcha)
         if (data.resultCode === ResultCode.Success) {
             await dispatch(getAuthUserData())
             dispatch(actions.clearCaptcha())
@@ -51,14 +51,14 @@ export const login = (data: LoginData, setError: UseFormSetError<LoginFormValues
 }
 
 export const logout = (): ThunkType => async (dispatch) => {
-    let data = await authApi.logout()
+    const data = await authApi.logout()
     if (data.resultCode === 0) {
         dispatch(actions.setAuthUserData(null, null, null, false))
     }
 }
 
 export const getCaptcha = (): ThunkType => async (dispatch) => {
-    let urlCaptcha = await authApi.getCaptcha()
+    const urlCaptcha = await authApi.getCaptcha()
     dispatch(actions.setCaptcha(urlCaptcha))
 }
 

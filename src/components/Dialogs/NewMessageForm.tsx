@@ -4,14 +4,14 @@ import {useForm} from 'react-hook-form';
 import cn from 'classnames';
 
 interface IProps {
-    addMessage: (newMessageText: string) => void;
+    sendMessage: (messageText: string) => void;
 }
 
 interface IFormValues {
-    newMessageText: string;
+    messageText: string;
 }
 
-const NewMessageForm: React.FC<IProps> = ({addMessage}) => {
+const NewMessageForm: React.FC<IProps> = ({sendMessage}) => {
     let {
         register,
         handleSubmit,
@@ -20,18 +20,18 @@ const NewMessageForm: React.FC<IProps> = ({addMessage}) => {
     } = useForm<IFormValues>({mode: 'onChange'});
 
     let onSubmit = (data: IFormValues) => {
-        addMessage(data.newMessageText);
+        sendMessage(data.messageText);
         reset();
     };
 
-    const textareaCls = cn(s.textarea, {[s.textareaValid]: touchedFields.newMessageText && isValid});
+    const textareaCls = cn(s.textarea, {[s.textareaValid]: touchedFields.messageText && isValid});
 
     return (
         <form className={s.newMsgForm} onSubmit={handleSubmit(onSubmit)}>
 			<textarea
                 className={textareaCls}
                 placeholder="Enter your message..."
-                {...register('newMessageText', {
+                {...register('messageText', {
                     required: true,
                     minLength: 1,
                 })}

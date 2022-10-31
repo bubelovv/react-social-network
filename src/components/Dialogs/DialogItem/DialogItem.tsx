@@ -1,12 +1,12 @@
 import React from 'react';
 import s from '../Dialogs.module.css';
 import {NavLink} from "react-router-dom";
-import {DialogType} from "../../../store/dialogsReducer";
+import {IDialog} from "../../../store/dialogs/types";
 
 // const setClass = navData => navData.isActive ? s.active : ' ';
 
 interface Props {
-    dialog: DialogType
+    dialog: IDialog
 }
 
 const DialogItem: React.FC<Props> = ({dialog}) => {

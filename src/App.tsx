@@ -25,7 +25,7 @@ export const App: React.FC = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch<void>(initializeApp());
+        dispatch(initializeApp());
     }, []);
 
     return (
@@ -38,15 +38,15 @@ export const App: React.FC = () => {
                     <div className="app-wrapper-content">
                         <Suspense fallback={<Preloader/>}>
                             <Routes>
-                                {/*<Route path={'/profile/:userId'} element={<ProfileContainer/>}/>*/}
-                                {/*<Route path="/profile" element={<ProfileContainer/>}/>*/}
-                                {/*<Route path="/" element={<ProfileContainer/>}/>*/}
+                                <Route path={'/profile/:userId'} element={<ProfileContainer/>}/>
+                                <Route path="/profile" element={<ProfileContainer/>}/>
+                                <Route path="/" element={<ProfileContainer/>}/>
                                                 <Route path="/dialogs/*" element={<Dialogs/>}/>
                                                 <Route path="/users" element={<UsersContainer/>}/>
                                 <Route path="/news" element={<News/>}/>
-                                {/*                <Route path="/music" element={<Music/>}/>*/}
-                                {/*                <Route path="/settings" element={<Settings/>}/>*/}
-                                {/*                <Route path="/login" element={<Login/>}/>*/}
+                                                <Route path="/music" element={<Music/>}/>
+                                                <Route path="/settings" element={<Settings/>}/>
+                                                <Route path="/login" element={<Login/>}/>
                             </Routes>
                         </Suspense>
                     </div>

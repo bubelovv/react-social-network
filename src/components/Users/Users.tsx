@@ -23,7 +23,7 @@ const Users: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
-        let params: {term?: string, friend?: string, page?: string} = {};
+        const params: { term?: string, friend?: string, page?: string } = {};
         if (filter.term.length) params.term = filter.term;
         if (filter.friend.length) params.friend = filter.friend;
         if (currentPage && currentPage > 1) params.page = String(currentPage);

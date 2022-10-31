@@ -4,20 +4,23 @@ import Message from './Message/Message';
 import DialogItem from './DialogItem/DialogItem';
 import NewMessageForm from './NewMessageForm';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import {actions} from '../../store/dialogsReducer';
+import {sendMessage} from '../../store/dialogs/dialogsSlice';
 
 const Dialogs: React.FC = () => {
-    const dialogs = useAppSelector(state => state.dialogsPage.dialogs);
-    const messages = useAppSelector(state => state.dialogsPage.messages);
-    const name = useAppSelector(state => state.auth.login) as string;
     const dispatch = useAppDispatch();
+    const dialogs = useAppSelector(state => state.dialogs.dialogs);
+    const messages = useAppSelector(state => state.dialogs.messages);
+    const name = useAppSelector(state => state.auth.login) as string;
 
-    const addMessage = (newMessageText: string) => {
-        dispatch(actions.addMessage(name, newMessageText))
-    }
+    const newMessage = (messageText: string) => {
+        if (messageText.trim() !== '') {
+            dispatch(sendMessage({message: messageText, name, id: messages.length + 1}));
+        }
+    };
 
     const dialogsElements = dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
-    const messagesElements = messages.map(message => <Message key={message.id} name={message.name} message={message.message}/>);
+    const messagesElements = messages.map(message => <Message key={message.id} name={message.name}
+                                                              message={message.message}/>);
 
     return (
         <div className={s.dialogsContainer}>
@@ -26,7 +29,7 @@ const Dialogs: React.FC = () => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <NewMessageForm addMessage={addMessage}/>
+                <NewMessageForm sendMessage={newMessage}/>
             </div>
         </div>
     );
