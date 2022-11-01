@@ -25,7 +25,7 @@ const Header: React.FC = () => {
                     ? <div className={s.loginWrap}>
                         <div className={s.loginName}> {login} </div>
                         <button className={s.btnLogout} onClick={onLogout}>Logout</button>
-                      </div>
+                    </div>
                     : <Link className={s.btnLogout} to="/login">Login</Link>
                 }
             </div>
