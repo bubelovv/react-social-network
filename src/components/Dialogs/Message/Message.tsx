@@ -1,13 +1,13 @@
 import React from 'react';
 import s from '../Dialogs.module.css';
 import avatar from '../../../assets/images/avatar.jpg';
+import {IMessage} from '../../../store/dialogs/types';
 
 interface Props {
-    name: string;
-    message: string;
+    message: IMessage;
 }
 
-const Message: React.FC<Props> = ({name, message}) => {
+const Message: React.FC<Props> = ({message}) => {
     return (
         <div className={s.messageWrap}>
             <div className={s.msgAvatarWrap}>
@@ -17,8 +17,8 @@ const Message: React.FC<Props> = ({name, message}) => {
             </div>
 
             <div className={s.message}>
-                <strong>{name}</strong>
-                <p>{message}</p>
+                <strong>{message.name}</strong>
+                <p>{message.message}</p>
             </div>
         </div>
     );

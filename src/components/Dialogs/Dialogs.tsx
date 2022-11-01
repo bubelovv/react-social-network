@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
-import DialogItem from './DialogItem/DialogItem';
+import Dialog from './Dialog/Dialog';
 import NewMessageForm from './NewMessageForm';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {sendMessage} from '../../store/dialogs/dialogsSlice';
@@ -18,9 +18,8 @@ const Dialogs: React.FC = () => {
         }
     };
 
-    const dialogsElements = dialogs.map(dialog => <DialogItem key={dialog.id} dialog={dialog}/>);
-    const messagesElements = messages.map(message => <Message key={message.id} name={message.name}
-                                                              message={message.message}/>);
+    const dialogsElements = dialogs.map(dialog => <Dialog key={dialog.id} dialog={dialog}/>);
+    const messagesElements = messages.map(message => <Message key={message.id} message={message}/>);
 
     return (
         <div className={s.dialogsContainer}>

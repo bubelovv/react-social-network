@@ -1,8 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faUser, faUsers, faMusic, faGear} from '@fortawesome/free-solid-svg-icons';
-import {faEnvelope, faNewspaper, } from '@fortawesome/free-regular-svg-icons';
+import {faUser, faUsers, faMusic, faGear, IconDefinition} from '@fortawesome/free-solid-svg-icons';
+import {faEnvelope, faNewspaper,} from '@fortawesome/free-regular-svg-icons';
 import styles from './Navbar.module.css';
 import {useAppSelector} from '../../store/store';
 // import FriendsContainer from "./Friends/FriendsContainer";
@@ -12,32 +12,30 @@ const Navbar = () => {
 
     const setClass = ({isActive}: { isActive: boolean }) => isActive ? styles.active : '';
 
+    interface navbarLink {
+        path: string,
+        innerText: string,
+        icon: IconDefinition,
+    }
+
+    const navbarLinks: navbarLink[] = [
+        {path: `/profile/${myId}`, innerText: 'Profile', icon: faUser},
+        {path: `/dialogs`, innerText: 'Dialogs', icon: faEnvelope},
+        {path: `/users`, innerText: 'Users', icon: faUsers},
+        {path: `/news`, innerText: 'News', icon: faNewspaper},
+        {path: `/music`, innerText: 'Music', icon: faMusic},
+        {path: `/settings`, innerText: 'Settings', icon: faGear},
+    ];
+
     return (
         <nav className={styles.nav}>
-            <NavLink className={setClass} to={`/profile/${myId}`}>
-                Profile
-                <FontAwesomeIcon className={styles.icon} icon={faUser} />
-            </NavLink>
-            <NavLink className={setClass} to="/dialogs">
-                Dialogs
-                <FontAwesomeIcon className={styles.icon} icon={faEnvelope} />
-            </NavLink>
-            <NavLink className={setClass} to="/users">
-                Users
-                <FontAwesomeIcon className={styles.icon} icon={faUsers} />
-            </NavLink>
-            <NavLink className={setClass} to="/news">
-                News
-                <FontAwesomeIcon className={styles.icon} icon={faNewspaper} />
-            </NavLink>
-            <NavLink className={setClass} to="/music">
-                Music
-                <FontAwesomeIcon className={styles.icon} icon={faMusic} />
-            </NavLink>
-            <NavLink className={setClass} to="/settings">
-                Settings
-                <FontAwesomeIcon className={styles.icon} icon={faGear} />
-            </NavLink>
+            {navbarLinks.map(link =>
+                <NavLink key={link.path} className={setClass} to={link.path}>
+                    {link.innerText}
+                    <FontAwesomeIcon className={styles.icon} icon={link.icon}/>
+                </NavLink>
+            )}
+
             {/*<FriendsContainer/>*/}
         </nav>
     );
