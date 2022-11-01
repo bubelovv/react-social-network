@@ -1,9 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {useForm, UseFormSetError} from 'react-hook-form';
 import s from './Login.module.css';
 import cn from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import {Navigate} from 'react-router-dom';
 import {login} from '../../store/authReducer';
 
 export interface LoginFormValues {
@@ -13,10 +12,9 @@ export interface LoginFormValues {
     captcha: string | null;
 }
 
-const Login: React.FC = () => {
-    const urlCaptcha = useAppSelector(state => state.auth.urlCaptcha);
-    const isAuth = useAppSelector(state => state.auth.isAuth);
+const Login: FC = () => {
     const dispatch = useAppDispatch();
+    const urlCaptcha = useAppSelector(state => state.auth.urlCaptcha);
 
     const {
         register,
@@ -25,17 +23,15 @@ const Login: React.FC = () => {
         formState: {errors, isValid, touchedFields},
     } = useForm<LoginFormValues>({mode: 'onChange'});
 
-    if (isAuth) return <Navigate to={'/profile'}></Navigate>;
+    const onSubmit = (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => {
+        dispatch(login(data, setError));
+    };
 
     const inputCls = (inputName: keyof LoginFormValues) => cn(
         s.field,
         {[s.fieldValid]: touchedFields[inputName] && !errors[inputName]},
         {[s.fieldInvalid]: touchedFields[inputName] && errors[inputName]}
     );
-
-    const onSubmit = (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => {
-        dispatch<void>(login(data, setError));
-    };
 
     return (
         <div className={s.formWrap}>

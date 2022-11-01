@@ -21,7 +21,6 @@ export enum RouteNames {
     NEWS = '/news',
     MUSIC = '/music',
     SETTING = '/settings',
-    DEFAULT = '/',
 }
 
 export const publicRoutes: IRoute[] = [
@@ -35,5 +34,4 @@ export const privateRoutes: IRoute[] = [
     {path: RouteNames.NEWS, element: News},
     {path: RouteNames.MUSIC, element: Music},
     {path: RouteNames.SETTING, element: Settings},
-    {path: RouteNames.DEFAULT, element: ProfileContainer},
 ];

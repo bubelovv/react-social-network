@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '.././Users.module.css';
 import avatar from '../../../assets/images/avatar.jpg'
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {IUser} from "../../../store/usersReducer";
 
 interface Props {
@@ -16,10 +16,10 @@ const User: React.FC<Props> = ({user, followUser, unfollowUser, followingInProgr
         <div className={styles.user} key={user.id}>
             <div className={styles.followArea}>
                 <div>
-                    <NavLink to={`/profile/${user.id}`}>
+                    <Link to={`/profile/${user.id}`}>
                         <img alt='avatar' className={styles.avatar}
                              src={user.photos.small !== null ? user.photos.small : avatar}/>
-                    </NavLink>
+                    </Link>
                 </div>
 
                 <div>

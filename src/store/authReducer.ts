@@ -26,14 +26,7 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
     }
 };
 
-export interface LoginData {
-    email: string;
-    password: string;
-    checkbox: boolean;
-    captcha: string | null;
-}
-
-export const login = (data: LoginData, setError: UseFormSetError<LoginFormValues>): ThunkType => {
+export const login = (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>): ThunkType => {
     const {email, password, checkbox, captcha} = data;
 
     return async (dispatch) => {
