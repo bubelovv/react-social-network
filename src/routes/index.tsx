@@ -2,7 +2,7 @@ import React, {lazy} from 'react';
 
 const ProfileContainer = lazy(() => import('../components/Profile/ProfileContainer'));
 const Dialogs = lazy(() => import('../components/Dialogs/Dialogs'));
-const UsersContainer = lazy(() => import('../components/Users/UsersContainer'));
+const UsersContainer = lazy(() => import('../components/Users/Users'));
 const News = lazy(() => import('../components/News/News'));
 const Music = lazy(() => import('../components/Music/Music'));
 const Settings = lazy(() => import('../components/Settings/Settings'));

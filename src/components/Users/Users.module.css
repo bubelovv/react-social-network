@@ -1,5 +1,7 @@
 .userArea {
     padding: 10px;
+    height: 100%;
+    text-align: center;
 }
 
 .user {
@@ -109,11 +111,3 @@
     color: black;
     background-color: #acd7e5;
 }
-
-.preloader {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%);
-}
-

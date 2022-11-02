@@ -13,15 +13,16 @@
 
 .app-wrapper {
   display: flex;
+  gap: 5px;
   width: 800px;
   height: 100%;
-  margin: 5px auto 0;
+  margin: 5px auto 5px;
   padding: 0 10px;
 }
 
 .app-wrapper-content {
   width: 100%;
-  margin-left: 5px;
+  height: 100%;
   border: 1px solid teal;
   border-radius: 5px;
   background-color: rgba(0, 128, 128, 0.1);

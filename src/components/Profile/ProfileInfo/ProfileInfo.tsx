@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import Preloader from '../../Users/Preloader/Preloader';
+import Preloader from '../../../UI/Preloader/Preloader';
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 import ProfileUserInfo from './ProfileUserInfo/ProfileUserInfo';
 import {useAppSelector} from '../../../store/store';

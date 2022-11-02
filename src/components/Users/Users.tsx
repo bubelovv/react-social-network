@@ -6,6 +6,7 @@ import UsersFilterForm from './UsersFilterForm/UsersFilterForm';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {follow, getUsers, unfollow} from '../../store/users/usersSlice';
 import {useSearchParams} from 'react-router-dom';
+import Preloader from '../../UI/Preloader/Preloader';
 
 const Users: React.FC = () => {
     const {
@@ -63,20 +64,23 @@ const Users: React.FC = () => {
     };
 
     return (
-        <div style={isFetching ? {display: 'none'} : {display: 'block'}} className={styles.userArea}>
-
-            <Pagination totalCount={totalUsersCount} pageSize={pageSize}
-                        currentPage={currentPage} onPageChanged={onPageChanged}/>
+        <div className={styles.userArea}>
 
             <UsersFilterForm onFilterChange={onFilterChange}
                              filter={filter}/>
 
-            {users.map(user => <User key={user.id}
-                                     user={user}
-                                     followingInProgress={followingInProgress}
-                                     followUser={followUser}
-                                     unfollowUser={unfollowUser}
-            />)}
+            <Pagination totalCount={totalUsersCount} pageSize={pageSize}
+                        currentPage={currentPage} onPageChanged={onPageChanged}/>
+
+            {isFetching
+                ? <Preloader/>
+                : users.map(user => <User key={user.id}
+                                          user={user}
+                                          followingInProgress={followingInProgress}
+                                          followUser={followUser}
+                                          unfollowUser={unfollowUser}
+                />)
+            }
         </div>
     );
 };
