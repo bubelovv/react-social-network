@@ -1,113 +1,23 @@
-.userArea {
-    padding: 10px;
+.usersWrap {
+    padding: 10px 10px 0;
     height: 100%;
     text-align: center;
 }
 
-.user {
-    display: flex;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background-color: #e5e7f6;
-    color: black;
-}
-
-.user:last-child {
-    margin-bottom: 0;
-}
-
-.followArea {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80px;
-    background-color: #bfc1cb;
-    border-radius: 7px;
-    padding: 3px;
-}
-
-.avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: block;
-    margin-bottom: 3px;
-}
-
-.followArea button {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    border: 0;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.btnFollow {
-    background-color: #acd7e5;
-    padding: 0 5px;
-}
-
-.btnUnfollow {
-    background-color: #fdfdfe;
-    padding: 0 5px;
-}
-
-.description {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.userInfo {
-    padding-left: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.location {
-    padding-left: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.getUsers {
-    display: block;
-    padding: 5px 15px;
-    margin: 0 auto;
-    background-color: #71bfef;
-    color: white;
-    border-radius: 7px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 2px 2px 5px 0 rgba(0, 144, 255, 0.5);
-}
-
-.btnNumbersPage {
+.users {
     display: flex;
     justify-content: center;
-    margin: 0 auto 10px;
+    flex-wrap: wrap;
 }
 
-.btnNumbersPage span {
-    display: inline-flex;
-    width: 40px;
-    padding: 2px 0;
-    margin-right: 5px;
-    border-radius: 4px;
-    justify-content: center;
-    background-color: #bec0ca;
-    cursor: pointer;
-}
-
-.btnNumbersPage span.selectedPage {
-    font-weight: bold;
-    color: black;
-    background-color: #acd7e5;
-}
+/*.getUsers {*/
+/*    display: block;*/
+/*    padding: 5px 15px;*/
+/*    margin: 0 auto;*/
+/*    background-color: #71bfef;*/
+/*    color: white;*/
+/*    border-radius: 7px;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    box-shadow: 2px 2px 5px 0 rgba(0, 144, 255, 0.5);*/
+/*}*/

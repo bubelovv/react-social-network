@@ -1,0 +1,16 @@
+.myButton {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: rgba(0, 128, 128, 0.4);
+    font-family: Tahoma, serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.myButton:hover {
+    background-color: rgba(0, 128, 128, 0.8);;
+    color: white;
+}

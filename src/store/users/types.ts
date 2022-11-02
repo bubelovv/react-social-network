@@ -8,16 +8,18 @@ export interface IUser {
     followed: boolean,
 }
 
+export interface IUsersFilterValues {
+    term: string;
+    friend: string;
+}
+
 export interface InitialStateUsers {
     users: IUser[],
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
     followingInProgress: number[], // array of users id
-    filter: {
-        term: string,
-        friend: string,
-    },
+    filter: IUsersFilterValues,
     isFetching: boolean,
     error: string | null,
 }

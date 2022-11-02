@@ -1,6 +1,10 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
 import styles from './UsersFilterForm.module.css';
+import MyButton from '../../../UI/MyButton/MyButton';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import {IUsersFilterValues} from '../../../store/users/types';
 
 interface IProps {
     onFilterChange: (term: string, friend: string) => void;
@@ -9,23 +13,17 @@ interface IProps {
 
 const UsersFilterForm: React.FC<IProps> = ({onFilterChange, filter}) => {
 
-    interface FormValues {
-        term: string;
-        friend: string;
-    }
-
     const {
         register,
         handleSubmit,
-    } = useForm<FormValues>();
+    } = useForm<IUsersFilterValues>();
 
-    const onSubmit = (data: FormValues) => {
-        onFilterChange(data.term, data.friend);
+    const onSubmit = (filter: IUsersFilterValues) => {
+        onFilterChange(filter.term, filter.friend);
     };
 
     return (
-        <form className={styles.filterForm}
-              onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.filterForm} onSubmit={handleSubmit(onSubmit)}>
             <input className={styles.filterInput}
                    defaultValue={filter.term}
                    placeholder={'search users'}
@@ -38,7 +36,10 @@ const UsersFilterForm: React.FC<IProps> = ({onFilterChange, filter}) => {
                 <option value='true'>Followed users</option>
                 <option value='false'>Not followed users</option>
             </select>
-            <button className={styles.filterButton}>find</button>
+            <MyButton>
+                <FontAwesomeIcon className={styles.icon} icon={faMagnifyingGlass}/>
+                <p style={{fontSize: '16px'}}>find</p>
+            </MyButton>
         </form>
     );
 };

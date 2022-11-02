@@ -30,11 +30,8 @@ export const unfollow = createAsyncThunk<number, number>(
 
 export const initialState: InitialStateUsers = {
     users: [],
-    pageSize: 5,
-
-    //todo: refactor name after Redux Toolkit
+    pageSize: 10,
     totalUsersCount: 0,
-
     currentPage: 1,
     followingInProgress: [],
     filter: {

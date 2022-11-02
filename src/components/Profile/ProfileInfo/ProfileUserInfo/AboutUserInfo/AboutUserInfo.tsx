@@ -1,7 +1,7 @@
 import React from 'react';
 import s from '../../ProfileInfo.module.css';
 import ProfileSocialLinks from './ProfileSocialLinks/ProfileSocialLinks';
-import Button from '../../../../../UI/Button/Button';
+import MyButton from '../../../../../UI/MyButton/MyButton';
 import {IProfile} from '../../../../../store/profileReducer';
 
 interface Props {
@@ -28,7 +28,7 @@ const AboutUserInfo: React.FC<Props> = ({profile, isOwner, goToEditMode}) => {
 
             <ProfileSocialLinks contacts={profile.contacts}/>
 
-            {isOwner && <Button goToEditMode={goToEditMode}>change user info</Button>}
+            {isOwner && <MyButton onClick={goToEditMode}>change user info</MyButton>}
         </div>
     );
 };

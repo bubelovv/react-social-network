@@ -64,7 +64,7 @@ const Users: React.FC = () => {
     };
 
     return (
-        <div className={styles.userArea}>
+        <div className={styles.usersWrap}>
 
             <UsersFilterForm onFilterChange={onFilterChange}
                              filter={filter}/>
@@ -72,15 +72,17 @@ const Users: React.FC = () => {
             <Pagination totalCount={totalUsersCount} pageSize={pageSize}
                         currentPage={currentPage} onPageChanged={onPageChanged}/>
 
-            {isFetching
-                ? <Preloader/>
-                : users.map(user => <User key={user.id}
-                                          user={user}
-                                          followingInProgress={followingInProgress}
-                                          followUser={followUser}
-                                          unfollowUser={unfollowUser}
-                />)
-            }
+            <div className={styles.users}>
+                {isFetching
+                    ? <Preloader/>
+                    : users.map(user => <User key={user.id}
+                                              user={user}
+                                              followingInProgress={followingInProgress}
+                                              followUser={followUser}
+                                              unfollowUser={unfollowUser}
+                    />)
+                }
+            </div>
         </div>
     );
 };

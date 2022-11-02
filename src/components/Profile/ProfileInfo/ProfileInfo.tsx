@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../../UI/Preloader/Preloader';
-import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
+import ProfileStatusWithHooks from './ProfileStatus/ProfileStatus';
 import ProfileUserInfo from './ProfileUserInfo/ProfileUserInfo';
 import {useAppSelector} from '../../../store/store';
 
@@ -9,7 +9,7 @@ interface Props {
     isOwner: boolean;
 }
 
-const ProfileInfo: React.FC<Props> = ({isOwner}) => {
+const ProfileInfo: FC<Props> = ({isOwner}) => {
     const profile = useAppSelector(state => state.profilePage.profile);
     const status = useAppSelector(state => state.profilePage.status);
 
