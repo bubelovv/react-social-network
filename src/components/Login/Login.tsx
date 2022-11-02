@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useForm, UseFormSetError} from 'react-hook-form';
-import s from './Login.module.css';
 import cn from 'classnames';
+import s from './Login.module.css';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {login} from '../../store/authReducer';
 

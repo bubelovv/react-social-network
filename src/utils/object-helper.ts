@@ -1,6 +1,6 @@
-// Ищем в массиве array обьект, у которого по ключу itemKey лежит значение actionValue,
-// и в этом обьекте заменяем/добавляем свойство newObjProps
-import {IUser} from "../store/usersReducer";
+// Ищем в массиве array объект, у которого по ключу itemKey лежит значение actionValue,
+// и в этом объекте заменяем/добавляем свойство newObjProps
+import {IUser} from "../store/users/types";
 
 export const objectsHelper = (array: IUser[], itemKey: string, actionValue: number, newObjProps: { followed: boolean }) => {
     return array.map((item: IUser) => {

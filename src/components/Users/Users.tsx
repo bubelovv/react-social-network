@@ -4,7 +4,7 @@ import Pagination from '../../UI/Pagination/Pagination';
 import User from './User/User';
 import UsersFilterForm from './UsersFilterForm/UsersFilterForm';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import {follow, getUsers, unfollow} from '../../store/usersReducer';
+import {follow, getUsers, unfollow} from '../../store/users/usersSlice';
 import {useSearchParams} from 'react-router-dom';
 
 const Users: React.FC = () => {
@@ -13,7 +13,7 @@ const Users: React.FC = () => {
         currentPage,
         pageSize,
         isFetching,
-        totalCount,
+        totalUsersCount,
         users,
         followingInProgress
     } = useAppSelector(state => state.usersPage);
@@ -23,6 +23,7 @@ const Users: React.FC = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
+        // Если в state есть filter и currentPage, то вставляем их в адресную строку
         const params: { term?: string, friend?: string, page?: string } = {};
         if (filter.term.length) params.term = filter.term;
         if (filter.friend.length) params.friend = filter.friend;
@@ -32,37 +33,39 @@ const Users: React.FC = () => {
     }, [filter.term, filter.friend, currentPage]);
 
     useEffect(() => {
+        // Берём параметры filter и currentPage из адресной строки
         const termParam = String(searchParams.get('term'));
         const friendParam = String(searchParams.get('friend'));
         const pageParam = Number(searchParams.get('page'));
 
+        // Если параметры в адресной строке были, то getUsers c ними, иначе getUsers со значениями из state
         const actualTerm = termParam !== 'null' ? termParam : filter.term;
         const actualFriend = friendParam !== 'null' ? friendParam : filter.friend;
         const actualPage = pageParam !== 0 ? pageParam : currentPage;
 
-        dispatch<void>(getUsers(actualPage, pageSize, actualTerm, actualFriend));
+        dispatch(getUsers({currentPage: actualPage, pageSize, term: actualTerm, friend: actualFriend}));
     }, []);
 
     const onPageChanged = (currentPage: number) => {
-        dispatch<void>(getUsers(currentPage, pageSize, filter.term, filter.friend));
+        dispatch(getUsers({currentPage, pageSize, term: filter.term, friend: filter.friend}));
     };
 
     const onFilterChange = (term: string, friend: string) => {
-        dispatch<void>(getUsers(1, pageSize, term, friend));
+        dispatch(getUsers({currentPage: 1, pageSize, term, friend}));
     };
 
     const followUser = (userId: number) => {
-        dispatch<void>(follow(userId));
+        dispatch(follow(userId));
     };
 
     const unfollowUser = (userId: number) => {
-        dispatch<void>(unfollow(userId));
+        dispatch(unfollow(userId));
     };
 
     return (
         <div style={isFetching ? {display: 'none'} : {display: 'block'}} className={styles.userArea}>
 
-            <Pagination totalCount={totalCount} pageSize={pageSize}
+            <Pagination totalCount={totalUsersCount} pageSize={pageSize}
                         currentPage={currentPage} onPageChanged={onPageChanged}/>
 
             <UsersFilterForm onFilterChange={onFilterChange}

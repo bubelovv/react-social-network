@@ -1,27 +1,24 @@
-import {IUser} from "../store/usersReducer";
-import {instance, IResponseWithFieldsErrors} from "./api";
+import {IUser} from '../store/users/types';
+import {instance, IResponseWithFieldsErrors} from './api';
 
-interface IGetUsersResponse {
+export interface IGetUsersResponse {
     error: null | string,
     totalCount: number,
     items: IUser[],
 }
 
-export let usersApi: { [key: string]: any } = {
+export let usersApi = {
     async getUsers(currentPage = 1, pageSize = 10, term = '', friend = '') {
-        friend = !friend ? friend : `${friend === 'true'}`
-        let filterUrl = (term ? '&term=' + term : '') + (friend  ? '&friend=' + friend : '')
-        let response = await instance.get<IGetUsersResponse>(
-            `users?page=${currentPage}&count=${pageSize}${filterUrl}`
-        )
-        return response.data;
+        friend = !friend ? friend : `${friend === 'true'}`;
+        const filterUrl = (term ? '&term=' + term : '') + (friend ? '&friend=' + friend : '');
+        return await instance.get<IGetUsersResponse>(`users?page=${currentPage}&count=${pageSize}${filterUrl}`);
     },
     async follow(userId: number) {
-        let response = await instance.post<IResponseWithFieldsErrors>(`follow/${userId}`)
+        const response = await instance.post<IResponseWithFieldsErrors>(`follow/${userId}`);
         return response.data.resultCode;
     },
     async unfollow(userId: number) {
-        let response = await instance.delete<IResponseWithFieldsErrors>(`follow/${userId}`)
+        const response = await instance.delete<IResponseWithFieldsErrors>(`follow/${userId}`);
         return response.data.resultCode;
     },
-}
+};

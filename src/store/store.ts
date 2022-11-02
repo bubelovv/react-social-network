@@ -2,7 +2,7 @@ import {Action, combineReducers} from 'redux';
 import profileReducer from './profileReducer';
 import {dialogsSlice} from './dialogs/dialogsSlice';
 import sidebarReducer from './sidebarReducer';
-import usersReducer from './usersReducer';
+import {usersSlice} from './users/usersSlice';
 import authReducer from './authReducer';
 import {ThunkAction} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogs: dialogsSlice.reducer,
     sidebar: sidebarReducer,
-    usersPage: usersReducer,
+    usersPage: usersSlice.reducer,
     auth: authReducer,
 });
 

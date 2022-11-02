@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '.././Users.module.css';
 import avatar from '../../../assets/images/avatar.jpg'
 import {Link} from "react-router-dom";
-import {IUser} from "../../../store/usersReducer";
+import {IUser} from "../../../store/users/types";
 
 interface Props {
     user: IUser
@@ -26,13 +26,13 @@ const User: React.FC<Props> = ({user, followUser, unfollowUser, followingInProgr
                     {user.followed ?
                         <button className={styles.btnFollow}
                                 disabled={!!followingInProgress.find(id => id === user.id)}
-                                onClick={() => followUser(user.id)}>
-                            follow
+                                onClick={() => unfollowUser(user.id)}>
+                            unfollow
                         </button> :
                         <button className={styles.btnUnfollow}
                                 disabled={!!followingInProgress.find(id => id === user.id)}
-                                onClick={() => unfollowUser(user.id)}>
-                            unfollow
+                                onClick={() => followUser(user.id)}>
+                            follow
                         </button>
                     }
                 </div>

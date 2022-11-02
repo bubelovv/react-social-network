@@ -1,4 +1,5 @@
-import usersReducer, {actions, InitialStateUsers} from './usersReducer';
+import {followSuccessful, unfollowSuccessful, usersSlice} from './usersSlice';
+import {InitialStateUsers} from './types';
 
 let state: InitialStateUsers;
 
@@ -19,9 +20,10 @@ beforeEach(() => {
             },
         ],
         pageSize: 5,
-        totalCount: 0,
+        totalUsersCount: 0,
         currentPage: 1,
         isFetching: false,
+        error: null,
         followingInProgress: [],
         filter: {
             term: '',
@@ -32,9 +34,9 @@ beforeEach(() => {
 
 test('follow user success', () => {
 
-    let action = actions.followSuccessful(3);
+    let action = followSuccessful(3);
 
-    let newState = usersReducer(state, action);
+    let newState = usersSlice.reducer(state, action);
 
     expect(newState.users[3].followed).toBeTruthy();
     expect(newState.users[2].followed).toBeFalsy();
@@ -42,9 +44,9 @@ test('follow user success', () => {
 
 test('unfollow user success', () => {
 
-    let action = actions.unfollowSuccessful(1);
+    let action = unfollowSuccessful(1);
 
-    let newState = usersReducer(state, action);
+    let newState = usersSlice.reducer(state, action);
 
     expect(newState.users[0].followed).toBeTruthy();
     expect(newState.users[1].followed).toBeFalsy();
