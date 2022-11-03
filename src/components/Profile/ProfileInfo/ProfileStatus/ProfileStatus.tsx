@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import s from '../ProfileInfo.module.css';
 import MyButton from "../../../../UI/MyButton/MyButton";
-import {updateStatus} from '../../../../store/profileReducer';
+import {updateStatus} from '../../../../store/profile/profileSlice';
 import {useAppDispatch} from '../../../../store/store';
 
 interface Props {

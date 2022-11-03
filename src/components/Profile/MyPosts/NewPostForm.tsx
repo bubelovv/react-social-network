@@ -2,16 +2,16 @@ import React from 'react';
 import s from './MyPosts.module.css';
 import {useForm} from 'react-hook-form';
 import cn from "classnames";
+import {addPost} from '../../../store/profile/profileSlice';
 
 interface Props {
-    addPost: (newPostText: string) => void
 }
 
 interface FormValues {
     newPostText: string
 }
 
-const NewPostForm: React.FC<Props> = ({addPost}) => {
+const NewPostForm: React.FC<Props> = () => {
     let {
         register,
         handleSubmit,
@@ -20,7 +20,7 @@ const NewPostForm: React.FC<Props> = ({addPost}) => {
     } = useForm<FormValues>({mode: 'onBlur'});
 
     let onSubmit = (data: FormValues) => {
-        addPost(data.newPostText);
+        addPost({newPostText: data.newPostText});
         reset();
     };
 

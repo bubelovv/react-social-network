@@ -10,6 +10,7 @@ import Preloader from '../../UI/Preloader/Preloader';
 
 const Users: React.FC = () => {
     const {
+        error,
         filter,
         currentPage,
         pageSize,
@@ -63,6 +64,8 @@ const Users: React.FC = () => {
         dispatch(unfollow(userId));
     };
 
+
+
     return (
         <div className={styles.usersWrap}>
 
@@ -72,17 +75,20 @@ const Users: React.FC = () => {
             <Pagination totalCount={totalUsersCount} pageSize={pageSize}
                         currentPage={currentPage} onPageChanged={onPageChanged}/>
 
-            <div className={styles.users}>
-                {isFetching
-                    ? <Preloader/>
-                    : users.map(user => <User key={user.id}
-                                              user={user}
-                                              followingInProgress={followingInProgress}
-                                              followUser={followUser}
-                                              unfollowUser={unfollowUser}
-                    />)
-                }
-            </div>
+            {error
+                ? <h1>error</h1>
+                : <div className={styles.users}>
+                    {isFetching
+                        ? <Preloader/>
+                        : users.map(user => <User key={user.id}
+                                                  user={user}
+                                                  followingInProgress={followingInProgress}
+                                                  followUser={followUser}
+                                                  unfollowUser={unfollowUser}
+                        />)
+                    }
+                </div>
+            }
         </div>
     );
 };

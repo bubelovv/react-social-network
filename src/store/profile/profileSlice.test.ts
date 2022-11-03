@@ -1,4 +1,5 @@
-import profileReducer, {actions, InitialStateProfile} from './profileReducer';
+import {InitialStateProfile} from './types';
+import {profileSlice, deletePost} from './profileSlice';
 
 test('post should be deleted', () => {
     // 1. test data
@@ -11,9 +12,9 @@ test('post should be deleted', () => {
         profile: null,
         status: '',
     };
-    let action = actions.deletePost(1);
+    let action = deletePost({id: 1});
     // 2. change state
-    let newState = profileReducer(state, action);
+    let newState = profileSlice.reducer(state, action);
     // 3. check result
     expect(newState.posts.length).toBe(2);
 });

@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import Profile from './Profile';
-import {getProfile, getStatus} from '../../store/profileReducer';
+import {getProfile, getStatus} from '../../store/profile/profileSlice';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 
 
-const ProfileContainer: React.FC = () => {
+const ProfileContainer: FC = () => {
     const authorisedUserId = useAppSelector(state => state.auth.id);
     const dispatch = useAppDispatch();
 
@@ -19,8 +19,8 @@ const ProfileContainer: React.FC = () => {
     }
 
     useEffect(() => {
-        dispatch<void>(getProfile(userId));
-        dispatch<void>(getStatus(userId));
+        dispatch(getProfile(userId));
+        dispatch(getStatus(userId));
     }, [params]);
 
     return <Profile isOwner={userId === authorisedUserId}/>;

@@ -1,4 +1,4 @@
-import {FormValues, IProfile, IPhotosProfile} from "../store/profileReducer";
+import {IUserInfoFormValues, IProfile, IPhotosProfile} from "../store/profile/types";
 import {IDefaultResponse, instance} from "./api";
 
 interface IResponseDataPhotos {
@@ -26,7 +26,7 @@ export let profileApi = {
         })
         return response.data;
     },
-    async saveInfo(profile: FormValues) {
+    async saveInfo(profile: IUserInfoFormValues) {
         let response = await instance.put<IDefaultResponse>(`profile`, profile);
         return response.data
     },

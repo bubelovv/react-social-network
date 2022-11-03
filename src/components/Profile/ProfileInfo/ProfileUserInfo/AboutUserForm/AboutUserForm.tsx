@@ -1,7 +1,8 @@
 import React from 'react';
 import s from './AboutUserForm.module.css';
 import {useForm, UseFormSetError} from 'react-hook-form';
-import {FormValues, IProfile, saveInfo} from '../../../../../store/profileReducer';
+import {IProfile, IUserInfoFormValues} from '../../../../../store/profile/types';
+import {saveInfo} from '../../../../../store/profile/profileSlice';
 import {useAppDispatch} from '../../../../../store/store';
 
 interface Props {
@@ -18,11 +19,11 @@ const AboutUserForm: React.FC<Props> = ({profile, goToEditMode}) => {
         setError,
         clearErrors,
         formState: {errors},
-    } = useForm<FormValues>({
+    } = useForm<IUserInfoFormValues>({
         defaultValues: profile,
     });
 
-    let onSubmit = async (formData: FormValues, setError: UseFormSetError<FormValues>) => {
+    let onSubmit = async (formData: IUserInfoFormValues, setError: UseFormSetError<IUserInfoFormValues>) => {
         await dispatch(saveInfo(formData, setError));
         goToEditMode();
     };

@@ -3,7 +3,8 @@ import s from '../ProfileInfo.module.css';
 import avatar from '../../../../assets/images/avatar.jpg';
 import AboutUserInfo from './AboutUserInfo/AboutUserInfo';
 import AboutUserForm from './AboutUserForm/AboutUserForm';
-import {IProfile, savePhoto} from '../../../../store/profileReducer';
+import {IProfile} from '../../../../store/profile/types';
+import {savePhoto} from '../../../../store/profile/profileSlice';
 import {useAppDispatch} from '../../../../store/store';
 
 interface Props {
@@ -17,7 +18,9 @@ const ProfileUserInfo: React.FC<Props> = ({profile, isOwner}) => {
     const mainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (files !== null) {
-            dispatch<void>(savePhoto(files[0]));
+            if (files[0] !== null) {
+                dispatch<void>(savePhoto(files[0]));
+            }
         }
     };
 

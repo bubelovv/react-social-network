@@ -1,5 +1,5 @@
 import {Action, combineReducers} from 'redux';
-import profileReducer from './profileReducer';
+import {profileSlice} from './profile/profileSlice';
 import {dialogsSlice} from './dialogs/dialogsSlice';
 import sidebarReducer from './sidebarReducer';
 import {usersSlice} from './users/usersSlice';
@@ -9,7 +9,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
 
 const rootReducer = combineReducers({
-    profilePage: profileReducer,
+    profilePage: profileSlice.reducer,
     dialogs: dialogsSlice.reducer,
     sidebar: sidebarReducer,
     usersPage: usersSlice.reducer,

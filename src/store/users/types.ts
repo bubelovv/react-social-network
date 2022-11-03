@@ -1,4 +1,4 @@
-import {IPhotosProfile} from '../profileReducer';
+import {IPhotosProfile} from '../profile/types';
 
 export interface IUser {
     id: number,

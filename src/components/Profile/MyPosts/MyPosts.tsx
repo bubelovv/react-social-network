@@ -1,26 +1,21 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Post from './Post/Post';
 import s from './MyPosts.module.css';
 import NewPostForm from "./NewPostForm";
-import {IPost} from "../../../store/profileReducer";
+import {useAppSelector} from '../../../store/store';
 
 interface Props {
-    posts: IPost[]
-    addPost: (newPostText: string) => void
-    incrementLikes: (userId: number) => void
-    decrementLikes: (userId: number) => void
 }
 
-const MyPosts: React.FC<Props> = (props) => {
-    let postsElements = [...props.posts].reverse().map(post => (
-        <Post key={post.id} postId={post.id} message={post.message} likesCount={post.likesCount}
-              incrementLikes={props.incrementLikes}
-              decrementLikes={props.decrementLikes}/>
-        ))
+const MyPosts: FC<Props> = () => {
+    const posts = useAppSelector(state => state.profilePage.posts)
+
+    const postsElements = [...posts].reverse().map(post => (
+        <Post key={post.id} id={post.id} message={post.message} likesCount={post.likesCount}/>))
 
     return (
         <div className={s.posts}>
-            <NewPostForm addPost={props.addPost}/>
+            <NewPostForm/>
             <div>
                 My posts:
                 {postsElements}
