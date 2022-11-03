@@ -21,15 +21,16 @@
 }
 
 .avatar {
-    width: 90%;
+    width: 80%;
     height: 0;
-    padding-bottom: 90%;
-    margin-bottom: 3px;
+    padding-bottom: 80%;
+    margin: 10px 0;
     border-radius: 50%;
+    transition: all linear 0.15s;
 }
 
 .avatar:hover {
-    box-shadow: 0 0 0 2px teal;
+    box-shadow: 0 0 5px 5px teal;
 }
 
 .avatar img {
@@ -44,11 +45,11 @@
     padding: 5px 0;
     border-radius: 4px;
     cursor: pointer;
+    transition: all linear 0.15s;
 }
 
 .userFollow button:hover {
-    border: 2px solid teal;
-    padding: 3px 0;
+    box-shadow: 0 0 3px 3px teal;
 }
 
 .btnFollow {
@@ -67,7 +68,7 @@
 }
 
 .description span {
-    color: white;
+    color: black;
     padding: 3px;
     border-radius: 5px;
     background-color: #c76f6f;
