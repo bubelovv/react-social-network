@@ -1,13 +1,4 @@
-export interface IUserInfoFormValues {
-    aboutMe: string
-    contacts: IContactsProfile
-    fullName: string
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    userId: number
-}
-
-
+export interface IUserInfoFormValues extends Omit<IProfile, 'photos'> {}
 
 export interface IPost {
     id: number
@@ -45,4 +36,5 @@ export interface InitialStateProfile {
     posts: IPost[];
     profile: IProfile | null;
     status: string;
+    error: string | null,
 }

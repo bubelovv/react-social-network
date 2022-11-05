@@ -55,7 +55,7 @@ export const getCaptcha = (): ThunkType => async (dispatch) => {
     dispatch(actions.setCaptcha(urlCaptcha));
 };
 
-export interface InitialState {
+export interface InitialStateAuth {
     id: number | null,
     email: string | null,
     login: string | null,
@@ -63,7 +63,7 @@ export interface InitialState {
     urlCaptcha: string | null,
 }
 
-let initialState: InitialState = {
+let initialStateAuth: InitialStateAuth = {
     id: null,
     email: null,
     login: null,
@@ -71,7 +71,7 @@ let initialState: InitialState = {
     urlCaptcha: null,
 };
 
-const authReducer = (state = initialState, action: ActionTypes): InitialState => {
+const authReducer = (state = initialStateAuth, action: ActionTypes): InitialStateAuth => {
     switch (action.type) {
         case SET_AUTH_USER_DATA: {
             return {...state, ...action.payload,};

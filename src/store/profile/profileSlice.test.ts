@@ -11,6 +11,7 @@ test('post should be deleted', () => {
         ],
         profile: null,
         status: '',
+        error: null,
     };
     let action = deletePost({id: 1});
     // 2. change state

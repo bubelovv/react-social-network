@@ -1,14 +1,13 @@
 import {IGetUsersResponse, usersApi} from '../../API/usersApi';
-import {objectsHelper} from '../../utils/object-helper';
 import {AnyAction, createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {IGetUsersRequest, InitialStateUsers, IUser} from './types';
+import {IGetUsersRequest, InitialStateUsers} from './types';
 
 export const getUsers = createAsyncThunk<IGetUsersResponse, IGetUsersRequest>(
     'users.getAll',
     async (arg, {rejectWithValue}) => {
         const response = await usersApi.getUsers(arg.currentPage, arg.pageSize, arg.term, arg.friend);
         if (response.status !== 200) {
-            return rejectWithValue('Can\'t ger users. Server Error')
+            return rejectWithValue('Can\'t ger users. Server Error');
         }
         return response.data;
     }
@@ -45,37 +44,7 @@ export const initialState: InitialStateUsers = {
 export const usersSlice = createSlice({
     name: 'users',
     initialState,
-    reducers: {
-        followSuccessful(state, action: PayloadAction<number>) {
-            state.users = objectsHelper(state.users, 'id', action.payload, {followed: true});
-        },
-        unfollowSuccessful(state, action: PayloadAction<number>) {
-            state.users = objectsHelper(state.users, 'id', action.payload, {followed: false});
-        },
-        setUsers(state, action: PayloadAction<IUser[]>) {
-            state.users = action.payload;
-        },
-        setTotalCount(state, action: PayloadAction<number>) {
-            state.totalUsersCount = action.payload;
-        },
-        setCurrentPage(state, action: PayloadAction<number>) {
-            state.currentPage = action.payload;
-        },
-        setFilterTerm(state, action: PayloadAction<string>) {
-            state.filter.term = action.payload;
-        },
-        setFilterFriend(state, action: PayloadAction<string>) {
-            state.filter.friend = action.payload;
-        },
-        toggleIsFetching(state, action: PayloadAction<boolean>) {
-            state.isFetching = action.payload;
-        },
-        toggleFollowingProgress(state, action: PayloadAction<{ isFetching: boolean, userId: number }>) {
-            action.payload.isFetching
-                ? state.followingInProgress.push(action.payload.userId)
-                : state.followingInProgress = state.followingInProgress.filter(id => id !== action.payload.userId);
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getUsers.pending, (state, action) => {
@@ -111,22 +80,10 @@ export const usersSlice = createSlice({
             .addMatcher(isError, (state, action: PayloadAction<string>) => {
                 state.error = action.payload;
                 state.isFetching = false;
-            })
+            });
     },
 });
 
 function isError(action: AnyAction) {
     return action.type.endsWith('rejected');
 }
-
-export const {
-    followSuccessful,
-    unfollowSuccessful,
-    setUsers,
-    setCurrentPage,
-    setTotalCount,
-    setFilterTerm,
-    setFilterFriend,
-    toggleIsFetching,
-    toggleFollowingProgress,
-} = usersSlice.actions;

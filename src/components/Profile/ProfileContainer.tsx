@@ -19,8 +19,10 @@ const ProfileContainer: FC = () => {
     }
 
     useEffect(() => {
-        dispatch(getProfile(userId));
-        dispatch(getStatus(userId));
+        if (userId !== null) {
+            dispatch(getProfile(userId));
+            dispatch(getStatus(userId));
+        }
     }, [params]);
 
     return <Profile isOwner={userId === authorisedUserId}/>;

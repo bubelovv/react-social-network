@@ -1,56 +1,59 @@
-import {ResultCode} from '../../API/api';
-import {BaseThunkType, RootState} from '../store';
+import {IDefaultResponse, ResultCode} from '../../API/api';
 import {UseFormSetError} from 'react-hook-form';
-import {profileApi} from '../../API/profileApi';
-import {InitialStateProfile, IPhotosProfile, IProfile, IUserInfoFormValues} from './types';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {IResponseDataPhotos, profileApi} from '../../API/profileApi';
+import {InitialStateProfile, IProfile, IUserInfoFormValues} from './types';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-export type ThunkType = BaseThunkType<any>
-
-export const getProfile = (userId: number | null): ThunkType => async (dispatch) => {
-    if (userId !== null) {
-        const data = await profileApi.getProfile(userId);
-        dispatch(profileSlice.actions.setUserProfile(data));
+export const getProfile = createAsyncThunk<IProfile, number>(
+    'profile.getProfile',
+    async (userId) => {
+        return await profileApi.getProfile(userId);
     }
-};
+);
 
-export const getStatus = (userId: number): ThunkType => async (dispatch) => {
-    const status = await profileApi.getStatus(userId);
-    dispatch(profileSlice.actions.setStatus({status}));
-};
-
-export const updateStatus = (status: string): ThunkType => async (dispatch) => {
-    const resultCode = await profileApi.updateStatus(status);
-    if (resultCode === ResultCode.Success) {
-        dispatch(profileSlice.actions.setStatus({status}));
+export const getStatus = createAsyncThunk<string, number>(
+    'profile.getStatus',
+    async (userId) => {
+        return await profileApi.getStatus(userId);
     }
-};
+);
 
-export const savePhoto = (file: File): ThunkType => async (dispatch) => {
-    let {resultCode, data} = await profileApi.savePhoto(file);
-    if (resultCode === ResultCode.Success) {
-        dispatch(profileSlice.actions.savePhotoSuccess(data.photos));
+export const updateStatus = createAsyncThunk<number, string>(
+    'profile.updateStatus',
+    async (status) => {
+        return await profileApi.updateStatus(status);
     }
-};
+);
 
-export const saveInfo = (profile: IUserInfoFormValues, setError: UseFormSetError<IUserInfoFormValues>): ThunkType => {
-    return async (dispatch, getState: () => RootState) => {
-        let data = await profileApi.saveInfo(profile);
+export const savePhoto = createAsyncThunk<IDefaultResponse<IResponseDataPhotos>, File>(
+    'profile.saveProfile',
+    async (file) => {
+        return await profileApi.savePhoto(file);
+    }
+);
 
-        if (data.resultCode === ResultCode.Success) {
-            const userId = getState().auth.id;
-            await dispatch(getProfile(userId));
-        } else {
+export const saveInfo = createAsyncThunk<IUserInfoFormValues,
+    { profile: IUserInfoFormValues, setError: UseFormSetError<IUserInfoFormValues>, goToEditMode: () => void }>(
+    'profile.saveInfo',
+    async (args, {rejectWithValue}) => {
+        const data = await profileApi.saveInfo(args.profile);
+
+        if (data.resultCode !== ResultCode.Success) {
             data.messages.forEach((message: string) => {
                 const name = message.slice(message.indexOf('>') + 1, message.indexOf(')'));
                 const mainName = name[0].toLowerCase() + name.slice(1);
 
-                setError('contacts.' + mainName as keyof IUserInfoFormValues, {type: 'server', message});
+                args.setError('contacts.' + mainName as keyof IUserInfoFormValues, {type: 'server', message});
             });
-            return Promise.reject();
+
+            args.goToEditMode();
+            return rejectWithValue('Server Error!');
         }
-    };
-};
+
+        args.goToEditMode();
+        return args.profile;
+    }
+);
 
 const initialState: InitialStateProfile = {
     posts: [
@@ -60,6 +63,7 @@ const initialState: InitialStateProfile = {
     ],
     profile: null,
     status: '',
+    error: null,
 };
 
 export const profileSlice = createSlice({
@@ -79,29 +83,44 @@ export const profileSlice = createSlice({
         decrementLikes(state, action: PayloadAction<{ id: number }>) {
             state.posts[action.payload.id - 1].likesCount--;
         },
-        setUserProfile(state, action: PayloadAction<IProfile>) {
-            state.profile = action.payload;
-        },
-        setStatus(state, action: PayloadAction<{ status: string }>) {
-            state.status = action.payload.status;
-        },
         deletePost(state, action: PayloadAction<{ id: number }>) {
             state.posts.filter(post => post.id !== action.payload.id);
         },
-        savePhotoSuccess(state, action: PayloadAction<IPhotosProfile>) {
-            if (state.profile !== null) {
-                state.profile.photos = action.payload;
-            }
-        },
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(getProfile.fulfilled, (state, action) => {
+                state.profile = action.payload;
+            })
+            .addCase(getStatus.fulfilled, (state, action) => {
+                state.status = action.payload;
+            })
+            .addCase(updateStatus.fulfilled, (state, action) => {
+                if (action.payload === ResultCode.Success) {
+                    state.status = action.meta.arg;
+                }
+            })
+            .addCase(savePhoto.fulfilled, (state, action) => {
+                if (action.payload.resultCode === ResultCode.Success) {
+                    if (state.profile !== null) {
+                        state.profile.photos = action.payload.data.photos;
+                    }
+                }
+            })
+            .addCase(saveInfo.fulfilled, (state, action) => {
+                if (state.profile !== null) {
+                    state.profile = {...state.profile, ...action.payload};
+                }
+            })
+            .addCase(saveInfo.rejected, (state, action) => {
+                state.error = action.error.message as string;
+            });
     }
 });
 
 export const {
     addPost,
-    savePhotoSuccess,
     deletePost,
-    setStatus,
-    setUserProfile,
     incrementLikes,
     decrementLikes,
 } = profileSlice.actions;

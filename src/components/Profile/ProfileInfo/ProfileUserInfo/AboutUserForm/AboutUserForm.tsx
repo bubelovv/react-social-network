@@ -24,8 +24,8 @@ const AboutUserForm: React.FC<Props> = ({profile, goToEditMode}) => {
     });
 
     let onSubmit = async (formData: IUserInfoFormValues, setError: UseFormSetError<IUserInfoFormValues>) => {
-        await dispatch(saveInfo(formData, setError));
-        goToEditMode();
+        await dispatch(saveInfo({profile: formData, setError, goToEditMode}));
+        // goToEditMode();
     };
 
     return (
