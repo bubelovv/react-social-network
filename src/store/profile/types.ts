@@ -2,6 +2,8 @@ export interface IUserInfoFormValues extends Omit<IProfile, 'photos'> {}
 
 export interface IPost {
     id: number
+    name: string
+    date: string
     message: string
     likesCount: number
 }

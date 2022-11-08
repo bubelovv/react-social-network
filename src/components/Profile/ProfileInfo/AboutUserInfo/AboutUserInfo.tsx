@@ -1,8 +1,8 @@
 import React from 'react';
-import s from '../../ProfileInfo.module.css';
+import s from '../../ProfileInfo/ProfileInfo.module.css';
 import ProfileSocialLinks from './ProfileSocialLinks/ProfileSocialLinks';
-import MyButton from '../../../../../UI/MyButton/MyButton';
-import {IProfile} from '../../../../../store/profile/types';
+import MyButton from '../../../../UI/MyButton/MyButton';
+import {IProfile} from '../../../../store/profile/types';
 
 interface Props {
     profile: IProfile;

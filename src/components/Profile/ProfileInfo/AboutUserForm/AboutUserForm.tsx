@@ -1,9 +1,9 @@
 import React from 'react';
 import s from './AboutUserForm.module.css';
 import {useForm, UseFormSetError} from 'react-hook-form';
-import {IProfile, IUserInfoFormValues} from '../../../../../store/profile/types';
-import {saveInfo} from '../../../../../store/profile/profileSlice';
-import {useAppDispatch} from '../../../../../store/store';
+import {IProfile, IUserInfoFormValues} from '../../../../store/profile/types';
+import {saveInfo} from '../../../../store/profile/profileSlice';
+import {useAppDispatch} from '../../../../store/store';
 
 interface Props {
     profile: IProfile,

@@ -1,29 +1,55 @@
-import React, {FC} from 'react';
+import React, {useState} from 'react';
 import s from './ProfileInfo.module.css';
-import Preloader from '../../../UI/Preloader/Preloader';
-import ProfileStatusWithHooks from './ProfileStatus/ProfileStatus';
-import ProfileUserInfo from './ProfileUserInfo/ProfileUserInfo';
-import {useAppSelector} from '../../../store/store';
+import avatar from '../../../assets/images/avatar.jpg';
+import AboutUserInfo from './AboutUserInfo/AboutUserInfo';
+import AboutUserForm from './AboutUserForm/AboutUserForm';
+import {IProfile} from '../../../store/profile/types';
+import {savePhoto} from '../../../store/profile/profileSlice';
+import {useAppDispatch} from '../../../store/store';
 
 interface Props {
+    profile: IProfile;
     isOwner: boolean;
 }
 
-const ProfileInfo: FC<Props> = ({isOwner}) => {
-    const profile = useAppSelector(state => state.profilePage.profile);
-    const status = useAppSelector(state => state.profilePage.status);
+const ProfileInfo: React.FC<Props> = ({profile, isOwner}) => {
+    const dispatch = useAppDispatch();
+
+    const mainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (files !== null) {
+            if (files[0] !== null) {
+                dispatch<void>(savePhoto(files[0]));
+            }
+        }
+    };
+
+    const [editMode, setEditMode] = useState(false);
 
     return (
-        profile === null ? <Preloader/> :
-            <div className={s.profileInfo}>
-                {/*<div className={s.wallpaper}>*/}
-                {/*    <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>*/}
-                {/*</div>*/}
+        <div className={s.aboutMe}>
 
-                <ProfileUserInfo isOwner={isOwner} profile={profile}/>
+            <div className={s.profilePhoto}>
+                <img src={profile.photos.large || avatar} alt="bgc"/>
 
-                <ProfileStatusWithHooks isOwner={isOwner} status={status}/>
+                {isOwner && (
+                    <label htmlFor="file-upload" className={s.customInputFile}>
+                        Change Photo
+                        <input hidden id="file-upload" type={'file'} onChange={mainPhotoSelected}/>
+                    </label>
+                )}
             </div>
+
+            <div className={s.profileInfoWrap}>
+                {editMode
+                    ? <AboutUserForm profile={profile}
+                                     goToEditMode={() => setEditMode(false)}/>
+                    : <AboutUserInfo profile={profile}
+                                     isOwner={isOwner}
+                                     goToEditMode={() => setEditMode(true)}/>
+                }
+            </div>
+        </div>
     );
 };
 

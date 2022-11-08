@@ -1,6 +1,6 @@
 import React, {lazy} from 'react';
 
-const ProfileContainer = lazy(() => import('../components/Profile/ProfileContainer'));
+const ProfileContainer = lazy(() => import('../components/Profile/Profile'));
 const Dialogs = lazy(() => import('../components/Dialogs/Dialogs'));
 const UsersContainer = lazy(() => import('../components/Users/Users'));
 const News = lazy(() => import('../components/News/News'));

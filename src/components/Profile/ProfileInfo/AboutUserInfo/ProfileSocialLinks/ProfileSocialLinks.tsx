@@ -1,12 +1,12 @@
 import React from "react";
-import s from '../../../ProfileInfo.module.css';
-import facebook from "../../../../../../assets/images/fb.png";
-import vk from "../../../../../../assets/images/vk.png";
-import twitter from "../../../../../../assets/images/twitter.png";
-import instagram from "../../../../../../assets/images/inst.png";
-import github from "../../../../../../assets/images/git.png";
-import avatar from "../../../../../../assets/images/avatar.jpg";
-import {IContactsProfile} from "../../../../../../store/profile/types";
+import s from '../../../ProfileInfo/ProfileInfo.module.css';
+import facebook from "../../../../../assets/images/fb.png";
+import vk from "../../../../../assets/images/vk.png";
+import twitter from "../../../../../assets/images/twitter.png";
+import instagram from "../../../../../assets/images/inst.png";
+import github from "../../../../../assets/images/git.png";
+import avatar from "../../../../../assets/images/avatar.jpg";
+import {IContactsProfile} from "../../../../../store/profile/types";
 
 interface Props {
     contacts: IContactsProfile

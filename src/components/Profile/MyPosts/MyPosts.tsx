@@ -11,7 +11,7 @@ const MyPosts: FC<Props> = () => {
     const posts = useAppSelector(state => state.profilePage.posts)
 
     const postsElements = [...posts].reverse().map(post => (
-        <Post key={post.id} id={post.id} message={post.message} likesCount={post.likesCount}/>))
+        <Post key={post.id} id={post.id} name={post.name} date={post.date} message={post.message} likesCount={post.likesCount}/>))
 
     return (
         <div className={s.posts}>

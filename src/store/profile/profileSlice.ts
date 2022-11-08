@@ -56,9 +56,9 @@ export const saveInfo = createAsyncThunk<IUserInfoFormValues,
 
 const initialState: InitialStateProfile = {
     posts: [
-        {id: 1, message: 'It\'s the old post. It\'s the old post. It\'s the old post. ', likesCount: 10},
-        {id: 2, message: 'It\'s  the middle post. It\'s  the middle post. It\'s  the middle post.', likesCount: 15},
-        {id: 3, message: 'It\'s the last post. It\'s the last post. It\'s the last post. ', likesCount: 20},
+        {id: 1, name: 'Sergey', date: '23.05.22', message: 'It\'s the old post. It\'s the old post. It\'s the old post. ', likesCount: 10},
+        {id: 2, name: 'Sergey', date: '24.05.22', message: 'It\'s  the middle post. It\'s  the middle post. It\'s  the middle post.', likesCount: 15},
+        {id: 3, name: 'Sergey', date: '25.05.22', message: 'It\'s the last post. It\'s the last post. It\'s the last post. ', likesCount: 20},
     ],
     profile: null,
     status: '',
@@ -73,7 +73,9 @@ export const profileSlice = createSlice({
             state.posts.push({
                 id: state.posts[state.posts.length - 1].id + 1,
                 message: action.payload.newPostText,
-                likesCount: 0
+                likesCount: 0,
+                name: 'Sergey',
+                date: '26.05.22',
             });
         },
         incrementLikes(state, action: PayloadAction<{ id: number }>) {
@@ -83,7 +85,7 @@ export const profileSlice = createSlice({
             state.posts[action.payload.id - 1].likesCount--;
         },
         deletePost(state, action: PayloadAction<{ id: number }>) {
-            state.posts.filter(post => post.id !== action.payload.id);
+            state.posts = state.posts.filter(post => post.id !== action.payload.id);
         },
     },
     extraReducers: builder => {
