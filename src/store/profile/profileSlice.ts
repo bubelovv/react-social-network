@@ -46,7 +46,6 @@ export const saveInfo = createAsyncThunk<IUserInfoFormValues,
                 args.setError('contacts.' + mainName as keyof IUserInfoFormValues, {type: 'server', message});
             });
 
-            args.goToEditMode();
             return rejectWithValue('Server Error!');
         }
 

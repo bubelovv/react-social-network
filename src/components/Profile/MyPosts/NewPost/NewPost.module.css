@@ -1,0 +1,38 @@
+.newPostWrapper {
+	background-color: #fff;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.newPostInput {
+	width: 100%;
+	min-height: 30px;
+	border-radius: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	border: 1px #888888 solid;
+}
+
+.newPostInput:focus {
+	border: 1px #1e78d9 solid;
+	border-radius: 3px;
+	outline: none;
+}
+
+.addBtnWrap {
+	display: flex;
+	align-items: center;
+}
+
+.addBtnWrap button {
+	background-color: rgb(51, 152, 152);
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+.addBtnWrap button:disabled {
+	cursor: auto;
+}

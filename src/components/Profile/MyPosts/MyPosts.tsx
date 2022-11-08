@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import Post from './Post/Post';
 import s from './MyPosts.module.css';
-import NewPostForm from "./NewPostForm";
 import {useAppSelector} from '../../../store/store';
+import NewPost from './NewPost/NewPost';
 
 interface Props {
 }
@@ -15,9 +15,8 @@ const MyPosts: FC<Props> = () => {
 
     return (
         <div className={s.posts}>
-            <NewPostForm/>
+            <NewPost/>
             <div>
-                My posts:
                 {postsElements}
             </div>
         </div>
