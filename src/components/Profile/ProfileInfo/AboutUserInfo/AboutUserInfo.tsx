@@ -1,5 +1,5 @@
 import React from 'react';
-import s from '../../ProfileInfo/ProfileInfo.module.css';
+import s from './AboutUserInfo.module.css';
 import ProfileSocialLinks from './ProfileSocialLinks/ProfileSocialLinks';
 import MyButton from '../../../../UI/MyButton/MyButton';
 import {IProfile} from '../../../../store/profile/types';

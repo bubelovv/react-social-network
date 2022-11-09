@@ -1,5 +1,5 @@
 import React from "react";
-import s from '../../../ProfileInfo/ProfileInfo.module.css';
+import s from './ProfileSocialLinks.module.css';
 import facebook from "../../../../../assets/images/fb.png";
 import vk from "../../../../../assets/images/vk.png";
 import twitter from "../../../../../assets/images/twitter.png";

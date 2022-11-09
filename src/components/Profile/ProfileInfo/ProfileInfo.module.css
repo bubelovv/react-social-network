@@ -1,12 +1,8 @@
-.wallpaper img {
-    width: 100%;
-}
-
 .aboutMe {
     display: flex;
     align-items: flex-start;
     padding: 5px;
-    margin: 10px 10px 5px;
+    margin: 10px 10px 0;
     border-radius: 5px;
     color: black;
     background-color: #fff;
@@ -26,12 +22,6 @@
     border-radius: 5px;
 }
 
-.profileInfoWrap {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-
 .customInputFile {
     background-color: lightgray;
     padding: 0 5px 1px;
@@ -47,44 +37,8 @@
     color: white;
 }
 
-.aboutMeInfo {
-    flex: 1 1 auto;
-}
-
-.myInfo {
-    display: inline-flex;
-    margin: 3px;
-    padding: 0 5px 2px;
-    line-height: 1;
-    border-radius: 8px;
-    background-color: #acd7e5;
-}
-
-.myInfoRed {
-    display: inline-flex;
-    margin: 3px;
-    padding: 0 5px 2px;
-    line-height: 1;
-    border-radius: 8px;
-    background-color: #ff8b8b;
-}
-
-.myInfo:last-child {
-    margin-bottom: 0;
-}
-
-.socialIcons {
-    height: 30px;
-}
-
-.link {
-    display: inline-flex;
-    margin-left: 3px;
-    height: 100%;
-}
-
-.link img {
-    display: block;
+.profileInfoWrap {
+    display: flex;
     width: 100%;
-    height: 100%;
+    justify-content: space-between;
 }
