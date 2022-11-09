@@ -14,6 +14,7 @@ interface Props {
 
 const ProfileInfo: React.FC<Props> = ({profile, isOwner}) => {
     const dispatch = useAppDispatch();
+    const [editMode, setEditMode] = useState(false);
 
     const mainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -24,17 +25,14 @@ const ProfileInfo: React.FC<Props> = ({profile, isOwner}) => {
         }
     };
 
-    const [editMode, setEditMode] = useState(false);
-
     return (
         <div className={s.aboutMe}>
-
             <div className={s.profilePhoto}>
                 <img src={profile.photos.large || avatar} alt="bgc"/>
 
                 {isOwner && (
-                    <label htmlFor="file-upload" className={s.customInputFile}>
-                        Change Photo
+                    <label className={s.customInputFile}>
+                        CHANGE
                         <input hidden id="file-upload" type={'file'} onChange={mainPhotoSelected}/>
                     </label>
                 )}

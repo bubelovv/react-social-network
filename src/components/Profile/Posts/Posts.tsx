@@ -4,25 +4,26 @@ import {useAppSelector} from '../../../store/store';
 import NewPost from './NewPost/NewPost';
 
 interface Props {
-    isOwner: boolean
+    isOwner: boolean;
 }
 
 const Posts: FC<Props> = ({isOwner}) => {
     const posts = useAppSelector(state => state.profilePage.posts);
 
-    const postsElements = [...posts].reverse().map(post => (
-        <Post key={post.id} id={post.id} name={post.name} date={post.date} message={post.message}
-              likesCount={post.likesCount}/>));
+    const postsElements = [...posts].reverse().map(post => <Post key={post.id}
+                                                                 id={post.id}
+                                                                 name={post.name}
+                                                                 date={post.date}
+                                                                 message={post.message}
+                                                                 likesCount={post.likesCount}/>);
 
     return (
-        // <div className={s.posts}>
         <>
             {isOwner && <NewPost/>}
             <div>
                 {postsElements}
             </div>
         </>
-        // </div>
     );
 };
 

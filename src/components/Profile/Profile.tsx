@@ -15,8 +15,7 @@ const Profile: FC = () => {
     const authorisedUserId = useAppSelector(state => state.auth.id);
     const dispatch = useAppDispatch();
 
-    //todo: refactor <Navigate/>
-    let params = useParams();
+    const params = useParams();
     let userId = Number(params.userId);
     if (!userId) {
         if (typeof authorisedUserId === 'number') {

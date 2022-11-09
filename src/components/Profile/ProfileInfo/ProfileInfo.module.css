@@ -1,44 +1,39 @@
 .aboutMe {
     display: flex;
-    align-items: flex-start;
-    padding: 5px;
+    gap: 10px;
     margin: 10px 10px 0;
     border-radius: 5px;
-    color: black;
-    background-color: #fff;
 }
 
 .profilePhoto {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 5px;
-    flex: 0 0 100px;
+    flex: 1 1 30%;
+    height: 30%;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
-.profilePhoto img{
-    width: 100px;
-    height: 100px;
-    border-radius: 5px;
+.profilePhoto img {
+    width: 100%;
 }
 
 .customInputFile {
-    background-color: lightgray;
-    padding: 0 5px 1px;
-    border-radius: 3px;
+    width: 100%;
+    text-align: center;
+    padding: 5px 0;
+    background-color: #7295da;
     cursor: pointer;
-    font-size: 12px;
-    margin-top: 5px;
     transition: all 0.3s;
 }
 
 .customInputFile:hover {
-    background-color: #000000;
-    color: white;
+    background-color: #577fd9;
 }
 
 .profileInfoWrap {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    flex: 1 1 70%;
+    font-size: 16px;
 }
