@@ -2,9 +2,9 @@ import React, {FC, useEffect} from 'react';
 import {getProfile, getStatus} from '../../store/profile/profileSlice';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import MyPosts from './MyPosts/MyPosts';
+import Posts from './Posts/Posts';
 import Preloader from '../../UI/Preloader/Preloader';
-// import s from './ProfileInfo/ProfileInfo.module.css';
+import s from './ProfileInfo/ProfileInfo.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 
@@ -32,20 +32,16 @@ const Profile: FC = () => {
     }, [params]);
 
     return (
-        <>
-            {profile === null ? <Preloader/> :
-                <>
-                    {/*<div className={s.wallpaper}>*/}
-                    {/*    <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>*/}
-                    {/*</div>*/}
+        profile === null ? <Preloader/> :
+            <>
+                {/*<div className={s.wallpaper}>*/}
+                {/*    <img src="https://wallpaperaccess.com/full/2397971.jpg" alt='bgc'/>*/}
+                {/*</div>*/}
 
-                    <ProfileInfo isOwner={userId === authorisedUserId} profile={profile}/>
-
-                    <ProfileStatus isOwner={userId === authorisedUserId} status={status}/>
-                </>
-            }
-            <MyPosts/>
-        </>
+                <ProfileInfo isOwner={userId === authorisedUserId} profile={profile}/>
+                <ProfileStatus isOwner={userId === authorisedUserId} status={status}/>
+                <Posts isOwner={userId === authorisedUserId}/>
+            </>
     );
 };
 
