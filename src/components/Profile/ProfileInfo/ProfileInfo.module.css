@@ -12,11 +12,16 @@
     flex: 1 1 30%;
     height: 30%;
     border-radius: 15px;
+    background-color: #e4f1f1;
     overflow: hidden;
 }
 
 .profilePhoto img {
     width: 100%;
+}
+
+.circleAvatar {
+    border-radius: 50%;
 }
 
 .customInputFile {
@@ -30,10 +35,4 @@
 
 .customInputFile:hover {
     background-color: #577fd9;
-}
-
-.profileInfoWrap {
-    display: flex;
-    flex: 1 1 70%;
-    font-size: 16px;
 }

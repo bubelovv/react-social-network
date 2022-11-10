@@ -1,11 +1,29 @@
+.socialWrap {
+    text-align: center;
+    border: 3px solid #7294d9;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #7294d9;
+}
+
 .socialIcons {
-    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #ffffff;
+    max-height: 45px;
+    padding: 5px 10px;
 }
 
 .link {
     display: inline-flex;
-    margin-left: 3px;
-    height: 100%;
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+}
+
+.link:last-child {
+    margin-right: 0;
 }
 
 .link img {

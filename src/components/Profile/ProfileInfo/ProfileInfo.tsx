@@ -18,17 +18,16 @@ const ProfileInfo: React.FC<Props> = ({profile, isOwner}) => {
 
     const mainPhotoSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
-        if (files !== null) {
-            if (files[0] !== null) {
-                dispatch<void>(savePhoto(files[0]));
-            }
+        if (files !== null && files[0] !== null) {
+            dispatch<void>(savePhoto(files[0]));
         }
     };
 
     return (
         <div className={s.aboutMe}>
             <div className={s.profilePhoto}>
-                <img src={profile.photos.large || avatar} alt="bgc"/>
+                <img className={profile.photos.large ? '' : s.circleAvatar} src={profile.photos.large || avatar}
+                     alt="bgc"/>
 
                 {isOwner && (
                     <label className={s.customInputFile}>
@@ -38,15 +37,10 @@ const ProfileInfo: React.FC<Props> = ({profile, isOwner}) => {
                 )}
             </div>
 
-            <div className={s.profileInfoWrap}>
-                {editMode
-                    ? <AboutUserForm profile={profile}
-                                     goToEditMode={() => setEditMode(false)}/>
-                    : <AboutUserInfo profile={profile}
-                                     isOwner={isOwner}
-                                     goToEditMode={() => setEditMode(true)}/>
-                }
-            </div>
+            {editMode
+                ? <AboutUserForm profile={profile} goToEditMode={() => setEditMode(false)}/>
+                : <AboutUserInfo profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>
+            }
         </div>
     );
 };
