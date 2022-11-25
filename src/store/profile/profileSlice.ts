@@ -33,7 +33,7 @@ export const savePhoto = createAsyncThunk<IDefaultResponse<IResponseDataPhotos>,
 );
 
 export const saveInfo = createAsyncThunk<IUserInfoFormValues,
-    { profile: IUserInfoFormValues, setError: UseFormSetError<IUserInfoFormValues>, goToEditMode: () => void }>(
+    { profile: IUserInfoFormValues, setError: UseFormSetError<IUserInfoFormValues>, goOutEditMode: () => void }>(
     'profile.saveInfo',
     async (args, {rejectWithValue}) => {
         const data = await profileApi.saveInfo(args.profile);
@@ -49,7 +49,7 @@ export const saveInfo = createAsyncThunk<IUserInfoFormValues,
             return rejectWithValue('Server Error!');
         }
 
-        args.goToEditMode();
+        args.goOutEditMode();
         return args.profile;
     }
 );

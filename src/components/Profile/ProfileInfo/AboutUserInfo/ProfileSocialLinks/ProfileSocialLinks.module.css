@@ -1,6 +1,6 @@
 .socialWrap {
     text-align: center;
-    border: 3px solid #7294d9;
+    border: 2px solid #7294d9;
     border-radius: 10px;
     overflow: hidden;
     background-color: #7294d9;
@@ -9,7 +9,7 @@
 .socialIcons {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: #ffffff;
     max-height: 45px;
     padding: 5px 10px;

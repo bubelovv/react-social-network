@@ -25,7 +25,8 @@ const ProfileInfo: React.FC<Props> = ({profile, isOwner}) => {
 
     return (
         <div className={s.aboutMe}>
-            <div className={s.profilePhoto}>
+            {!editMode &&
+                <div className={s.profilePhoto}>
                 <img className={profile.photos.large ? '' : s.circleAvatar} src={profile.photos.large || avatar}
                      alt="bgc"/>
 
@@ -35,10 +36,10 @@ const ProfileInfo: React.FC<Props> = ({profile, isOwner}) => {
                         <input hidden id="file-upload" type={'file'} onChange={mainPhotoSelected}/>
                     </label>
                 )}
-            </div>
+            </div>}
 
             {editMode
-                ? <AboutUserForm profile={profile} goToEditMode={() => setEditMode(false)}/>
+                ? <AboutUserForm profile={profile} goOutEditMode={() => setEditMode(false)}/>
                 : <AboutUserInfo profile={profile} isOwner={isOwner} goToEditMode={() => setEditMode(true)}/>
             }
         </div>

@@ -34,7 +34,6 @@ const ProfileSocialLinks: React.FC<Props> = ({contacts}) => {
 
     return (
         <div className={s.socialWrap}>
-            <span>Social links</span>
             <div className={s.socialIcons}>
                 {contactsList}
             </div>

@@ -1,43 +1,34 @@
 .userForm {
-    background-color: #c9c9c9;
-    border: 1px solid #000;
-    width: 100%;
-    border-radius: 5px;
-    margin: 0 auto;
-}
-
-.userInfoBlocks {
-    background-color: #fff;
-    padding: 10px;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px;
+    border: 1px solid #000;
     border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.contactName {
-    line-height: 0.8;
-    margin-bottom: 3px;
+    background-color: #eeeeee;
 }
 
 .userInfoBlock {
-    margin-bottom: 10px;
-    padding: 5px;
-    background-color: lightgray;
-    border-radius: 5px;
+    margin-bottom: 5px;
 }
 
-.userInfoBlock:last-child {
-    margin-bottom: 0;
+.contactName {
+    line-height: 1.3em;
+    padding-left: 4px;
 }
 
 .userInfoBlock input,
 .userInfoBlock textarea {
-    padding: 5px;
+    padding: 3px;
     border-radius: 5px;
     width: 100%;
     border: 1px transparent solid;
     transition: all 0.2s;
+}
+
+.userInfoBlock span {
+    padding-left: 3px;
 }
 
 .userInfoBlock input:hover,
@@ -52,20 +43,25 @@
     width: 20px;
 }
 
-.btnChange {
-    text-align: center;
-    margin-bottom: 10px;
+.buttonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
-.btnChange button {
+.buttonsContainer button {
+    text-align: center;
+    min-width: 80px;
     padding: 4px 20px 5px;
+    border: 1px solid lightslategrey;
     border-radius: 5px;
-    cursor: pointer;
     font-size: 16px;
     transition: all 0.3s;
+    cursor: pointer;
 }
 
-.btnChange button:hover {
+.buttonsContainer button:hover {
     background-color: #000;
     color: white;
 }
