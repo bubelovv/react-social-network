@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./MyButton.module.css";
 
 interface Props {
-    onClick?: () => void
+    onClick?: (e: any) => void
     style?: {}
     children: React.ReactNode
 }

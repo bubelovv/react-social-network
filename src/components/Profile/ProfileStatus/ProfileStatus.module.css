@@ -8,29 +8,38 @@
 
 .statusSpanWrap {
     display: flex;
+    align-items: center;
     width: 100%;
+    padding-left: 5px;
+    font-size: 15px;
 }
 
 .statusSpanWrap span {
+    font-family: 'Tahoma', sans-serif;
+}
+
+.statusSpanWrap p {
     display: block;
     width: 100%;
-    padding: 0 5px;
+    padding: 0 8px;
 }
 
 .statusInputWrap {
     width: 100%;
+    height: 27px;
     display: flex;
     align-items: center;
     padding-left: 5px;
+    font-size: 15px;
 }
 
 .statusInputWrap input {
     width: 100%;
-    height: auto;
-    margin-left: 5px;
-    padding: 0 3px;
+    height: 100%;
+    margin: 0 5px;
+    padding-left: 3px;
     border-radius: 3px;
     background-color: rgba(17, 34, 51, 0.19);
-    font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    font-family: 'Tahoma', sans-serif;
 }
