@@ -25,7 +25,7 @@ const Post: FC<Props> = ({id, name, date, likesCount, message}) => {
                 </div>
                 <div onClick={() => dispatch(deletePost({id}))} className={s.changePost}>delete</div>
             </div>
-            <div className={s.postText}>{message} {message} {message} {message} {message}</div>
+            <div className={s.postText}>{message}</div>
             <div className={s.likesBlock}>
                 <span className={s.count}> {likesCount} </span>
                 <button onClick={() => dispatch(incrementLikes({id}))} className={s.like}> like</button>

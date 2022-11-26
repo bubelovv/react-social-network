@@ -56,9 +56,27 @@ export const saveInfo = createAsyncThunk<IUserInfoFormValues,
 
 const initialState: InitialStateProfile = {
     posts: [
-        {id: 1, name: 'Sergey', date: '23.05.22', message: 'It\'s the old post. It\'s the old post. It\'s the old post. ', likesCount: 10},
-        {id: 2, name: 'Sergey', date: '24.05.22', message: 'It\'s  the middle post. It\'s  the middle post. It\'s  the middle post.', likesCount: 15},
-        {id: 3, name: 'Sergey', date: '25.05.22', message: 'It\'s the last post. It\'s the last post. It\'s the last post. ', likesCount: 20},
+        {
+            id: 1,
+            name: 'bubelov',
+            date: '23.05.2022',
+            message: 'It\'s the old post. It\'s the old post. It\'s the old post. ',
+            likesCount: 10
+        },
+        {
+            id: 2,
+            name: 'bubelov',
+            date: '24.05.2022',
+            message: 'It\'s  the middle post. It\'s  the middle post. It\'s  the middle post.',
+            likesCount: 15
+        },
+        {
+            id: 3,
+            name: 'bubelov',
+            date: '25.05.2022',
+            message: 'It\'s the last post. It\'s the last post. It\'s the last post. ',
+            likesCount: 20
+        },
     ],
     profile: null,
     status: '',
@@ -69,13 +87,13 @@ export const profileSlice = createSlice({
     name: 'profile',
     initialState,
     reducers: {
-        addPost(state, action: PayloadAction<{ newPostText: string }>) {
+        addPost(state, action: PayloadAction<{ newPostText: string, date: string }>) {
             state.posts.push({
                 id: state.posts[state.posts.length - 1].id + 1,
                 message: action.payload.newPostText,
                 likesCount: 0,
-                name: 'Sergey',
-                date: '26.05.22',
+                name: state.profile?.fullName as string,
+                date: action.payload.date,
             });
         },
         incrementLikes(state, action: PayloadAction<{ id: number }>) {

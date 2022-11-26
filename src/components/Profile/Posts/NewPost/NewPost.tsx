@@ -4,7 +4,8 @@ import {addPost} from '../../../../store/profile/profileSlice';
 import {useAppDispatch} from '../../../../store/store';
 import MyButton from '../../../../UI/MyButton/MyButton';
 
-interface Props {}
+interface Props {
+}
 
 const NewPost: FC<Props> = () => {
     const dispatch = useAppDispatch();
@@ -12,7 +13,14 @@ const NewPost: FC<Props> = () => {
     const [errorPost, setErrorPost] = useState(false);
 
     const onAddPost = () => {
-        dispatch(addPost({newPostText}));
+        setNewPostText('');
+
+        const newDate = new Date();
+        const addZero = (num: number) => (num >= 0 && num <= 9) ? '0' + num : num;
+        const date =
+            `${addZero(newDate.getDate())}.${addZero(newDate.getMonth() + 1)}.${addZero(newDate.getFullYear())}`;
+
+        dispatch(addPost({newPostText, date}));
     };
 
     const changeNewPost = (e: ChangeEvent<HTMLInputElement>) => {
