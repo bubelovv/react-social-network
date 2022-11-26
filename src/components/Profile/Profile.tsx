@@ -7,6 +7,7 @@ import Preloader from '../../UI/Preloader/Preloader';
 import s from './ProfileInfo/ProfileInfo.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
+import NewPost from './Posts/NewPost/NewPost';
 
 
 const Profile: FC = () => {
@@ -28,7 +29,7 @@ const Profile: FC = () => {
             dispatch(getProfile(userId));
             dispatch(getStatus(userId));
         }
-    }, [params]);
+    }, [userId]);
 
     return (
         profile === null ? <Preloader/> :
@@ -39,7 +40,8 @@ const Profile: FC = () => {
 
                 <ProfileInfo isOwner={userId === authorisedUserId} profile={profile}/>
                 <ProfileStatus isOwner={userId === authorisedUserId} status={status}/>
-                <Posts isOwner={userId === authorisedUserId}/>
+                {userId === authorisedUserId && <NewPost/>}
+                <Posts/>
             </>
     );
 };
