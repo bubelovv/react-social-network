@@ -1,8 +1,12 @@
-.nav {
+.navbar {
   display: flex;
   flex-direction: column;
-  /*max-width: 150px;*/
   width: 20%;
+  gap: 5px;
+}
+
+.nav {
+  width: 100%;
   height: max-content;
   padding: 5px;
   border: 1px solid teal;

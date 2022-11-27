@@ -1,17 +1,17 @@
 import React from 'react';
 import s from './Friends.module.css'
 import Friend from "./Friend/Friend";
-import {IFriend} from "../../../store/sidebarReducer";
+import {IUser} from '../../../store/users/types';
 
 interface Props {
-    friends: IFriend[]
+    friends: IUser[]
 }
 
 const Friends: React.FC<Props> = ({friends}) => {
-    let friendsElements = friends.map(friend => <Friend key={friend.id} friend={friend}/>)
+    const friendsElements = friends.map(friend => <Friend key={friend.id} friend={friend}/>)
     return (
-        <div className={''}>
-            <h3>Friends</h3>
+        <div className={s.friendsContainer}>
+            <p className={s.friendsContainerName}>Friends</p>
             <div className={s.friends}>
                 {friendsElements}
             </div>

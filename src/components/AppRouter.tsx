@@ -1,6 +1,6 @@
 import React, {Suspense, useEffect, useState} from 'react';
 import Header from './Header/Header';
-import Navbar from './Navbar/Navbar';
+import Sidebar from './Sidebar/Sidebar';
 import Preloader from '../UI/Preloader/Preloader';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../store/store';
@@ -26,7 +26,7 @@ const AppRouter = () => {
         <div className="app">
             <Header/>
             <div className="app-wrapper">
-                <Navbar/>
+                <Sidebar/>
                 <div className="app-wrapper-content">
                     {!initialized ?
                         <Preloader/> :
