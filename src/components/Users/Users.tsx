@@ -64,8 +64,6 @@ const Users: React.FC = () => {
         dispatch(unfollow(userId));
     };
 
-
-
     return (
         <div className={styles.usersWrap}>
 
