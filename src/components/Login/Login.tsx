@@ -3,7 +3,7 @@ import {useForm, UseFormSetError} from 'react-hook-form';
 import cn from 'classnames';
 import s from './Login.module.css';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import {login} from '../../store/authReducer';
+import {login} from '../../store/auth/authSlice';
 
 export interface LoginFormValues {
     email: string;
@@ -24,7 +24,7 @@ const Login: FC = () => {
     } = useForm<LoginFormValues>({mode: 'onChange'});
 
     const onSubmit = (data: LoginFormValues, setError: UseFormSetError<LoginFormValues>) => {
-        dispatch(login(data, setError));
+        dispatch(login({data, setError}));
     };
 
     const inputCls = (inputName: keyof LoginFormValues) => cn(

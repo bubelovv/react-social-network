@@ -3,7 +3,7 @@ import s from './Header.module.css';
 import {Link} from 'react-router-dom';
 import logo from '../../assets/images/icons8-internet-64.png';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import {logout} from '../../store/authReducer';
+import {logout} from '../../store/auth/authSlice';
 
 const Header: React.FC = () => {
     const dispatch = useAppDispatch();

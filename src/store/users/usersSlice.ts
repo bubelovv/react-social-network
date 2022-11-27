@@ -7,7 +7,7 @@ export const getUsers = createAsyncThunk<IGetUsersResponse, IGetUsersRequest>(
     async (arg, {rejectWithValue}) => {
         const response = await usersApi.getUsers(arg.currentPage, arg.pageSize, arg.term, arg.friend);
         if (response.status !== 200) {
-            return rejectWithValue('Can\'t ger users. Server Error');
+            return rejectWithValue('Can\'t get users. Server Error');
         }
         return response.data;
     }

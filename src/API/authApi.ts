@@ -4,7 +4,7 @@ export enum ResultCodeForCaptcha {
     captcha = 10,
 }
 
-interface IMeDataResponse {
+export interface IMeDataResponse {
     id: number,
     email: string,
     login: string

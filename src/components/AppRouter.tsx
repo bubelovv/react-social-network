@@ -5,7 +5,7 @@ import Preloader from '../UI/Preloader/Preloader';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../store/store';
 import {privateRoutes, publicRoutes} from '../routes';
-import {getAuthUserData} from '../store/authReducer';
+import {getAuthUserData} from '../store/auth/authSlice';
 
 const AppRouter = () => {
     const isAuth = useAppSelector(state => state.auth.isAuth);
