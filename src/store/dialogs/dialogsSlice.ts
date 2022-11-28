@@ -1,6 +1,7 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit';
 import {DialogsState, IMessage} from './types';
 import avatar from '../../assets/images/avatar.jpg';
+import {dialogsApi} from '../../API/dialogsApi';
 
 const initialState: DialogsState = {
     dialogs: [
@@ -10,26 +11,56 @@ const initialState: DialogsState = {
         {id: 4, name: 'Manga', avatar},
         {id: 5, name: 'Ilysha', avatar},
     ],
-    messages: [
-        // {userId: 1, photo: '', userName: 'Aleksey', message: 'I will work in it-industry'},
-        // {userId: 2, photo: '', userName: 'Aleksey', message: 'I wait you so much, Lybimka'},
-        // {userId: 3, photo: '', userName: 'Aleksey', message: 'I do not know, we will go to the ocean or not...'},
-    ],
+    messages: [],
 };
+
+let _newMessageHandler: ((messages: IMessage[]) => void) | null = null;
+const newMessageHandlerCreator = (dispatch: Dispatch) => {
+    if (_newMessageHandler === null) {
+        _newMessageHandler = (messages) => {
+            dispatch(dialogsSlice.actions.messagesReceived(messages));
+        };
+    }
+    return _newMessageHandler;
+};
+
+export const startMessagesListening = createAsyncThunk(
+    'dialogs.startMessagesListening',
+    async (dispatch: Dispatch) => {
+        await dialogsApi.start();
+        await dialogsApi.subscribe(newMessageHandlerCreator(dispatch));
+    }
+);
+
+export const stopMessagesListening = createAsyncThunk(
+    'dialogs.stopMessagesListening',
+    async (dispatch: Dispatch) => {
+        await dialogsApi.unsubscribe(newMessageHandlerCreator(dispatch));
+        await dialogsApi.stop();
+    }
+);
+
+export const sendMessage = createAsyncThunk<void, string>(
+    'dialogs.sendMessage',
+    async (arg) => {
+        await dialogsApi.sendMessage(arg);
+    }
+);
 
 export const dialogsSlice = createSlice({
     name: 'dialogs',
     initialState,
     reducers: {
-        sendMessage(state, action: PayloadAction<IMessage>) {
-            state.messages.push({
-                message: action.payload.message,
-                photo: '',
-                userId: action.payload.userId,
-                userName: action.payload.userName,
-            });
+        messagesReceived(state, action: PayloadAction<IMessage[]>) {
+            state.messages = [...state.messages, ...action.payload];
         }
+        // sendMessage(state, action: PayloadAction<IMessage>) {
+        //     state.messages.push({
+        //         message: action.payload.message,
+        //         photo: '',
+        //         userId: action.payload.userId,
+        //         userName: action.payload.userName,
+        //     });
+        // }
     }
 });
-
-export const {sendMessage} = dialogsSlice.actions;
