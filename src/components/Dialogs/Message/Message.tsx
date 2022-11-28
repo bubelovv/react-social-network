@@ -13,11 +13,11 @@ const Message: React.FC<Props> = ({message}) => {
             <div className={s.msgAvatarWrap}>
                 <img className={s.avatar}
                      alt="avatar"
-                     src={avatar}/>
+                     src={message.photo}/>
             </div>
 
             <div className={s.message}>
-                <strong>{message.name}</strong>
+                <strong>{message.userName}</strong>
                 <p>{message.message}</p>
             </div>
         </div>

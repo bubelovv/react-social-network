@@ -5,9 +5,10 @@ export interface IDialog {
 }
 
 export interface IMessage {
-    id: number,
-    name: string,
     message: string,
+    photo: string,
+    userId: number,
+    userName: string,
 }
 
 export interface DialogsState {
