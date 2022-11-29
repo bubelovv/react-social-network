@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
 import Dialog from './Dialog/Dialog';
@@ -11,7 +11,8 @@ const Dialogs: React.FC = () => {
     const dialogs = useAppSelector(state => state.dialogs.dialogs);
     const messages = useAppSelector(state => state.dialogs.messages);
     const status = useAppSelector(state => state.dialogs.status);
-    // const name = useAppSelector(state => state.auth.login) as string;
+    const [isAutoScroll, setIsAutoScroll] = useState<boolean>(true);
+    const anchorAutoScroll = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         dispatch(startMessagesListening(dispatch));
@@ -20,14 +21,27 @@ const Dialogs: React.FC = () => {
         };
     }, []);
 
-    const newMessage = (messageText: string) => {
+    useEffect(() => {
+        if (isAutoScroll) anchorAutoScroll.current?.scrollIntoView({behavior: 'smooth'});
+    }, [messages]);
+
+    const scrollHandler = (e: React.UIEvent<HTMLDivElement>) => {
+        const element = e.currentTarget;
+        if (element.scrollHeight - element.scrollTop === element.clientHeight) {
+            !isAutoScroll && setIsAutoScroll(true);
+        } else {
+            isAutoScroll && setIsAutoScroll(false);
+        }
+    };
+
+    const onSendMessage = (messageText: string) => {
         if (messageText.trim() !== '') {
             dispatch(sendMessage(messageText));
         }
     };
 
     const dialogsElements = dialogs.map(dialog => <Dialog key={dialog.id} dialog={dialog}/>);
-    const messagesElements = messages.map((message, index) => <Message key={index} message={message}/>);
+    const messagesElements = messages.map(message => <Message key={message.id} message={message}/>);
 
     return (
         <div className={s.dialogsContainer}>
@@ -35,8 +49,11 @@ const Dialogs: React.FC = () => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
-                <NewMessageForm status={status} sendMessage={newMessage}/>
+                <div className={s.messagesWrap} onScroll={scrollHandler}>
+                    {messagesElements}
+                    <div ref={anchorAutoScroll}/>
+                </div>
+                <NewMessageForm status={status} onSendMessage={onSendMessage}/>
             </div>
         </div>
     );

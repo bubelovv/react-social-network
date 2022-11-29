@@ -5,14 +5,14 @@ import cn from 'classnames';
 
 interface IProps {
     status: string;
-    sendMessage: (messageText: string) => void;
+    onSendMessage: (messageText: string) => void;
 }
 
 interface IFormValues {
     messageText: string;
 }
 
-const NewMessageForm: React.FC<IProps> = ({status, sendMessage}) => {
+const NewMessageForm: React.FC<IProps> = ({status, onSendMessage}) => {
     let {
         register,
         handleSubmit,
@@ -21,7 +21,7 @@ const NewMessageForm: React.FC<IProps> = ({status, sendMessage}) => {
     } = useForm<IFormValues>({mode: 'onChange'});
 
     let onSubmit = (data: IFormValues) => {
-        sendMessage(data.messageText);
+        onSendMessage(data.messageText);
         reset();
     };
 

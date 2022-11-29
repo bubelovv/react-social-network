@@ -32,7 +32,7 @@ const Sidebar = () => {
     ];
 
     useEffect(() => {
-        dispatch(getFriends({currentPage: 1, pageSize: 6, term: '', friend: 'true'}));
+        isAuth && dispatch(getFriends({currentPage: 1, pageSize: 6, term: '', friend: 'true'}));
     }, [isAuth]);
 
     return (

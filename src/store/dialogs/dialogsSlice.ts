@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit';
-import {DialogsState, IMessage} from './types';
+import {DialogsState, IMessageAPI} from './types';
 import avatar from '../../assets/images/avatar.jpg';
 import {dialogsApi, MessageReceivedSubscriberType, StatusChangedSubscriberType, WsStatus} from '../../API/dialogsApi';
 
@@ -64,8 +64,11 @@ export const dialogsSlice = createSlice({
     name: 'dialogs',
     initialState,
     reducers: {
-        messagesReceived(state, action: PayloadAction<IMessage[]>) {
-            state.messages = [...state.messages, ...action.payload];
+        messagesReceived(state, action: PayloadAction<IMessageAPI[]>) {
+            state.messages = [
+                ...state.messages,
+                ...action.payload.map(m => ({...m, id: (Math.random() * Date.now()).toString()}))
+            ].filter((m, i, a) => i >= a.length - 15);
         },
         statusChanged(state, action: PayloadAction<WsStatus>) {
             state.status = action.payload;

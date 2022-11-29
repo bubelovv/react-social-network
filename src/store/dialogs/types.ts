@@ -6,11 +6,15 @@ export interface IDialog {
     avatar: string,
 }
 
-export interface IMessage {
+export interface IMessageAPI {
     message: string,
-    photo: string,
+    photo: string | null,
     userId: number,
     userName: string,
+}
+
+export interface IMessage extends IMessageAPI {
+    id: string,
 }
 
 export interface DialogsState {

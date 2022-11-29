@@ -1,8 +1,8 @@
-import {IMessage} from '../store/dialogs/types';
+import {IMessageAPI} from '../store/dialogs/types';
 
 export type WsStatus = 'pending' | 'ready' | 'error'
 export type EventsType = 'message-received' | 'status-changed'
-export type MessageReceivedSubscriberType = (messages: IMessage[]) => void
+export type MessageReceivedSubscriberType = (messages: IMessageAPI[]) => void
 export type StatusChangedSubscriberType = (status: WsStatus) => void
 
 const subscribers = {
@@ -23,6 +23,7 @@ const messageHandler = (e: MessageEvent) => {
 
 const closeHandler = () => {
     notifySubscribersAboutStatus('pending');
+    console.log('restart');
     setTimeout(createChannel, 3000);
 };
 
@@ -58,6 +59,7 @@ export const dialogsApi = {
     },
     async stop() {
         subscribers['message-received'] = [];
+        subscribers['status-changed'] = [];
         cleanUp();
     },
     async subscribe(event: EventsType, callback: MessageReceivedSubscriberType | StatusChangedSubscriberType) {

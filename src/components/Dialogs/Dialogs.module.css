@@ -45,23 +45,28 @@
 }
 
 .messages {
-	overflow-y: scroll;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	max-height: calc(100vh - 100px);
 	min-height: 100%;
 	width: 75%;
 	padding: 10px;
+}
+
+.messagesWrap {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
+	width: 100%;
+	height: calc(100% - 50px);
+	border-radius: 5px;
+	overflow-y: auto;
 }
 
 .messageWrap {
 	display: flex;
 	margin-bottom: 10px;
-}
-
-.msgAvatarWrap {
-
 }
 
 .message {
@@ -96,12 +101,27 @@
 	background-color: #a070b9;
 }
 
-/*.textareaValid {*/
-/*	border: 1px #2badda solid;*/
-/*}*/
+.newMsgForm button:disabled {
+	color: black;
+	background-color: #eeeeee;
+	border: 1px solid #d5bce3;
+}
 
-/*.textarea:focus {*/
-/*	border: 1px #2badda solid;*/
-/*	border-radius: 3px;*/
-/*	outline: none;*/
-/*}*/
+/* width */
+.messagesWrap::-webkit-scrollbar {
+	width: 7px;
+}
+/* Track */
+.messagesWrap::-webkit-scrollbar-track {
+	background-color: #e5e5f9;
+	border-radius: 10px;
+}
+/* Handle */
+.messagesWrap::-webkit-scrollbar-thumb {
+	background: #d4bbe2;
+	border-radius: 10px;
+}
+/* Handle on hover */
+.messagesWrap::-webkit-scrollbar-thumb:hover {
+	background: #a070b9;
+}
