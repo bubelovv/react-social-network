@@ -1,26 +1,55 @@
 import {IMessage} from '../store/dialogs/types';
 
-type SubscriberType = (messages: IMessage[]) => void
+export type WsStatus = 'pending' | 'ready' | 'error'
+export type EventsType = 'message-received' | 'status-changed'
+export type MessageReceivedSubscriberType = (messages: IMessage[]) => void
+export type StatusChangedSubscriberType = (status: WsStatus) => void
 
-let subscribers = [] as SubscriberType[];
-let wsChat: WebSocket;
-
-const closeHandler = () => {
-    console.log('close ws');
-    setTimeout(createChannel, 3000);
+const subscribers = {
+    'message-received': [] as MessageReceivedSubscriberType[],
+    'status-changed': [] as StatusChangedSubscriberType[],
 };
 
-const createChannel = () => {
-    wsChat?.removeEventListener('close', closeHandler);
-    wsChat?.close();
-    wsChat = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx');
-    wsChat.addEventListener('close', closeHandler);
-    wsChat.addEventListener('message', messageHandler);
+let wsChat: WebSocket;
+
+const openHandler = () => {
+    notifySubscribersAboutStatus('ready');
 };
 
 const messageHandler = (e: MessageEvent) => {
     const newMessages = JSON.parse(e.data);
-    subscribers.forEach(s => s(newMessages));
+    subscribers['message-received'].forEach(s => s(newMessages));
+};
+
+const closeHandler = () => {
+    notifySubscribersAboutStatus('pending');
+    setTimeout(createChannel, 3000);
+};
+
+const errorHandler = () => {
+    notifySubscribersAboutStatus('error');
+};
+
+const cleanUp = () => {
+    wsChat?.removeEventListener('open', openHandler);
+    wsChat?.removeEventListener('message', messageHandler);
+    wsChat?.removeEventListener('close', closeHandler);
+    wsChat?.removeEventListener('error', errorHandler);
+    wsChat?.close();
+};
+
+const notifySubscribersAboutStatus = (status: WsStatus) => {
+    subscribers['status-changed'].forEach(subscriber => subscriber(status));
+};
+
+const createChannel = () => {
+    cleanUp();
+    wsChat = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx');
+    notifySubscribersAboutStatus('pending');
+    wsChat.addEventListener('open', openHandler);
+    wsChat.addEventListener('message', messageHandler);
+    wsChat.addEventListener('close', closeHandler);
+    wsChat.addEventListener('error', errorHandler);
 };
 
 export const dialogsApi = {
@@ -28,16 +57,16 @@ export const dialogsApi = {
         createChannel();
     },
     async stop() {
-        wsChat?.close();
-        subscribers = [];
-        wsChat.removeEventListener('message', messageHandler);
-        wsChat?.removeEventListener('close', closeHandler);
+        subscribers['message-received'] = [];
+        cleanUp();
     },
-    async subscribe(callback: SubscriberType) {
-        subscribers.push(callback);
+    async subscribe(event: EventsType, callback: MessageReceivedSubscriberType | StatusChangedSubscriberType) {
+        // @ts-ignore
+        subscribers[event].push(callback);
     },
-    async unsubscribe(callback: SubscriberType) {
-        subscribers = subscribers.filter(s => s !== callback);
+    async unsubscribe(event: EventsType, callback: MessageReceivedSubscriberType | StatusChangedSubscriberType) {
+        // @ts-ignore
+        subscribers[event] = subscribers[event].filter(s => s !== callback);
     },
     async sendMessage(message: string) {
         wsChat.send(message);

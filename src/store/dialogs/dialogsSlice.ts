@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice, Dispatch, PayloadAction} from '@reduxjs/toolkit';
 import {DialogsState, IMessage} from './types';
 import avatar from '../../assets/images/avatar.jpg';
-import {dialogsApi} from '../../API/dialogsApi';
+import {dialogsApi, MessageReceivedSubscriberType, StatusChangedSubscriberType, WsStatus} from '../../API/dialogsApi';
 
 const initialState: DialogsState = {
     dialogs: [
@@ -12,9 +12,10 @@ const initialState: DialogsState = {
         {id: 5, name: 'Ilysha', avatar},
     ],
     messages: [],
+    status: 'pending',
 };
 
-let _newMessageHandler: ((messages: IMessage[]) => void) | null = null;
+let _newMessageHandler: MessageReceivedSubscriberType | null = null;
 const newMessageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages) => {
@@ -24,18 +25,30 @@ const newMessageHandlerCreator = (dispatch: Dispatch) => {
     return _newMessageHandler;
 };
 
+let _statusChangedHandler: StatusChangedSubscriberType | null = null;
+const statusChangedHandlerCreator = (dispatch: Dispatch) => {
+    if (_statusChangedHandler === null) {
+        _statusChangedHandler = (status) => {
+            dispatch(dialogsSlice.actions.statusChanged(status));
+        };
+    }
+    return _statusChangedHandler;
+};
+
 export const startMessagesListening = createAsyncThunk(
     'dialogs.startMessagesListening',
     async (dispatch: Dispatch) => {
         await dialogsApi.start();
-        await dialogsApi.subscribe(newMessageHandlerCreator(dispatch));
+        await dialogsApi.subscribe('message-received', newMessageHandlerCreator(dispatch));
+        await dialogsApi.subscribe('status-changed', statusChangedHandlerCreator(dispatch));
     }
 );
 
 export const stopMessagesListening = createAsyncThunk(
     'dialogs.stopMessagesListening',
     async (dispatch: Dispatch) => {
-        await dialogsApi.unsubscribe(newMessageHandlerCreator(dispatch));
+        await dialogsApi.unsubscribe('message-received', newMessageHandlerCreator(dispatch));
+        await dialogsApi.unsubscribe('status-changed', statusChangedHandlerCreator(dispatch));
         await dialogsApi.stop();
     }
 );
@@ -53,6 +66,9 @@ export const dialogsSlice = createSlice({
     reducers: {
         messagesReceived(state, action: PayloadAction<IMessage[]>) {
             state.messages = [...state.messages, ...action.payload];
+        },
+        statusChanged(state, action: PayloadAction<WsStatus>) {
+            state.status = action.payload;
         }
         // sendMessage(state, action: PayloadAction<IMessage>) {
         //     state.messages.push({

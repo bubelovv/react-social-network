@@ -1,3 +1,5 @@
+import {WsStatus} from '../../API/dialogsApi';
+
 export interface IDialog {
     id: number,
     name: string,
@@ -14,4 +16,5 @@ export interface IMessage {
 export interface DialogsState {
     dialogs: IDialog[];
     messages: IMessage[];
+    status: WsStatus;
 }

@@ -10,6 +10,7 @@ const Dialogs: React.FC = () => {
     const dispatch = useAppDispatch();
     const dialogs = useAppSelector(state => state.dialogs.dialogs);
     const messages = useAppSelector(state => state.dialogs.messages);
+    const status = useAppSelector(state => state.dialogs.status);
     // const name = useAppSelector(state => state.auth.login) as string;
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const Dialogs: React.FC = () => {
             </div>
             <div className={s.messages}>
                 {messagesElements}
-                <NewMessageForm sendMessage={newMessage}/>
+                <NewMessageForm status={status} sendMessage={newMessage}/>
             </div>
         </div>
     );

@@ -4,6 +4,7 @@ import {useForm} from 'react-hook-form';
 import cn from 'classnames';
 
 interface IProps {
+    status: string;
     sendMessage: (messageText: string) => void;
 }
 
@@ -11,7 +12,7 @@ interface IFormValues {
     messageText: string;
 }
 
-const NewMessageForm: React.FC<IProps> = ({sendMessage}) => {
+const NewMessageForm: React.FC<IProps> = ({status, sendMessage}) => {
     let {
         register,
         handleSubmit,
@@ -36,7 +37,7 @@ const NewMessageForm: React.FC<IProps> = ({sendMessage}) => {
                     minLength: 1,
                 })}
             />
-            <button disabled={!isValid}>{'>>>'}</button>
+            <button disabled={!isValid || status !== 'ready'}>{'>>>'}</button>
         </form>
     );
 };
