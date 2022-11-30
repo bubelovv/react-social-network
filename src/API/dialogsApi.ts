@@ -63,12 +63,11 @@ export const dialogsApi = {
         cleanUp();
     },
     async subscribe(event: EventsType, callback: MessageReceivedSubscriberType | StatusChangedSubscriberType) {
-        // @ts-ignore
-        subscribers[event].push(callback);
+        subscribers[event].push(callback as MessageReceivedSubscriberType & StatusChangedSubscriberType);
     },
     async unsubscribe(event: EventsType, callback: MessageReceivedSubscriberType | StatusChangedSubscriberType) {
         // @ts-ignore
-        subscribers[event] = subscribers[event].filter(s => s !== callback);
+        subscribers[event] = subscribers[event].filter((s: MessageReceivedSubscriberType | StatusChangedSubscriberType) => s !== callback);
     },
     async sendMessage(message: string) {
         wsChat.send(message);
